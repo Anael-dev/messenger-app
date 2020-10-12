@@ -1,0 +1,25 @@
+.message {
+  position: relative;
+  padding: 1rem;
+  width: fit-content;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  margin-bottom: 3rem;
+}
+
+.message-timestamp {
+  margin-left: 1rem;
+  font-size: xx-small;
+}
+
+.message-author {
+  position: absolute;
+  top: -15px;
+  font-weight: 800;
+  font-size: xx-small;
+}
+
+.received {
+  margin-left: auto;
+  background-color: #dcf8c6;
+}

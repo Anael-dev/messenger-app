@@ -1,0 +1,57 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  /* flex: 0.35; */
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  border-right: 1px solid lightgray;
+}
+
+.sidebar-header__right {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between;
+    align-items: center; */
+  min-width: 10vw;
+  /* margin: 0 1em; */
+}
+
+@media (max-width: 550px) {
+  .sidebar-header__right {
+    flex-direction: column;
+    margin: 0 1em;
+  }
+}
+
+.sidebar-search {
+  display: flex;
+  align-items: center;
+  background-color: #f6f6f6;
+  padding: 1rem;
+}
+
+.sidebar-search__body {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  border-radius: 20px;
+}
+
+.sidebar-search__body > .MuiSvgIcon-root {
+  color: gray;
+}
+
+.sidebar-search__body > input {
+  outline-width: 0;
+  border: none;
+  margin-left: 1rem;
+  width: 100%;
+}

@@ -1,0 +1,19 @@
+.input-form {
+  flex: 1;
+  display: flex;
+  margin-left: 0.3em;
+  max-height: 65px;
+}
+
+.input-form > input {
+  flex: 1;
+  border-radius: 20px;
+  padding: 0.7rem;
+  padding-left: 1rem;
+  border: none;
+  outline-width: 0;
+}
+
+.input-form > button {
+  display: none;
+}
