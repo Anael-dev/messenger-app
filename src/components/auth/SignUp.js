@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
 import { auth, db } from "../../firebase/base";
 import { AuthContext } from "../../firebase/auth";
 import "./Login/Login.css";
@@ -15,7 +14,12 @@ const SignUp = ({ history }) => {
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
-    return <Redirect to='/' />;
+    db.collection("users")
+      .doc(currentUser.uid)
+      .update({
+        active: true,
+      })
+      .then(() => history.push("/"));
   }
 
   const handleChange = (e) => {

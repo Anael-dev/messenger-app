@@ -3,10 +3,31 @@ import "./Rooms.css";
 import { Avatar } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-const Rooms = () => {
+const Rooms = ({ rooms }) => {
   return (
     <div className='rooms-container'>
-      <Link to={`/chat/1`}>
+      {rooms.length > 0 &&
+        rooms.map((room) => {
+          return (
+            <Link key={room.id} to={`/chat/${room.id}`}>
+              <div className='room'>
+                <Avatar />
+                <div className='room__info'>
+                  <h2>{room.name}</h2>
+                  <div className='room__details'>
+                    <p>Last message</p>
+                    <p>time</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+    </div>
+  );
+};
+
+/* <Link to={`/chat/1`}>
         <div className='room'>
           <Avatar />
           <div className='room__info'>
@@ -53,8 +74,9 @@ const Rooms = () => {
             </div>
           </div>
         </div>
-      </Link>
-      {/* {users.length > 1 && (
+      </Link> */
+
+/* {users.length > 1 && (
         <div>
           {users.map((x, i) => {
             if (x.id !== userId)
@@ -71,9 +93,6 @@ const Rooms = () => {
               );
           })}
         </div>
-      )} */}
-    </div>
-  );
-};
+      )} */
 
 export default Rooms;

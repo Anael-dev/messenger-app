@@ -6,7 +6,7 @@ const Messages = ({ messagesRef, id }) => {
   //   const messagesRef = db.collection("rooms").doc(id).collection("messages");
 
   //querying 20 messages by time order
-  const messagesQuery = messagesRef.orderBy("createdAt").limit(20);
+  const messagesQuery = messagesRef.orderBy("createdAt").limitToLast(20);
 
   const [messages, setMessages] = useState([]);
   const messagesEnd = useRef(null);
@@ -25,22 +25,22 @@ const Messages = ({ messagesRef, id }) => {
       }));
       setMessages(newMessages);
     });
-
     //unsubscribe callback when rerender useEffect/unmount
     return () => unsubscribe();
+
     // eslint-disable-next-line
   }, [id]);
 
   return (
-    <div>
-      <div>
-        {messages.length &&
+    <main>
+      <div className='messages-container'>
+        {messages.length > 0 &&
           messages.map((message) => (
             <Message key={message.id} messageData={message} />
           ))}
       </div>
       <div ref={messagesEnd}></div>
-    </div>
+    </main>
   );
 };
 

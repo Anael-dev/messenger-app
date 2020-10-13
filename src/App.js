@@ -14,6 +14,7 @@ function App() {
         {/* <NavBar /> */}
         <Switch>
           <LoggedRoute exact path='/' component={Dashboard} />
+          <LoggedRoute path='/chat' component={Dashboard} />
           {/* <Route path='/project/:id' component={ProjectDetails} /> */}
           <Route path='/login' component={Login} />
           <Route path='/signup' component={SignUp} />

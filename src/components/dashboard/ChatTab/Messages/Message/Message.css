@@ -7,6 +7,10 @@
   margin-bottom: 3rem;
 }
 
+.message:last-child {
+  margin-bottom: 1rem;
+}
+
 .message-timestamp {
   margin-left: 1rem;
   font-size: xx-small;

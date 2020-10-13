@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -6,8 +6,36 @@ import SearchIcon from "@material-ui/icons/Search";
 import { Avatar, IconButton } from "@material-ui/core";
 import "./RoomsTab.css";
 import Rooms from "./Rooms/Rooms";
+import { db } from "../../../firebase/base";
+import { AuthContext } from "../../../firebase/auth";
 
 const RoomsTab = () => {
+  const [rooms, setRooms] = useState([]);
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (currentUser) {
+      const unsubscribe = db
+        .collection("rooms")
+        .where("members", "array-contains", {
+          name: currentUser.displayName,
+          uid: currentUser.uid,
+        })
+        .onSnapshot((snap) =>
+          setRooms(
+            snap.docs.map((doc) => ({
+              ...doc.data(),
+              id: doc.id,
+            }))
+          )
+        );
+      return () => {
+        console.log("unsubscribed");
+        unsubscribe();
+      };
+    }
+  }, [currentUser]);
+
   return (
     <div className='sidebar'>
       <div className='sidebar-header'>
@@ -30,7 +58,7 @@ const RoomsTab = () => {
           <input type='text' placeholder='Search or start new chat' />
         </div>
       </div>
-        <Rooms />
+      <Rooms rooms={rooms} />
     </div>
   );
 };
