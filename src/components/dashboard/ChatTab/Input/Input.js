@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import SendIcon from "@material-ui/icons/Send";
+import { IconButton } from "@material-ui/core";
 import "./Input.css";
 import { AuthContext } from "../../../../firebase/auth";
 
@@ -26,9 +28,11 @@ const Input = ({ messagesRef }) => {
         onChange={(e) => setInputValue(e.target.value)}
         onKeyPress={(e) => (e.key === "Enter" ? sendMessage(e) : null)}
       />
-      <button type='submit' onClick={(e) => console.log(e)}>
-        Send a message
-      </button>
+      {inputValue && (
+        <IconButton type='submit'>
+          <SendIcon />
+        </IconButton>
+      )}
     </form>
   );
 };

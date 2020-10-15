@@ -23,16 +23,16 @@ function Dashboard() {
   //changing active status on window close
   useEffect(() => {
     window.addEventListener("beforeunload", async () => {
-      await signOut();
+      // await signOut();
     });
     // eslint-disable-next-line
   }, []);
 
   return (
     <div className='dashboard'>
-      <button onClick={() => signOut()}>Sign out</button>
+      {/* <button onClick={() => signOut()}>Sign out</button> */}
       <div className='dashboard__body'>
-        <RoomsTab />
+        <RoomsTab signOut={signOut} />
         <ChatTab />
       </div>
     </div>

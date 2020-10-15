@@ -7,7 +7,7 @@ import Input from "../Input/Input";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 // import AttachFileIcon from "@material-ui/icons/AttachFile";
 // import SearchIcon from "@material-ui/icons/Search";
-import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
+// import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { AuthContext } from "../../../../firebase/auth";
 
 const ChatRoom = ({ match }) => {
@@ -63,7 +63,7 @@ const ChatRoom = ({ match }) => {
               (chatUser.active ? (
                 <p>online</p>
               ) : (
-                <p>Last seen {chatUser.lastSeen.toUTCString()}</p>
+                <p>Last seen at {chatUser.lastSeen.toUTCString()}</p>
               ))}
             {roomData.type === "group" && (
               <p>{roomData.members.map((x) => x.name).join(", ")}</p>
@@ -86,7 +86,6 @@ const ChatRoom = ({ match }) => {
         <Messages messagesRef={messagesRef} id={match.params.id} />
       </div>
       <div className='chat-footer'>
-        <InsertEmoticonIcon />
         <Input messagesRef={messagesRef} />
       </div>
     </div>

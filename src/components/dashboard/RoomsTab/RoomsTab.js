@@ -2,14 +2,19 @@ import React, { useState, useEffect, useContext } from "react";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import PersonIcon from "@material-ui/icons/Person";
 import SearchIcon from "@material-ui/icons/Search";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Avatar, IconButton } from "@material-ui/core";
 import "./RoomsTab.css";
 import Rooms from "./Rooms/Rooms";
 import { db } from "../../../firebase/base";
 import { AuthContext } from "../../../firebase/auth";
+import SideBarNav from "./SideBarNav/SideBarNav";
+import SideBarSearch from "./SideBarSearch/SideBarSearch";
 
-const RoomsTab = () => {
+const RoomsTab = ({ signOut }) => {
   const [rooms, setRooms] = useState([]);
   const { currentUser } = useContext(AuthContext);
 
@@ -38,26 +43,8 @@ const RoomsTab = () => {
 
   return (
     <div className='sidebar'>
-      <div className='sidebar-header'>
-        <Avatar src='https://www.iconfinder.com/data/icons/avatars-xmas-giveaway/128/indian_native_boy_kid-512.png' />
-        <div className='sidebar-header__right'>
-          <IconButton>
-            <DonutLargeIcon />
-          </IconButton>
-          <IconButton>
-            <ChatIcon />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
-        </div>
-      </div>
-      <div className='sidebar-search'>
-        <div className='sidebar-search__body'>
-          <SearchIcon />
-          <input type='text' placeholder='Search or start new chat' />
-        </div>
-      </div>
+      <SideBarNav signOut={signOut} />
+      <SideBarSearch />
       <Rooms rooms={rooms} />
     </div>
   );

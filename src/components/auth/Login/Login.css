@@ -4,8 +4,8 @@
 
 .auth__heading {
   color: white;
-  font-size: 2.5em;
-  padding-bottom: 0.6em;
+  font-size: 3.2rem;
+  padding-bottom: 2rem;
   border-bottom: 2px solid white;
   letter-spacing: 1px;
 }
@@ -16,16 +16,16 @@
   font-weight: 400;
   width: fit-content;
   display: block;
-  margin-bottom: 0.4em;
-  margin-top: 1em;
+  margin-bottom: 0.3rem;
+  margin-top: 2rem;
 }
 
 .form__input-field {
   border-radius: 0;
-  padding: 0.8em 1em;
+  padding: 0.8rem 1rem;
   width: 100%;
   font-family: inherit;
-  margin-top: 1em;
+  margin-top: 1.5rem;
 }
 
 .form__button {
@@ -47,7 +47,7 @@ button:focus {
 }
 
 .mt-20 {
-  margin-top: 1.5em;
+  margin-top: 2rem;
 }
 
 .signUp-section {
@@ -65,7 +65,7 @@ button:focus {
   color: #2979ff;
   display: block;
   font-size: 1rem;
-  margin-top: 0.5em;
+  margin-top: 0.5rem;
   cursor: pointer;
 }
 
