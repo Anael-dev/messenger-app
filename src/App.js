@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
-import Dashboard from "./components/dashboard/Dashboard/Dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import Login from "./components/auth/Login/Login";
 import SignUp from "./components/auth/SignUp";
 import { AuthProvider } from "./firebase/auth";

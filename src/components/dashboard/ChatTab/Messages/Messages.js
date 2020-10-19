@@ -21,7 +21,7 @@ const Messages = ({ messagesRef, id }) => {
       const newMessages = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
-        createdAt: doc.data().createdAt.toDate(),
+        // createdAt: doc.data().createdAt.toDate(),
       }));
       setMessages(newMessages);
     });

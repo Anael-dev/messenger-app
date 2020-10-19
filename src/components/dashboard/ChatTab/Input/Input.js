@@ -3,20 +3,28 @@ import SendIcon from "@material-ui/icons/Send";
 import { IconButton } from "@material-ui/core";
 import "./Input.css";
 import { AuthContext } from "../../../../firebase/auth";
+import { firebase } from "../../../../firebase/base";
 
-const Input = ({ messagesRef }) => {
+const Input = ({ messagesRef, roomRef }) => {
   const [inputValue, setInputValue] = useState("");
   const { currentUser } = useContext(AuthContext);
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    await messagesRef.add({
-      content: inputValue,
-      uid: currentUser.uid,
-      name: currentUser.displayName,
-      createdAt: new Date(),
-    });
-    setInputValue("");
+    if (inputValue !== "") {
+      await messagesRef.add({
+        content: inputValue,
+        uid: currentUser.uid,
+        name: currentUser.displayName,
+        // createdAt: new Date(),
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+      await roomRef.update({
+        lastMessage: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+      setInputValue("");
+    }
+    return;
   };
 
   return (

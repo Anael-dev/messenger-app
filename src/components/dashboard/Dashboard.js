@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from "react";
-import ChatTab from "../ChatTab/ChatTab";
-import RoomsTab from "../RoomsTab/RoomsTab";
-import { auth, db } from "../../../firebase/base";
-import { AuthContext } from "../../../firebase/auth";
+import ChatTab from "./ChatTab/ChatTab";
+import RoomsTab from "./RoomsTab/RoomsTab";
+import { auth, db } from "../../firebase/base";
+import { AuthContext } from "../../firebase/auth";
 import "./DashBoard.css";
 
 function Dashboard() {
@@ -16,17 +16,17 @@ function Dashboard() {
   };
 
   const signOut = async () => {
+    await updateActiveStatus();
     auth.signOut();
-    updateActiveStatus();
   };
 
-  //changing active status on window close
-  useEffect(() => {
-    window.addEventListener("beforeunload", async () => {
-      // await signOut();
-    });
-    // eslint-disable-next-line
-  }, []);
+  // //changing active status on window close
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", async () => {
+  //     // await signOut();
+  //   });
+  //   // eslint-disable-next-line
+  // }, []);
 
   return (
     <div className='dashboard'>

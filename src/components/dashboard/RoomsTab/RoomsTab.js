@@ -8,7 +8,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Avatar, IconButton } from "@material-ui/core";
 import "./RoomsTab.css";
-import Rooms from "./Rooms/Rooms";
+import Room from "./Room/Room";
 import { db } from "../../../firebase/base";
 import { AuthContext } from "../../../firebase/auth";
 import SideBarNav from "./SideBarNav/SideBarNav";
@@ -16,6 +16,7 @@ import SideBarSearch from "./SideBarSearch/SideBarSearch";
 
 const RoomsTab = ({ signOut }) => {
   const [rooms, setRooms] = useState([]);
+  const [filteredRooms, setFilteredRooms] = useState([]);
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -26,14 +27,17 @@ const RoomsTab = ({ signOut }) => {
           name: currentUser.displayName,
           uid: currentUser.uid,
         })
-        .onSnapshot((snap) =>
-          setRooms(
-            snap.docs.map((doc) => ({
-              ...doc.data(),
-              id: doc.id,
-            }))
-          )
-        );
+        .orderBy("lastMessage", "desc")
+        .onSnapshot(async (snap) => {
+          const userRooms = snap.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          // const userRooms = await getMappedRooms(snap.docs);
+          // console.log(userRooms);
+          setRooms(userRooms);
+          setFilteredRooms(userRooms);
+        });
       return () => {
         console.log("unsubscribed");
         unsubscribe();
@@ -44,8 +48,17 @@ const RoomsTab = ({ signOut }) => {
   return (
     <div className='sidebar'>
       <SideBarNav signOut={signOut} />
-      <SideBarSearch />
-      <Rooms rooms={rooms} />
+      <SideBarSearch
+        rooms={rooms}
+        callback={(result) => setFilteredRooms(result)}
+      />
+      <div className='rooms-container'>
+        {filteredRooms.length > 0 ? (
+          filteredRooms.map((room) => <Room key={room.id} roomData={room} />)
+        ) : (
+          <p className='no-results'>No users or chats found</p>
+        )}
+      </div>
     </div>
   );
 };

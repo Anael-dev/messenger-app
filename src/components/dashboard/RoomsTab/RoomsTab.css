@@ -106,13 +106,6 @@
 
 .dropdown-model button {
   width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  background: transparent;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
   justify-content: space-between;
 }
 
@@ -120,10 +113,20 @@
   outline: 0;
 }
 
-.dropdown-model button > .MuiSvgIcon-root {
+.MuiSvgIcon-root {
   color: gray;
 }
 
 .open {
   display: block;
+}
+
+.rooms-container {
+  background-color: white;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.dropdown__btn {
+  display: flex;
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import "./ChatRoom.css";
 import { Avatar } from "@material-ui/core";
 import Messages from "../Messages/Messages";
@@ -14,14 +15,14 @@ const ChatRoom = ({ match }) => {
   const [roomData, setRoomData] = useState(null);
   const [chatUser, setChatUser] = useState(null);
   const { currentUser } = useContext(AuthContext);
+  const { roomId } = useParams();
+
+  const messagesRef = db.collection("rooms").doc(roomId).collection("messages");
+  const roomRef = db.collection("rooms").doc(roomId);
 
   useEffect(() => {
-    const roomId = match.params.id;
-    db.collection("rooms")
-      .doc(roomId)
-      .get()
-      .then((snap) => setRoomData({ ...snap.data(), id: snap.id }));
-  }, [match.params.id]);
+    roomRef.get().then((snap) => setRoomData({ ...snap.data(), id: snap.id }));
+  }, [roomId]);
 
   useEffect(() => {
     if (roomData && roomData.type === "private") {
@@ -46,11 +47,6 @@ const ChatRoom = ({ match }) => {
     }
   }, [roomData]);
 
-  const messagesRef = db
-    .collection("rooms")
-    .doc(match.params.id)
-    .collection("messages");
-
   return (
     <div className='chat'>
       <div className='chat-header'>
@@ -63,7 +59,7 @@ const ChatRoom = ({ match }) => {
               (chatUser.active ? (
                 <p>online</p>
               ) : (
-                <p>Last seen at {chatUser.lastSeen.toUTCString()}</p>
+                <p>last seen at {chatUser.lastSeen.toUTCString()}</p>
               ))}
             {roomData.type === "group" && (
               <p>{roomData.members.map((x) => x.name).join(", ")}</p>
@@ -83,10 +79,10 @@ const ChatRoom = ({ match }) => {
         </div>
       </div>
       <div className='chat-body'>
-        <Messages messagesRef={messagesRef} id={match.params.id} />
+        <Messages messagesRef={messagesRef} id={roomId} />
       </div>
       <div className='chat-footer'>
-        <Input messagesRef={messagesRef} />
+        <Input messagesRef={messagesRef} roomRef={roomRef} />
       </div>
     </div>
   );

@@ -11,9 +11,16 @@
   margin-bottom: 1rem;
 }
 
+.message-details {
+  display: flex;
+  justify-content: space-between;
+}
+
 .message-timestamp {
-  margin-left: 1rem;
+  margin-left: 1.5rem;
+  align-self: flex-end;
   font-size: xx-small;
+  opacity: 0.8;
 }
 
 .message-author {

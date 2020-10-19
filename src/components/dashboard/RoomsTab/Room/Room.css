@@ -1,0 +1,68 @@
+.room {
+  display: flex;
+  padding: 1.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+.room:hover {
+  background-color: #e2e0e0;
+}
+
+.room__info {
+  width: 100%;
+  margin-left: 1.5rem;
+  /* position: relative; */
+}
+
+.room__info__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.room__info__container:first-child {
+  margin-bottom: 0.2rem;
+}
+
+.room__info__container > h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.timestamp {
+  color: #03a688;
+}
+
+.room__notification {
+  display: none;
+  /* position: absolute; */
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #03a688;
+  position: relative;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.open {
+  display: block;
+}
+
+.room__notification__num {
+  position: absolute;
+  top: 15%;
+  left: 35%;
+  color: #ffff;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.no-results {
+  color: gray;
+  padding: 3rem;
+  text-align: center;
+}

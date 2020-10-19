@@ -80,7 +80,7 @@ const Login = ({ history }) => {
             // value={formData.password}
             onChange={(e) => handleChange(e)}
           />
-          <button className='form__button mt-20'>Sign in</button>
+          <button className='button form__button mt-20'>Sign in</button>
         </form>
         <p className='signUp-section signUp-p'>
           Don't have an account yet?
