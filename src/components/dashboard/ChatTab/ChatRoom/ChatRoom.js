@@ -9,7 +9,7 @@ import Input from "../Input/Input";
 // import AttachFileIcon from "@material-ui/icons/AttachFile";
 // import SearchIcon from "@material-ui/icons/Search";
 // import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import { AuthContext } from "../../../../firebase/auth";
+import { AuthContext } from "../../../../context/auth";
 
 const ChatRoom = ({ match }) => {
   const [roomData, setRoomData] = useState(null);
@@ -36,7 +36,7 @@ const ChatRoom = ({ match }) => {
           (snap) => {
             setChatUser({
               ...chatUser,
-              lastSeen: snap.data().lastSeen.toDate(),
+              lastSeen: snap.data().lastSeen,
               active: snap.data().active,
             });
           }
@@ -59,7 +59,10 @@ const ChatRoom = ({ match }) => {
               (chatUser.active ? (
                 <p>online</p>
               ) : (
-                <p>last seen at {chatUser.lastSeen.toUTCString()}</p>
+                <p>
+                  <span className='last-seen'>last seen at</span>
+                  {new Date(chatUser.lastSeen?.toDate()).toLocaleString()}
+                </p>
               ))}
             {roomData.type === "group" && (
               <p>{roomData.members.map((x) => x.name).join(", ")}</p>

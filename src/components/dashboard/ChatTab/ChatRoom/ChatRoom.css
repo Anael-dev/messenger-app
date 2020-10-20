@@ -40,9 +40,13 @@
   align-items: center;
   border-top: 1px solid lightgray;
   height: 9vh;
-  padding: 0 .7rem;
+  padding: 0 0.7rem;
 }
 
 .chat-footer > .MuiSvgIcon-root {
   color: gray;
+}
+
+.last-seen {
+  margin-right: 0.3rem;
 }

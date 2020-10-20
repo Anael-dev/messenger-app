@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { auth, db } from "../../firebase/base";
-import { AuthContext } from "../../firebase/auth";
+import { AuthContext } from "../../context/auth";
+import { Link } from "react-router-dom";
 import "./Login/Login.css";
 
 const SignUp = ({ history }) => {
@@ -56,15 +57,15 @@ const SignUp = ({ history }) => {
   return (
     <div className='auth-container'>
       <div className='auth__inner-container'>
+        <h1 className='auth__heading'>Sign up</h1>
         <form onSubmit={(e) => handleSignUp(e)} className='form'>
-          <h1 className='auth__heading'>Sign up</h1>
           {error && <p className='form__error'>{error}</p>}
           <input
             type='text'
             name='nickname'
             className='form__input-field'
             required
-            placeholder='Nickname'
+            placeholder='&#xf406; Nickname'
             // value={formData.password}
             onChange={(e) => handleChange(e)}
           />
@@ -74,7 +75,7 @@ const SignUp = ({ history }) => {
             className='form__input-field'
             autoComplete='email'
             required
-            placeholder='Email'
+            placeholder='&#xf1fa; Email'
             // value={formData.email}
             onChange={(e) => handleChange(e)}
           />
@@ -84,12 +85,18 @@ const SignUp = ({ history }) => {
             className='form__input-field'
             autoComplete='current-password'
             required
-            placeholder='Password'
+            placeholder='&#xf023; Password'
             // value={formData.password}
             onChange={(e) => handleChange(e)}
           />
           <button className='form__button mt-20'>Sign up</button>
         </form>
+        <p className='signUp-section signUp-p'>
+          Already have an account?
+          <Link to='/login'>
+            <span className='signUp-section signUp-span'>Login </span>
+          </Link>
+        </p>
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from "react";
 import ChatTab from "./ChatTab/ChatTab";
 import RoomsTab from "./RoomsTab/RoomsTab";
-import { auth, db } from "../../firebase/base";
-import { AuthContext } from "../../firebase/auth";
+import { auth, db, firebase } from "../../firebase/base";
+import { AuthContext } from "../../context/auth";
 import "./DashBoard.css";
 
 function Dashboard() {
@@ -11,11 +11,12 @@ function Dashboard() {
   const updateActiveStatus = async () => {
     await db.collection("users").doc(currentUser.uid).update({
       active: false,
-      lastSeen: new Date(),
+      lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
     });
   };
 
   const signOut = async () => {
+    console.log("clicked");
     await updateActiveStatus();
     auth.signOut();
   };

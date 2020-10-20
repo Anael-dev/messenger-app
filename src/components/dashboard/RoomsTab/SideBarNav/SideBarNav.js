@@ -5,7 +5,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonIcon from "@material-ui/icons/Person";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Avatar, IconButton } from "@material-ui/core";
-import { AuthContext } from "../../../../firebase/auth";
+import { AuthContext } from "../../../../context/auth";
 import "./../RoomsTab.css";
 
 const SideBarNav = ({ signOut }) => {
@@ -19,7 +19,10 @@ const SideBarNav = ({ signOut }) => {
         onClick={() => setOpenMore(!openMore)}></div>
       <div className='sidebar-header'>
         <Avatar
-          src={`https://avatars.dicebear.com/api/human/${currentUser.uid}.svg`}
+          src={
+            currentUser?.photoURL ||
+            `https://avatars.dicebear.com/api/human/${currentUser.uid}.svg`
+          }
         />
         <div className='sidebar-header__right'>
           <IconButton title='new chat'>

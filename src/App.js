@@ -4,7 +4,7 @@ import "./App.css";
 import Dashboard from "./components/dashboard/Dashboard";
 import Login from "./components/auth/Login/Login";
 import SignUp from "./components/auth/SignUp";
-import { AuthProvider } from "./firebase/auth";
+import { AuthProvider } from "./context/auth";
 import LoggedRoute from "./components/LoggedRoute";
 
 function App() {

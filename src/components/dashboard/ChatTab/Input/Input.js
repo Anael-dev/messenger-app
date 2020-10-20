@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import SendIcon from "@material-ui/icons/Send";
 import { IconButton } from "@material-ui/core";
 import "./Input.css";
-import { AuthContext } from "../../../../firebase/auth";
+import { AuthContext } from "../../../../context/auth";
 import { firebase } from "../../../../firebase/base";
 
 const Input = ({ messagesRef, roomRef }) => {

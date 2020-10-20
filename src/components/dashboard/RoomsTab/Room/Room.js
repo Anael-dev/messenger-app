@@ -76,7 +76,7 @@ const Room = ({ roomData }) => {
             </p>
           </div>
           <div className='room__info__container'>
-            <p className={changesCounter > 0 ? "bold" : null}>
+            <p className={`room__info__message ${changesCounter > 0 ? "bold" : null}`}>
               {lastMessage?.content}
             </p>
             <div

@@ -38,15 +38,6 @@ input {
   font-family: "Montserrat", "Roboto";
 }
 
-.auth-container {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  background-color: #1a1a1d;
-  height: 100%;
-}
-
 a {
   text-decoration: none;
   color: black;
