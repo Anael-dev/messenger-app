@@ -1,24 +1,32 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./ChatRoom.css";
-import { Avatar } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import Messages from "../Messages/Messages";
 import { db } from "../../../../firebase/base";
 import Input from "../Input/Input";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 // import MoreVertIcon from "@material-ui/icons/MoreVert";
 // import AttachFileIcon from "@material-ui/icons/AttachFile";
 // import SearchIcon from "@material-ui/icons/Search";
 // import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { AuthContext } from "../../../../context/auth";
+import { useHistory } from "react-router-dom";
 
-const ChatRoom = ({ match }) => {
+const ChatRoom = () => {
   const [roomData, setRoomData] = useState(null);
   const [chatUser, setChatUser] = useState(null);
+  const [backBtnActive, setBackBtnActive] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const { roomId } = useParams();
+  const history = useHistory();
 
   const messagesRef = db.collection("rooms").doc(roomId).collection("messages");
   const roomRef = db.collection("rooms").doc(roomId);
+
+  useEffect(() => {
+    if (backBtnActive) history.push("/chats");
+  }, [backBtnActive]);
 
   useEffect(() => {
     roomRef.get().then((snap) => setRoomData({ ...snap.data(), id: snap.id }));
@@ -50,6 +58,11 @@ const ChatRoom = ({ match }) => {
   return (
     <div className='chat'>
       <div className='chat-header'>
+        <button
+          className={`back-btn ${backBtnActive ? "back-btn__active" : null}`}
+          onClick={() => setBackBtnActive(!backBtnActive)}>
+          <ArrowBackIcon />
+        </button>
         <Avatar />
         {roomData && (
           <div className='chat-header__info'>

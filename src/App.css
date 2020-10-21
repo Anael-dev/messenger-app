@@ -17,6 +17,7 @@ html {
 
 body {
   font-family: "Montserrat", "Roboto";
+  color: #162226;
   font-size: 1.6rem;
   padding: 0;
   margin: 0;
@@ -40,7 +41,7 @@ input {
 
 a {
   text-decoration: none;
-  color: black;
+  color: #162226;
 }
 
 button {
@@ -54,4 +55,14 @@ button {
   /* display: flex; */
   margin: 0;
   padding: 0;
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
 }

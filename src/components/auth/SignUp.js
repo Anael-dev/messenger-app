@@ -20,7 +20,7 @@ const SignUp = ({ history }) => {
       .update({
         active: true,
       })
-      .then(() => history.push("/"));
+      .then(() => history.push("/chats"));
   }
 
   const handleChange = (e) => {

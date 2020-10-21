@@ -6,8 +6,10 @@ import DefaultPage from "./DefaultPage/DefaultPage";
 const ChatTab = () => {
   return (
     <Switch>
-      <Route exact path='/' component={DefaultPage} />
-      <Route path='/chat/:roomId' component={ChatRoom} />
+      <Route exact path='/chats' component={DefaultPage} />
+      <Route path='/people' component={DefaultPage} />
+      <Route path='/chats/room/:roomId' component={ChatRoom} />
+      <Route path='/people/room/:roomId' component={ChatRoom} />
     </Switch>
   );
 };

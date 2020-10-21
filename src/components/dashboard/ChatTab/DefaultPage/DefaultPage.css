@@ -1,0 +1,5 @@
+@media (max-width: 480px) {
+  .default-page__container {
+    display: none;
+  }
+}

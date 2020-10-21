@@ -17,13 +17,6 @@
   flex-direction: row;
 }
 
-@media (max-width: 550px) {
-  .sidebar-header__right {
-    flex-direction: column;
-    margin: 0 1rem;
-  }
-}
-
 .sidebar-search {
   display: flex;
   align-items: center;
@@ -132,3 +125,33 @@
   display: flex;
   width: 100%;
 }
+
+.chats-nav {
+  font-size: 1rem;
+  padding-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #f6f6f6;
+}
+
+.chats-nav > .nav-link {
+  color: #03a688;
+  padding: 0.3rem;
+}
+
+.active-route {
+  border-bottom: 2px solid #03a688;
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+
+/* @media (max-width: 480px) {
+  .sidebar-header__right {
+    flex-direction: column;
+    margin: 0 1rem;
+  }
+} */

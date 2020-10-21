@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./RoomsTab.css";
-import Room from "./Room/Room";
+import Room from "./Rooms/Room/Room";
+import Rooms from "./Rooms/Rooms";
 import { db } from "../../../firebase/base";
 import { AuthContext } from "../../../context/auth";
 import SideBarNav from "./SideBarNav/SideBarNav";
 import SideBarSearch from "./SideBarSearch/SideBarSearch";
+import { NavLink, Switch, Route } from "react-router-dom";
 
 const RoomsTab = ({ signOut }) => {
   const [rooms, setRooms] = useState([]);
@@ -44,12 +46,32 @@ const RoomsTab = ({ signOut }) => {
         rooms={rooms}
         callback={(result) => setFilteredRooms(result)}
       />
+      <nav className='chats-nav'>
+        <NavLink
+          className='nav-link'
+          to='/chats'
+          activeClassName='active-route'>
+          <h3 className='link-title'>Chats</h3>
+        </NavLink>
+        <NavLink
+          className='nav-link'
+          to='/people'
+          activeClassName='active-route'>
+          <h3 className='link-title'>People</h3>
+        </NavLink>
+      </nav>
       <div className='rooms-container'>
-        {filteredRooms.length > 0 ? (
+        <Switch>
+          <Route path='/chats' component={Rooms} />
+          <Route path='/room' component={Rooms} />
+          {/* <Route path='/people' component={People} />
+          <Route path='/room' component={People} /> */}
+        </Switch>
+        {/* {filteredRooms.length > 0 ? (
           filteredRooms.map((room) => <Room key={room.id} roomData={room} />)
         ) : (
           <p className='no-results'>No users or chats found</p>
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -11,11 +11,11 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        {/* <NavBar /> */}
         <Switch>
           <LoggedRoute exact path='/' component={Dashboard} />
-          <LoggedRoute path='/chat' component={Dashboard} />
-          {/* <Route path='/project/:id' component={ProjectDetails} /> */}
+          <LoggedRoute path='/room' component={Dashboard} />
+          <LoggedRoute path='/chats' component={Dashboard} />
+          <LoggedRoute path='/people' component={Dashboard} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={SignUp} />
         </Switch>

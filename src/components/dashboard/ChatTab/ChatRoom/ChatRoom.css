@@ -8,6 +8,7 @@
 
 .chat-header {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   padding: 2rem;
   border-bottom: 1px solid lightgray;
@@ -24,6 +25,16 @@
 
 .chat-header__info > p {
   color: grey;
+  white-space: nowrap;
+}
+
+.back-btn {
+  display: none;
+  margin-right: 0.3rem;
+}
+
+.back-btn__active {
+  display: none;
 }
 
 .chat-body {
@@ -49,4 +60,14 @@
 
 .last-seen {
   margin-right: 0.3rem;
+}
+
+@media (max-width: 480px) {
+  .chat {
+    width: 100%;
+    display: none;
+  }
+  .back-btn {
+    display: block;
+  }
 }

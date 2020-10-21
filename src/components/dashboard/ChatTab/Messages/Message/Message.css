@@ -34,3 +34,13 @@
   margin-left: auto;
   background-color: #dcf8c6;
 }
+
+@media (max-width: 480px) {
+  .message-timestamp {
+    font-size: x-small;
+  }
+
+  .message-author {
+    font-size: x-small;
+  }
+}

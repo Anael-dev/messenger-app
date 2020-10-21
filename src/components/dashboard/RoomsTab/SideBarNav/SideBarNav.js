@@ -24,6 +24,7 @@ const SideBarNav = ({ signOut }) => {
             `https://avatars.dicebear.com/api/human/${currentUser.uid}.svg`
           }
         />
+        {/* <h1>{currentUser.displayName}</h1> */}
         <div className='sidebar-header__right'>
           <IconButton title='new chat'>
             <ChatIcon />

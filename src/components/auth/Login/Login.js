@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { auth, db, provider } from "../../../firebase/base";
 import { AuthContext } from "../../../context/auth";
 import "./Login.css";
-import Logo from "../../../images/WhatsApp_Logos/logo-whatsapp-png-46043.png";
+import Logo from "../../../images/WhatsApp_Logos/logo.png";
 
 const Login = ({ history }) => {
   const [formData, setFormData] = useState({
@@ -20,7 +20,7 @@ const Login = ({ history }) => {
       .update({
         active: true,
       })
-      .then(() => history.push("/"));
+      .then(() => history.push("/chats"));
   }
 
   const handleChange = (e) => {
@@ -90,11 +90,11 @@ const Login = ({ history }) => {
     <div className='auth-container'>
       <div className='auth__inner-container'>
         <h1 className='auth__heading'>Sign in to WhatsApp</h1>
-        <img className='app-logo' src={Logo} />
+        <img className='app-logo' src={Logo} alt="whatsapp logo"/>
         <button
           className='google-auth__button'
           onClick={(e) => handleGoogleLogin(e)}>
-          <i className='fab fa-google'></i>{" "}
+          <i className='fab fa-google'></i>
           <span>
             Sign in with <b>Google</b>
           </span>

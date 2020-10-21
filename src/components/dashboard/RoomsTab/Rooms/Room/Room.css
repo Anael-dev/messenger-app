@@ -5,8 +5,9 @@
   border-bottom: 1px solid #f6f6f6;
 }
 
-.room:hover {
-  background-color: #e2e0e0;
+.room:hover,
+.selected-room {
+  background-color: #ededed;
 }
 
 .room__info {

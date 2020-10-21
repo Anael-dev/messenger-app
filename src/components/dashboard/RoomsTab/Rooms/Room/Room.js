@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Room.css";
 import { Avatar } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { db } from "../../../../firebase/base";
+import { Link, NavLink } from "react-router-dom";
+import { db } from "../../../../../firebase/base";
 import { useLocation } from "react-router-dom";
 
 const Room = ({ roomData }) => {
@@ -55,40 +55,45 @@ const Room = ({ roomData }) => {
   }, [roomData.id, roomActive]);
 
   return (
-    <Link key={roomData.id} to={`/chat/${roomData.id}`}>
-      <div className='room'>
-        <Avatar
-          src={`https://avatars.dicebear.com/api/human/${roomData.id}.svg`}
-        />
-        <div className='room__info'>
-          <div className='room__info__container'>
-            <h2>{roomData.name}</h2>
-            <p className='timestamp'>
-              {lastMessage &&
-                lastMessage.createdAt &&
-                new Date(lastMessage.createdAt?.toDate()).toLocaleString(
-                  "en-GB",
-                  {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  }
-                )}
-            </p>
-          </div>
-          <div className='room__info__container'>
-            <p className={`room__info__message ${changesCounter > 0 ? "bold" : null}`}>
-              {lastMessage?.content}
-            </p>
-            <div
-              className={`room__notification ${
-                changesCounter > 0 ? "open" : null
-              }`}>
-              <span className='room__notification__num'>{changesCounter}</span>
-            </div>
+    <NavLink
+      key={roomData.id}
+      className='room'
+      activeClassName='selected-room'
+      to={`/chats/room/${roomData.id}`}>
+      <Avatar
+        src={`https://avatars.dicebear.com/api/human/${roomData.id}.svg`}
+      />
+      <div className='room__info'>
+        <div className='room__info__container'>
+          <h2>{roomData.name}</h2>
+          <p className='timestamp'>
+            {lastMessage &&
+              lastMessage.createdAt &&
+              new Date(lastMessage.createdAt?.toDate()).toLocaleString(
+                "en-GB",
+                {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }
+              )}
+          </p>
+        </div>
+        <div className='room__info__container'>
+          <p
+            className={`room__info__message ${
+              changesCounter > 0 ? "bold" : null
+            }`}>
+            {lastMessage?.content}
+          </p>
+          <div
+            className={`room__notification ${
+              changesCounter > 0 ? "open" : null
+            }`}>
+            <span className='room__notification__num'>{changesCounter}</span>
           </div>
         </div>
       </div>
-    </Link>
+    </NavLink>
   );
 };
 
