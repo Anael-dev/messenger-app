@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Room.css";
 import { Avatar } from "@material-ui/core";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { db } from "../../../../../firebase/base";
 import { useLocation } from "react-router-dom";
 
@@ -39,13 +39,11 @@ const Room = ({ roomData }) => {
               let changes = snapshot.docChanges();
               changes.forEach((change) => {
                 if (change.type == "added") {
-                  console.log(roomData.name);
+                  // console.log(roomData.name);
                   setChangesCounter((counter) => counter + 1);
-                  console.log(change.doc.data());
-                  console.log(change.type);
+                  // console.log(change.doc.data());
+                  // console.log(change.type);
                 }
-                // console.log(change.doc.data());
-                // console.log(change.type);
               });
             }
           }
@@ -60,9 +58,7 @@ const Room = ({ roomData }) => {
       className='room'
       activeClassName='selected-room'
       to={`/chats/room/${roomData.id}`}>
-      <Avatar
-        src={`https://avatars.dicebear.com/api/human/${roomData.id}.svg`}
-      />
+      <Avatar src={roomData.photo} />
       <div className='room__info'>
         <div className='room__info__container'>
           <h2>{roomData.name}</h2>

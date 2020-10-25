@@ -1,40 +1,30 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { filterRooms } from "../../../../actions/roomsActions";
+import { filterUsers } from "../../../../actions/usersActions";
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { IconButton } from "@material-ui/core";
+// import { IconButton } from "@material-ui/core";
 
 import "./../RoomsTab.css";
 
-const SideBarSearch = ({ rooms, callback }) => {
+const SideBarSearch = () => {
+  const dispatch = useDispatch();
   const [input, setInput] = useState("");
-  const [filteredResult, setFilteredResult] = useState([]);
+  // const [filteredResult, setFilteredResult] = useState([]);
 
   useEffect(() => {
-    let filteredArr;
-    if (input) {
-      const lowerInput = input.trim().toLowerCase();
-      filteredArr = rooms.filter((room) =>
-        room.name.toLowerCase().trim().includes(lowerInput)
-      );
-      if (filteredArr !== rooms) {
-        if (filteredArr.length > 0) {
-          setFilteredResult(filteredArr);
-        } else {
-          setFilteredResult([]);
-        }
-      }
-    } else {
-      setFilteredResult(rooms);
-    }
+    dispatch(filterRooms(input));
+    dispatch(filterUsers(input));
   }, [input]);
 
-  useEffect(() => {
-    callback(filteredResult);
-  }, [filteredResult]);
+  // useEffect(() => {
+  //   callback(filteredResult);
+  // }, [filteredResult]);
 
   const backToAllRooms = () => {
     setInput("");
-    setFilteredResult(rooms);
+    dispatch(filterRooms());
   };
 
   return (

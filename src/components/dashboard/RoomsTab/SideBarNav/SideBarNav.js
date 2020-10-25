@@ -20,8 +20,7 @@ const SideBarNav = ({ signOut }) => {
       <div className='sidebar-header'>
         <Avatar
           src={
-            currentUser?.photoURL ||
-            `https://avatars.dicebear.com/api/human/${currentUser.uid}.svg`
+            currentUser?.photo
           }
         />
         {/* <h1>{currentUser.displayName}</h1> */}

@@ -146,6 +146,17 @@
 @media (max-width: 480px) {
   .sidebar {
     width: 100%;
+    position: relative;
+  }
+
+  .model {
+    position: static;
+  }
+
+  .dropdown-model {
+    top: 0;
+    right: 0;
+    left: auto;
   }
 }
 

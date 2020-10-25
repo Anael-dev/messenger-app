@@ -46,7 +46,7 @@ a {
 
 button {
   font-family: inherit;
-  font-size: inherit;
+  /* font-size: inherit; */
   background: transparent;
   text-decoration: none;
   text-align: center;

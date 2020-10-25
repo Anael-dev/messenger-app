@@ -7,9 +7,9 @@ const ChatTab = () => {
   return (
     <Switch>
       <Route exact path='/chats' component={DefaultPage} />
-      <Route path='/people' component={DefaultPage} />
+      <Route exact path='/users' component={DefaultPage} />
       <Route path='/chats/room/:roomId' component={ChatRoom} />
-      <Route path='/people/room/:roomId' component={ChatRoom} />
+      <Route path='/users/room/:roomId' component={ChatRoom} />
     </Switch>
   );
 };

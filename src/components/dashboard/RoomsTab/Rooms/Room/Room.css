@@ -1,8 +1,11 @@
-.room {
+.room,
+.user {
+  width: 100%;
   display: flex;
   padding: 1.5rem;
   cursor: pointer;
   border-bottom: 1px solid #f6f6f6;
+  outline: none;
 }
 
 .room:hover,

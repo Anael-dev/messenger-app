@@ -41,11 +41,15 @@ const SignUp = ({ history }) => {
         // photoURL: , // some photo url
       });
       //create a user document in users collection
-      await db.collection("users").doc(authResult.user.uid).set({
-        name: formData.nickname,
-        uid: authResult.user.uid,
-        active: true,
-      });
+      await db
+        .collection("users")
+        .doc(authResult.user.uid)
+        .set({
+          name: formData.nickname,
+          uid: authResult.user.uid,
+          active: true,
+          photo: `https://avatars.dicebear.com/api/human/${authResult.user.uid}.svg`,
+        });
 
       history.push("/");
     } catch (err) {
