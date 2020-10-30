@@ -1,16 +1,25 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonIcon from "@material-ui/icons/Person";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Avatar, IconButton } from "@material-ui/core";
-import { AuthContext } from "../../../../context/auth";
-import "./../RoomsTab.css";
+import { AuthContext } from "../../../../../context/AuthContextProvider";
+import { db, firebase, auth } from "../../../../../firebase/base";
+import "./../../RoomsTab.css";
 
-const SideBarNav = ({ signOut }) => {
+const SideBarNav = () => {
   const [openMore, setOpenMore] = useState(false);
   const { currentUser } = useContext(AuthContext);
+
+  const signOut = async () => {
+    await db.collection("users").doc(currentUser.uid).update({
+      active: false,
+      lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    auth.signOut();
+  };
 
   return (
     <>
@@ -18,13 +27,11 @@ const SideBarNav = ({ signOut }) => {
         className={`backdrop ${openMore ? "open" : null}`}
         onClick={() => setOpenMore(!openMore)}></div>
       <div className='sidebar-header'>
-        <Avatar
-          src={
-            currentUser?.photo
-          }
-        />
-        {/* <h1>{currentUser.displayName}</h1> */}
-        <div className='sidebar-header__right'>
+        <div className='sidebar-header__user-data'>
+          <Avatar src={currentUser?.photo} />
+          <p>{currentUser.name}</p>
+        </div>
+        <div className='sidebar-header__nav-section'>
           <IconButton title='new chat'>
             <ChatIcon />
           </IconButton>

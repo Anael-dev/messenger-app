@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { filterRooms } from "../../../../actions/roomsActions";
-import { filterUsers } from "../../../../actions/usersActions";
+import { filterRooms } from "../../../../../actions/roomsActions";
+import { filterUsers } from "../../../../../actions/usersActions";
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 // import { IconButton } from "@material-ui/core";
-
-import "./../RoomsTab.css";
+import "./../../RoomsTab.css";
 
 const SideBarSearch = () => {
   const dispatch = useDispatch();
@@ -16,7 +15,7 @@ const SideBarSearch = () => {
   useEffect(() => {
     dispatch(filterRooms(input));
     dispatch(filterUsers(input));
-  }, [input]);
+  }, [input, dispatch]);
 
   // useEffect(() => {
   //   callback(filteredResult);

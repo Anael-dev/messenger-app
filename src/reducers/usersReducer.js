@@ -1,4 +1,4 @@
-import { GET_REALTIME_USERS, FILTER_USERS } from "../actions/types";
+import { SET_REALTIME_USERS, FILTER_USERS } from "../actions/types";
 
 const initialState = {
   users: [],
@@ -7,7 +7,7 @@ const initialState = {
 const roomsReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case GET_REALTIME_USERS:
+    case SET_REALTIME_USERS:
       return {
         ...state,
         users: payload,

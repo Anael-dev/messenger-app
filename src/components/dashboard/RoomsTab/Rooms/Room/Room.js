@@ -18,12 +18,11 @@ const Room = ({ roomData }) => {
     } else {
       setRoomActive(false);
     }
-  }, [location.pathname]);
+  }, [location.pathname, roomData.id]);
 
   useEffect(() => {
     if (roomData.id) {
       let initState = true;
-
       const unsubscribe = db
         .collection("rooms")
         .doc(roomData.id)
@@ -38,7 +37,7 @@ const Room = ({ roomData }) => {
             if (!roomActive && !snapshot.docChanges().empty) {
               let changes = snapshot.docChanges();
               changes.forEach((change) => {
-                if (change.type == "added") {
+                if (change.type === "added") {
                   // console.log(roomData.name);
                   setChangesCounter((counter) => counter + 1);
                   // console.log(change.doc.data());
@@ -53,43 +52,47 @@ const Room = ({ roomData }) => {
   }, [roomData.id, roomActive]);
 
   return (
-    <NavLink
-      key={roomData.id}
-      className='room'
-      activeClassName='selected-room'
-      to={`/chats/room/${roomData.id}`}>
-      <Avatar src={roomData.photo} />
-      <div className='room__info'>
-        <div className='room__info__container'>
-          <h2>{roomData.name}</h2>
-          <p className='timestamp'>
-            {lastMessage &&
-              lastMessage.createdAt &&
-              new Date(lastMessage.createdAt?.toDate()).toLocaleString(
-                "en-GB",
-                {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                }
-              )}
-          </p>
-        </div>
-        <div className='room__info__container'>
-          <p
-            className={`room__info__message ${
-              changesCounter > 0 ? "bold" : null
-            }`}>
-            {lastMessage?.content}
-          </p>
-          <div
-            className={`room__notification ${
-              changesCounter > 0 ? "open" : null
-            }`}>
-            <span className='room__notification__num'>{changesCounter}</span>
+    <>
+      {/* {lastMessage && ( */}
+      <NavLink
+        key={roomData.id}
+        className='room'
+        activeClassName='selected-room'
+        to={`/dashboard/chats/room/${roomData.id}`}>
+        <Avatar src={roomData.photo} />
+        <div className='room__info'>
+          <div className='room__info__container'>
+            <h2>{roomData.name}</h2>
+            <p className='timestamp'>
+              {lastMessage &&
+                lastMessage.createdAt &&
+                new Date(lastMessage.createdAt?.toDate()).toLocaleString(
+                  "en-GB",
+                  {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  }
+                )}
+            </p>
+          </div>
+          <div className='room__info__container'>
+            <p
+              className={`room__info__message ${
+                changesCounter > 0 ? "bold" : null
+              }`}>
+              {lastMessage?.content}
+            </p>
+            <div
+              className={`room__notification ${
+                changesCounter > 0 ? "open" : null
+              }`}>
+              <span className='room__notification__num'>{changesCounter}</span>
+            </div>
           </div>
         </div>
-      </div>
-    </NavLink>
+      </NavLink>
+      {/* )} */}
+    </>
   );
 };
 

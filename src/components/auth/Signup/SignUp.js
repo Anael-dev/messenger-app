@@ -1,61 +1,74 @@
-import React, { useState, useContext } from "react";
-import { auth, db } from "../../firebase/base";
-import { AuthContext } from "../../context/auth";
+import React, { useState} from "react";
+import { auth, generateUserDocument } from "../../../firebase/base";
 import { Link } from "react-router-dom";
-import "./Login/Login.css";
+import "../Login/Login.css";
 
-const SignUp = ({ history }) => {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    nickname: "",
+    displayName: "",
   });
   const [error, setError] = useState(null);
 
-  const { currentUser } = useContext(AuthContext);
+  // const { currentUser } = useContext(AuthContext);
 
-  if (currentUser) {
-    db.collection("users")
-      .doc(currentUser.uid)
-      .update({
-        active: true,
-      })
-      .then(() => history.push("/chats"));
-  }
+  // if (currentUser) {
+  //   db.collection("users")
+  //     .doc(currentUser.uid)
+  //     .update({
+  //       active: true,
+  //     })
+  //     .then(() => history.push("/dashboard/chats"));
+  // }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSignUp = async (e) => {
+    const { email, password, displayName } = formData;
     e.preventDefault();
-
     //sign up the user
     try {
-      const authResult = await auth.createUserWithEmailAndPassword(
-        formData.email,
-        formData.password
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
       );
-      await authResult.user.updateProfile({
-        displayName: formData.nickname,
-        // photoURL: , // some photo url
-      });
-      //create a user document in users collection
-      await db
-        .collection("users")
-        .doc(authResult.user.uid)
-        .set({
-          name: formData.nickname,
-          uid: authResult.user.uid,
-          active: true,
-          photo: `https://avatars.dicebear.com/api/human/${authResult.user.uid}.svg`,
-        });
-
-      history.push("/");
-    } catch (err) {
-      console.log(err.message);
-      setError(err.message);
+      generateUserDocument(user, { name: displayName });
+    } catch (error) {
+      setError("Error Signing up with email and password");
     }
+    setFormData({
+      email: "",
+      password: "",
+      displayName: "",
+    });
+    // history.push("/");
+    // try {
+    //   const authResult = await auth.createUserWithEmailAndPassword(
+    //     formData.email,
+    //     formData.password
+    //   );
+    // await authResult.user.updateProfile({
+    //   displayName: formData.displayName,
+    //   // photoURL: , // some photo url
+    // });
+    //create a user document in users collection
+    // await db
+    //   .collection("users")
+    //   .doc(authResult.user.uid)
+    //   .set({
+    //     name: formData.displayName,
+    //     uid: authResult.user.uid,
+    //     active: true,
+    //     photo: `https://avatars.dicebear.com/api/human/${authResult.user.uid}.svg`,
+    //   });
+
+    // } catch (err) {
+    //   console.log(err.message);
+    //   setError(err.message);
+    // }
   };
 
   return (
@@ -97,7 +110,7 @@ const SignUp = ({ history }) => {
         </form>
         <p className='signUp-section signUp-p'>
           Already have an account?
-          <Link to='/login'>
+          <Link to='/auth/login'>
             <span className='signUp-section signUp-span'>Login </span>
           </Link>
         </p>

@@ -1,6 +1,7 @@
-import { FILTER_ROOMS, GET_REALTIME_ROOMS } from "../actions/types";
+import { FILTER_ROOMS, SET_REALTIME_ROOMS } from "../actions/types";
 
 const initialState = {
+  loadedRooms: false,
   rooms: [],
   filteredRooms: [],
 };
@@ -8,11 +9,12 @@ const initialState = {
 const roomsReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case GET_REALTIME_ROOMS:
+    case SET_REALTIME_ROOMS:
       return {
         ...state,
         rooms: payload,
         filteredRooms: payload,
+        loadedRooms: true,
       };
     case FILTER_ROOMS:
       const inputVal = payload;
@@ -20,8 +22,10 @@ const roomsReducer = (state = initialState, action) => {
       let filteredResult;
       if (inputVal) {
         const lowerInput = inputVal.trim().toLowerCase();
-        filteredArr = state.rooms.filter((room) =>
-          room.name.toLowerCase().trim().includes(lowerInput)
+        filteredArr = state.rooms.filter(
+          (room) =>
+            room.lastMessage !== null &&
+            room.name.toLowerCase().trim().includes(lowerInput)
         );
         if (filteredArr !== state.rooms) {
           if (filteredArr.length > 0) {

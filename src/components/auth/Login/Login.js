@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { auth, db, provider } from "../../../firebase/base";
-import { AuthContext } from "../../../context/auth";
+import { AuthContext } from "../../../context/AuthContextProvider";
 import "./Login.css";
 import Logo from "../../../images/WhatsApp_Logos/logo.png";
 
@@ -10,7 +10,6 @@ const Login = ({ history }) => {
     email: "",
     password: "",
   });
-
   const [isError, setIsError] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
@@ -20,7 +19,7 @@ const Login = ({ history }) => {
       .update({
         active: true,
       })
-      .then(() => history.push("/chats"));
+      .then(() => history.push("/dashboard/chats"));
   }
 
   const handleChange = (e) => {
@@ -31,31 +30,13 @@ const Login = ({ history }) => {
     e.preventDefault();
     //sign in the user
     try {
-      const authResult = await auth.signInWithPopup(provider);
-      
-      console.log(authResult);
-      const existingUserQuery = await db
-        .collection("users")
-        .where("uid", "==", authResult.user.uid);
-      if (existingUserQuery.length) {
-        await db.collection("users").doc(authResult.user.uid).update({
-          active: true,
-        });
-      } else {
-        await db.collection("users").doc(authResult.user.uid).set({
-          name: authResult.user.displayName,
-          uid: authResult.user.uid,
-          photo: authResult.user.photoURL,
-          active: true,
-        });
-      }
-      //update active user status
+      await auth.signInWithPopup(provider);
+      setFormData({
+        email: "",
+        password: "",
+      });
 
-      // setFormData({
-      //   email: "",
-      //   password: "",
-      // });
-      history.push("/");
+      // history.push("/");
     } catch (err) {
       console.log(err);
     }
@@ -65,21 +46,20 @@ const Login = ({ history }) => {
     e.preventDefault();
     //sign in the user
     try {
-      const authResult = await auth.signInWithEmailAndPassword(
-        formData.email,
-        formData.password
-      );
-      console.log(authResult);
+      await auth.signInWithEmailAndPassword(formData.email, formData.password);
+      // console.log(authResult);
 
       //update active user status
-      await db.collection("users").doc(authResult.user.uid).update({
-        active: true,
-      });
-      // setFormData({
-      //   email: "",
-      //   password: "",
+      // await db.collection("users").doc(authResult.user.uid).update({
+      //   active: true,
       // });
-      history.push("/");
+
+      setFormData({
+        email: "",
+        password: "",
+      });
+
+      // history.push("/");
     } catch (err) {
       console.log(err);
       setIsError(true);
@@ -90,7 +70,7 @@ const Login = ({ history }) => {
     <div className='auth-container'>
       <div className='auth__inner-container'>
         <h1 className='auth__heading'>Sign in to WhatsApp</h1>
-        <img className='app-logo' src={Logo} alt="whatsapp logo"/>
+        <img className='app-logo' src={Logo} alt='whatsapp logo' />
         <button
           className='google-auth__button'
           onClick={(e) => handleGoogleLogin(e)}>
@@ -135,7 +115,7 @@ const Login = ({ history }) => {
 
         <p className='signUp-section signUp-p'>
           Don't have an account yet?
-          <Link to='/signup'>
+          <Link to='/auth/signup'>
             <span className='signUp-section signUp-span'>Sign Up </span>
           </Link>
         </p>

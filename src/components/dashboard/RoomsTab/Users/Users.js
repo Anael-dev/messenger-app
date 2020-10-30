@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import "../RoomsTab.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import User from "./User";
 
 const Users = () => {

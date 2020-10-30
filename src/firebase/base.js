@@ -15,8 +15,47 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+//exports
 const db = firebase.firestore();
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 
-export { firebase, auth, db, provider };
+const generateUserDocument = async (user, additionalData = null) => {
+  if (!user) return;
+  const userRef = db.collection("users").doc(user.uid);
+  const userSnapshot = await userRef.get();
+  if (userSnapshot.exists) {
+    await userRef.update({
+      active: true,
+    });
+  } else {
+    const { uid, displayName, photoURL } = user;
+    try {
+      await userRef.set({
+        name: displayName,
+        uid,
+        photo: photoURL || `https://avatars.dicebear.com/api/human/${uid}.svg`,
+        active: true,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("Error creating user document", error);
+    }
+  }
+  // const loggedUserData = await userRef.get();
+  // return loggedUserData.data();
+
+  return getUserDocument(user.uid);
+};
+
+const getUserDocument = async (uid) => {
+  if (!uid) return null;
+  try {
+    const userDocument = await db.collection("users").doc(uid).get();
+    return userDocument.data();
+  } catch (error) {
+    console.error("Error fetching user", error);
+  }
+};
+
+export { firebase, auth, db, provider, generateUserDocument };

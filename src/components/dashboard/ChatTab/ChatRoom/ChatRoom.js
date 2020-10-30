@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./ChatRoom.css";
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import Messages from "../Messages/Messages";
 import { db } from "../../../../firebase/base";
 import Input from "../Input/Input";
@@ -10,64 +10,42 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 // import AttachFileIcon from "@material-ui/icons/AttachFile";
 // import SearchIcon from "@material-ui/icons/Search";
 // import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import { AuthContext } from "../../../../context/auth";
+import { AuthContext } from "../../../../context/AuthContextProvider";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const ChatRoom = () => {
-  const [roomData, setRoomData] = useState(null);
-  const [chatUser, setChatUser] = useState(null);
-  const [backBtnActive, setBackBtnActive] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const [chatUserId, setChatUserId] = useState(null);
+  const [backBtnActive, setBackBtnActive] = useState(false);
   const { roomId } = useParams();
   const history = useHistory();
-  const rooms = useSelector((state) => state.roomsReducer.rooms);
-  // const users = useSelector((state) => state.usersReducer.users);
+  const room = useSelector((state) =>
+    state.roomsReducer.rooms.find((room) => room.id === roomId)
+  );
+  const chatUser = useSelector((state) =>
+    state.usersReducer.users.find((user) => user.id === chatUserId)
+  );
 
   const messagesRef = db.collection("rooms").doc(roomId).collection("messages");
   const roomRef = db.collection("rooms").doc(roomId);
 
+  const redirectToChats = () => {
+    history.push("/dashboard/chats");
+  };
   useEffect(() => {
-    if (backBtnActive) history.push("/chats");
+    if (backBtnActive) redirectToChats();
+    // eslint-disable-next-line
   }, [backBtnActive]);
 
   useEffect(() => {
-    // roomRef.get().then((snap) => setRoomData({ ...snap.data(), id: snap.id }));
-    setRoomData(rooms.find((room) => room.id === roomId));
-  }, [roomId]);
-
-  // useEffect(() => {
-  //   if (roomData && roomData.type === "private") {
-  //     const userId = roomData.members.filter(
-  //       (x) => x.uid !== currentUser.uid
-  //     )[0].uid;
-
-  //     const chatUserData = users.find((user) => user.id == userId);
-  //     console.log(chatUserData);
-  //     setChatUser(chatUserData);
-  //   }
-  // }, [roomData])
-
-  useEffect(() => {
-    if (roomData && roomData.type === "private") {
-      const userId = roomData.members.filter(
-        (x) => x.uid !== currentUser.uid
-      )[0].uid;
-      const unsubscribe = db
-        .collection("users")
-        .doc(userId)
-        .onSnapshot(
-          (snap) => {
-            setChatUser({
-              ...snap.data(),
-            });
-          }
-          // setLastSeen(snap.data().lastSeen.toUTCString()
-        );
-
-      return () => unsubscribe();
+    if (room && room.type === "private") {
+      const userId = room.members.filter((x) => x.uid !== currentUser.uid)[0]
+        .uid;
+      setChatUserId(userId);
     }
-  }, [roomData]);
+    // eslint-disable-next-line
+  }, [roomId]);
 
   return (
     <div className='chat'>
@@ -77,13 +55,16 @@ const ChatRoom = () => {
           onClick={() => setBackBtnActive(!backBtnActive)}>
           <ArrowBackIcon />
         </button>
-        <Avatar src={roomData?.photo || chatUser?.photo} />
-        {roomData && (
+        <Avatar src={room?.photo} />
+        {room && (
           <div className='chat-header__info'>
-            <h3>{roomData.name || chatUser?.name}</h3>
-            {roomData.type === "private" &&
+            <h3>{room.name}</h3>
+            {room.type === "private" &&
               chatUser &&
-              (chatUser.active ? (
+              (room.typingUsers.length > 0 &&
+              room.typingUsers.some((x) => x !== currentUser.uid) ? (
+                <p>typing...</p>
+              ) : chatUser.active ? (
                 <p>online</p>
               ) : (
                 <p>
@@ -92,28 +73,11 @@ const ChatRoom = () => {
                     new Date(chatUser.lastSeen.toDate()).toLocaleString()}
                 </p>
               ))}
-            {roomData.type === "group" && (
-              <p>{roomData.members.map((x) => x.name).join(", ")}</p>
+            {room.type === "group" && (
+              <p>{room.members.map((x) => x.name).join(", ")}</p>
             )}
           </div>
         )}
-        {/* {roomData && chatUser && (
-          <div className='chat-header__info'>
-            <h3>{chatUser.name}</h3>
-            {roomData.type === "private" &&
-              (chatUser.active ? (
-                <p>online</p>
-              ) : (
-                <p>
-                  <span className='last-seen'>last seen at</span>
-                  {new Date(chatUser.lastSeen?.toDate()).toLocaleString()}
-                </p>
-              ))}
-            {roomData.type === "group" && (
-              <p>{roomData.members.map((x) => x.name).join(", ")}</p>
-            )}
-          </div>
-        )} */}
         <div className='chat-header__right'>
           {/* <IconButton>
             <SearchIcon />

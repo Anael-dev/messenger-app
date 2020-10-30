@@ -2,9 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Message from "../Messages/Message/Message";
 
 const Messages = ({ messagesRef, id }) => {
-  //reference to messages user's subcollection
-  //   const messagesRef = db.collection("rooms").doc(id).collection("messages");
-
   //querying 20 messages by time order
   const messagesQuery = messagesRef.orderBy("createdAt").limitToLast(20);
 
@@ -25,7 +22,7 @@ const Messages = ({ messagesRef, id }) => {
       }));
       setMessages(newMessages);
     });
-    //unsubscribe callback when rerender useEffect/unmount
+
     return () => unsubscribe();
 
     // eslint-disable-next-line

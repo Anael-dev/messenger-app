@@ -1,43 +1,94 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { db } from "../../firebase/base";
+import { AuthContext } from "../../context/AuthContextProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { setRooms } from "../../actions/roomsActions";
+import { setUsers } from "../../actions/usersActions";
 import ChatTab from "./ChatTab/ChatTab";
 import RoomsTab from "./RoomsTab/RoomsTab";
-import { auth, db, firebase } from "../../firebase/base";
-import { AuthContext } from "../../context/auth";
 import "./DashBoard.css";
 
-function Dashboard() {
+const Dashboard = () => {
   const { currentUser } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.usersReducer.users);
+  const loadedRooms = useSelector((state) => state.roomsReducer.loadedRooms);
+  const [loadedUsers, setLoadedUsers] = useState(false);
 
-  const updateActiveStatus = async () => {
-    await db.collection("users").doc(currentUser.uid).update({
-      active: false,
-      lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-  };
+  useEffect(() => {
+    if (currentUser) {
+      const unsubscribeUsers = db
+        .collection("users")
+        .where("uid", "!=", currentUser.uid)
+        .onSnapshot(async (snap) => {
+          const users = snap.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          await dispatch(setUsers(users));
+          setLoadedUsers(true);
+        });
 
-  const signOut = async () => {
-    console.log("clicked");
-    await updateActiveStatus();
-    auth.signOut();
-  };
+      return () => {
+        console.log("unsubscribed");
+        unsubscribeUsers();
+      };
+    }
+  }, [currentUser, dispatch]);
 
-  // //changing active status on window close
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", async () => {
-  //     // await signOut();
-  //   });
-  //   // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {
+    if (currentUser && loadedUsers) {
+      if (users.length > 0) {
+        const unsubscribeRooms = db
+          .collection("rooms")
+          .where("members", "array-contains", {
+            name: currentUser.name,
+            uid: currentUser.uid,
+          })
+          // .where("lastMessage", "!=", null)
+          .orderBy("lastMessage", "desc")
+          .onSnapshot(async (snap) => {
+            let chatUser;
+            const userRooms = snap.docs.map((doc) => {
+              if (doc.data().type === "private") {
+                chatUser = doc
+                  .data()
+                  .members.find((user) => user.uid !== currentUser.uid);
+              }
+
+              return {
+                ...doc.data(),
+                id: doc.id,
+                name: doc.data().name || chatUser?.name,
+                photo:
+                  doc.data().photo ||
+                  users.find((user) => user.id === chatUser.uid).photo,
+              };
+            });
+            dispatch(setRooms(userRooms));
+          });
+
+        return () => {
+          console.log("unsubscribed");
+          unsubscribeRooms();
+        };
+      }
+    }
+    // eslint-disable-next-line
+  }, [currentUser, loadedUsers, dispatch]);
 
   return (
     <div className='dashboard'>
-      {/* <button onClick={() => signOut()}>Sign out</button> */}
-      <div className='dashboard__body'>
-        <RoomsTab signOut={signOut} />
-        <ChatTab />
-      </div>
+      {loadedUsers && loadedRooms ? (
+        <div className='dashboard__body'>
+          <RoomsTab />
+          <ChatTab />
+        </div>
+      ) : (
+        <h3>Loading...</h3>
+      )}
     </div>
   );
-}
+};
 
 export default Dashboard;

@@ -1,4 +1,7 @@
-import { FILTER_USERS, GET_REALTIME_USERS } from "./types";
+import {
+  FILTER_USERS,
+  SET_REALTIME_USERS,
+} from "./types";
 
 export const filterUsers = (input) => {
   return {
@@ -7,9 +10,11 @@ export const filterUsers = (input) => {
   };
 };
 
-export const getUsers = (users) => {
+export const setUsers = (users) => {
   return {
-    type: GET_REALTIME_USERS,
+    type: SET_REALTIME_USERS,
     payload: users,
   };
 };
+
+

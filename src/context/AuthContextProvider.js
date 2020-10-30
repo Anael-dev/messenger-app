@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { auth } from "../firebase/base";
+import { auth, generateUserDocument } from "../firebase/base";
 
 export const AuthContext = React.createContext();
 
@@ -8,9 +8,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     //listen for auth status change
-    auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      console.log(user);
+    auth.onAuthStateChanged(async (userAuth) => {
+      const loggedUser = await generateUserDocument(userAuth);
+      setCurrentUser(loggedUser);
+      console.log(loggedUser);
     });
   }, []);
 

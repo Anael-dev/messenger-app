@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ReactEmoji from "react-emoji";
 import "./Message.css";
-import { AuthContext } from "../../../../../context/auth";
+import { AuthContext } from "../../../../../context/AuthContextProvider";
 
 const Message = ({ messageData }) => {
   const { content, createdAt, name, uid } = messageData;

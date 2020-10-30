@@ -12,9 +12,20 @@
   border-right: 1px solid lightgray;
 }
 
-.sidebar-header__right {
+.sidebar-header__nav-section {
   display: flex;
   flex-direction: row;
+}
+
+.sidebar-header__user-data {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-header__user-data > p {
+  color: grey;
+  font-weight: 600;
+  margin-left: 1em;
 }
 
 .sidebar-search {
