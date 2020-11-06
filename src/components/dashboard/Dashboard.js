@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { db } from "../../firebase/base";
 import { AuthContext } from "../../context/AuthContextProvider";
 import { useDispatch, useSelector } from "react-redux";
-import { setRooms } from "../../actions/roomsActions";
+import { setRooms, setWindowWidth } from "../../actions/roomsActions";
 import { setUsers } from "../../actions/usersActions";
 import ChatTab from "./ChatTab/ChatTab";
 import RoomsTab from "./RoomsTab/RoomsTab";
@@ -14,6 +14,19 @@ const Dashboard = () => {
   const users = useSelector((state) => state.usersReducer.users);
   const loadedRooms = useSelector((state) => state.roomsReducer.loadedRooms);
   const [loadedUsers, setLoadedUsers] = useState(false);
+  const [windowWidth, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    dispatch(setWindowWidth(windowWidth));
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      dispatch(setWindowWidth(window.innerWidth));
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [windowWidth]);
 
   useEffect(() => {
     if (currentUser) {

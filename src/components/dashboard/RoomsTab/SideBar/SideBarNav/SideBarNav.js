@@ -14,7 +14,7 @@ const SideBarNav = () => {
   const [openMore, setOpenMore] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const history = useHistory();
-  
+
   const signOut = async () => {
     await db.collection("users").doc(currentUser.uid).update({
       active: false,
@@ -40,8 +40,11 @@ const SideBarNav = () => {
             onClick={() => history.push("/dashboard/users")}>
             <ChatIcon />
           </IconButton>
+          <IconButton title='log out' onClick={signOut}>
+            <ExitToAppIcon />
+          </IconButton>
           {/* </Link> */}
-          <div className='model'>
+          {/* <div className='model'>
             <IconButton title='menu' onClick={() => setOpenMore(!openMore)}>
               <MoreVertIcon />
             </IconButton>
@@ -67,7 +70,7 @@ const SideBarNav = () => {
                 </li>
               </ul>
             </nav>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

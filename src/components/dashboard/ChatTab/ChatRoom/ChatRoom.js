@@ -12,7 +12,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 // import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { AuthContext } from "../../../../context/AuthContextProvider";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleSidebarView } from "../../../../actions/roomsActions";
 
 const ChatRoom = () => {
   const { currentUser } = useContext(AuthContext);
@@ -24,10 +25,11 @@ const ChatRoom = () => {
   const room = useSelector((state) =>
     state.roomsReducer.rooms.find((room) => room.id === roomId)
   );
+  const windowWidth = useSelector((state) => state.roomsReducer.windowWidth);
   const chatUser = useSelector((state) =>
     state.usersReducer.users.find((user) => user.id === chatUserId)
   );
-
+  const dispatch = useDispatch();
   const messagesRef = db.collection("rooms").doc(roomId).collection("messages");
   const roomRef = db.collection("rooms").doc(roomId);
 
@@ -55,7 +57,10 @@ const ChatRoom = () => {
       <div className='chat-header'>
         <button
           className={`back-btn ${backBtnActive ? "back-btn__active" : null}`}
-          onClick={() => setBackBtnActive(!backBtnActive)}>
+          onClick={() => {
+            setBackBtnActive(!backBtnActive);
+            if (windowWidth <= 480) dispatch(toggleSidebarView(true));
+          }}>
           <ArrowBackIcon />
         </button>
         <Avatar src={room?.photo} />

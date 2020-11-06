@@ -31,12 +31,13 @@ const Messages = ({ messagesRef, id }) => {
 
   return (
     <main>
-      <div className='messages-container'>
-        {messages.length > 0 &&
-          messages.map((message) => (
+      {messages.length > 0 && (
+        <div className='messages-container'>
+          {messages.map((message) => (
             <Message key={message.id} messageData={message} />
           ))}
-      </div>
+        </div>
+      )}
       <div ref={messagesEnd}></div>
     </main>
   );

@@ -65,7 +65,8 @@
 @media (max-width: 480px) {
   .chat {
     width: 100%;
-    display: none;
+    /* position: absolute; */
+    /* display: none; */
   }
   .back-btn {
     display: block;

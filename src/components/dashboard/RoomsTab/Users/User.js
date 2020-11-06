@@ -4,15 +4,19 @@ import { Avatar } from "@material-ui/core";
 import { db } from "../../../../firebase/base";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../../../context/AuthContextProvider";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleSidebarView } from "../../../../actions/roomsActions";
 
 const User = ({ userData }) => {
   const [chatRoom, setChatRoom] = useState("");
-  const rooms = useSelector((state) => state.roomsReducer.rooms);
+  const { rooms, windowWidth } = useSelector((state) => state.roomsReducer);
   const history = useHistory();
   const { currentUser } = useContext(AuthContext);
+  const dispatch = useDispatch();
 
   const redirectToRoom = async () => {
+    if (windowWidth <= 480) dispatch(toggleSidebarView(true));
+
     if (chatRoom.id) {
       history.push(
         `/dashboard/${chatRoom.lastMessage !== null ? "chats" : "users"}/room/${

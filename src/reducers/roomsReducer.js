@@ -2,17 +2,31 @@ import {
   FILTER_ROOMS,
   SET_REALTIME_ROOMS,
   SET_UNREAD_ROOM_MESSAGES,
+  TOGGLE_SIDEBAR_VIEW,
+  SET_WINDOW_WIDTH,
 } from "../actions/types";
 
 const initialState = {
   loadedRooms: false,
   rooms: [],
   filteredRooms: [],
+  windowWidth: "",
+  displaySidebar: true,
 };
 
 const roomsReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case SET_WINDOW_WIDTH:
+      return {
+        ...state,
+        windowWidth: payload,
+      };
+    case TOGGLE_SIDEBAR_VIEW:
+      return {
+        ...state,
+        displaySidebar: payload,
+      };
     case SET_REALTIME_ROOMS:
       return {
         ...state,
@@ -56,7 +70,7 @@ const roomsReducer = (state = initialState, action) => {
         }
         return room;
       });
-      
+
       return {
         ...state,
         rooms: mappedRooms,

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Room.css";
 import ReactEmoji from "react-emoji";
 import { Avatar } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { db } from "../../../../../firebase/base";
 import { useLocation } from "react-router-dom";
-import { setUnreadMessages } from "../../../../../actions/roomsActions";
-import { useDispatch } from "react-redux";
+import { toggleSidebarView } from "../../../../../actions/roomsActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Room = ({ roomData }) => {
   const [lastMessage, setLastMessage] = useState("");
@@ -14,12 +14,17 @@ const Room = ({ roomData }) => {
   const [changesCounter, setChangesCounter] = useState(0);
   const location = useLocation();
   const dispatch = useDispatch();
+  const { windowWidth, displaySidebar } = useSelector(
+    (state) => state.roomsReducer
+  );
 
   useEffect(() => {
     if (location.pathname.includes(roomData.id)) {
       setChangesCounter(0);
       // dispatch(setUnreadMessages(roomData.id, 0));
       setRoomActive(true);
+      if (windowWidth <= 480 && displaySidebar)
+        dispatch(toggleSidebarView(false));
     } else {
       setRoomActive(false);
     }
@@ -58,13 +63,17 @@ const Room = ({ roomData }) => {
 
   return (
     <>
-      <NavLink
-        key={roomData.id}
-        className='room'
-        activeClassName='selected-room'
-        to={`/dashboard/chats/room/${roomData.id}`}>
-        <Avatar src={roomData.photo} />{" "}
-        {roomData.lastMessage && (
+      {lastMessage && (
+        <NavLink
+          key={roomData.id}
+          className='room'
+          activeClassName='selected-room'
+          to={`/dashboard/chats/room/${roomData.id}`}
+          onClick={() => {
+            // console.log(WindowWidthContext.width);
+            if (windowWidth <= 480) dispatch(toggleSidebarView(false));
+          }}>
+          <Avatar src={roomData.photo} /> {/* {roomData.lastMessage && ( */}
           <div className='room__info'>
             <div className='room__info__container'>
               <h2>{roomData.name}</h2>
@@ -93,8 +102,9 @@ const Room = ({ roomData }) => {
               </div>
             </div>
           </div>
-        )}
-      </NavLink>
+          {/* )} */}
+        </NavLink>
+      )}
     </>
   );
 };

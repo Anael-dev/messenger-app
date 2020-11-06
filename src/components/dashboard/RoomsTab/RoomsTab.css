@@ -154,6 +154,10 @@
   border-bottom: 2px solid #03a688;
 }
 
+.hide-sidebar {
+  display: none;
+}
+
 @media (max-width: 480px) {
   .sidebar {
     width: 100%;
