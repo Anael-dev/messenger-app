@@ -20,6 +20,7 @@ const ChatRoom = () => {
   const [backBtnActive, setBackBtnActive] = useState(false);
   const { roomId } = useParams();
   const history = useHistory();
+  const users = useSelector((state) => state.usersReducer.users);
   const room = useSelector((state) =>
     state.roomsReducer.rooms.find((room) => room.id === roomId)
   );
@@ -40,8 +41,10 @@ const ChatRoom = () => {
 
   useEffect(() => {
     if (room && room.type === "private") {
-      const userId = room.members.filter((x) => x.uid !== currentUser.uid)[0]
-        .uid;
+      // const userId = Object.keys(room.members).find(
+      //   (id) => id !== currentUser.uid
+      // );
+      const userId = room.members.filter((uid) => uid !== currentUser.uid)[0];
       setChatUserId(userId);
     }
     // eslint-disable-next-line
@@ -74,7 +77,21 @@ const ChatRoom = () => {
                 </p>
               ))}
             {room.type === "group" && (
-              <p>{room.members.map((x) => x.name).join(", ")}</p>
+              // <p>
+              //   {Object.entries(room.members)
+              //     .map((x) => x[1].name)
+              //     .join(", ")}
+              // </p>
+              <p>
+                {room.members
+                  .map((uid) => {
+                    if (uid === currentUser.uid) {
+                      return currentUser.name;
+                    }
+                    return users?.find((user) => user.id === uid).name;
+                  })
+                  .join(", ")}
+              </p>
             )}
           </div>
         )}

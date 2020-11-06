@@ -15,12 +15,13 @@ const Messages = ({ messagesRef, id }) => {
 
   useEffect(() => {
     const unsubscribe = messagesQuery.onSnapshot((snapshot) => {
-      const newMessages = snapshot.docs.map((doc) => ({
+      const snapMessages = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
+        createdAt: doc.data().createdAt?.toDate(),
         // createdAt: doc.data().createdAt.toDate(),
       }));
-      setMessages(newMessages);
+      setMessages(snapMessages);
     });
 
     return () => unsubscribe();

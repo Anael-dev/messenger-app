@@ -41,7 +41,7 @@ const Message = ({ messageData }) => {
           <div className='message-details'>
             <p className='message-text'>{ReactEmoji.emojify(content)}</p>
             <span className='message-timestamp'>
-              {createdAt && checkMessageDate(new Date(createdAt.toDate()))}
+              {createdAt && checkMessageDate(new Date(createdAt))}
             </span>
           </div>
         </div>

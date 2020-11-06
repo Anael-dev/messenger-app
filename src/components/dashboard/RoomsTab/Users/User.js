@@ -7,28 +7,23 @@ import { AuthContext } from "../../../../context/AuthContextProvider";
 import { useSelector } from "react-redux";
 
 const User = ({ userData }) => {
-  const [userChatId, setUserChatId] = useState("");
-  const room = useSelector((state) =>
-    state.roomsReducer.rooms.find((room) => room.id === userChatId)
-  );
+  const [chatRoom, setChatRoom] = useState("");
+  const rooms = useSelector((state) => state.roomsReducer.rooms);
   const history = useHistory();
   const { currentUser } = useContext(AuthContext);
 
   const redirectToRoom = async () => {
-    if (userChatId) {
+    if (chatRoom.id) {
       history.push(
-        `/dashboard/${
-          room.lastMessage !== null ? "chats" : "users"
-        }/room/${userChatId}`
+        `/dashboard/${chatRoom.lastMessage !== null ? "chats" : "users"}/room/${
+          chatRoom.id
+        }`
       );
     } else {
       const newRoom = await db.collection("rooms").add({
         type: "private",
         lastMessage: null,
-        members: [
-          { name: currentUser.name, uid: currentUser.uid },
-          { name: userData.name, uid: userData.uid },
-        ],
+        members: [currentUser.uid, userData.uid],
         typingUsers: [],
         // createdAt: new Date(),
       });
@@ -38,23 +33,14 @@ const User = ({ userData }) => {
 
   useEffect(() => {
     if (userData.id) {
-      const unsubscribe = db
-        .collection("rooms")
-        .where("members", "array-contains", {
-          name: userData.name,
-          uid: userData.uid,
-        })
-        .where("type", "==", "private")
-        .onSnapshot(async (snap) => {
-          const userRoom = snap.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          if (userRoom.length > 0) {
-            setUserChatId(userRoom[0].id);
-          }
-        });
-      return () => unsubscribe();
+      const chatRoomArr = rooms.filter(
+        (room) =>
+          room.type === "private" &&
+          room.members.some((uid) => uid === userData.uid)
+      );
+      if (chatRoomArr.length > 0) {
+        setChatRoom(chatRoomArr[0]);
+      }
     }
   }, [userData]);
 

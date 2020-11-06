@@ -8,11 +8,13 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { AuthContext } from "../../../../../context/AuthContextProvider";
 import { db, firebase, auth } from "../../../../../firebase/base";
 import "./../../RoomsTab.css";
+import { useHistory } from "react-router-dom";
 
 const SideBarNav = () => {
   const [openMore, setOpenMore] = useState(false);
   const { currentUser } = useContext(AuthContext);
-
+  const history = useHistory();
+  
   const signOut = async () => {
     await db.collection("users").doc(currentUser.uid).update({
       active: false,
@@ -32,9 +34,13 @@ const SideBarNav = () => {
           <p>{currentUser.name}</p>
         </div>
         <div className='sidebar-header__nav-section'>
-          <IconButton title='new chat'>
+          {/* <Link to='/dashboard/users'> */}
+          <IconButton
+            title='new chat'
+            onClick={() => history.push("/dashboard/users")}>
             <ChatIcon />
           </IconButton>
+          {/* </Link> */}
           <div className='model'>
             <IconButton title='menu' onClick={() => setOpenMore(!openMore)}>
               <MoreVertIcon />

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { auth, generateUserDocument } from "../../../firebase/base";
 import { Link } from "react-router-dom";
 import "../Login/Login.css";
@@ -35,15 +35,16 @@ const SignUp = () => {
         email,
         password
       );
-      generateUserDocument(user, { name: displayName });
+      await generateUserDocument(user, { name: displayName });
+      setFormData({
+        email: "",
+        password: "",
+        displayName: "",
+      });
     } catch (error) {
       setError("Error Signing up with email and password");
     }
-    setFormData({
-      email: "",
-      password: "",
-      displayName: "",
-    });
+
     // history.push("/");
     // try {
     //   const authResult = await auth.createUserWithEmailAndPassword(
@@ -79,7 +80,7 @@ const SignUp = () => {
           {error && <p className='form__error'>{error}</p>}
           <input
             type='text'
-            name='nickname'
+            name='displayName'
             className='form__input-field'
             required
             placeholder='&#xf406; Nickname'

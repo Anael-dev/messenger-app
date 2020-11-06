@@ -20,7 +20,7 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 
-const generateUserDocument = async (user, additionalData = null) => {
+const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
   const userRef = db.collection("users").doc(user.uid);
   const userSnapshot = await userRef.get();
@@ -29,14 +29,15 @@ const generateUserDocument = async (user, additionalData = null) => {
       active: true,
     });
   } else {
+    console.log(additionalData);
     const { uid, displayName, photoURL } = user;
     try {
       await userRef.set({
-        name: displayName,
+        name: displayName || additionalData.name,
         uid,
         photo: photoURL || `https://avatars.dicebear.com/api/human/${uid}.svg`,
         active: true,
-        ...additionalData,
+        // ...additionalData,
       });
     } catch (error) {
       console.log("Error creating user document", error);

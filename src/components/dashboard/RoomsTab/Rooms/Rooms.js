@@ -6,7 +6,9 @@ import { AuthContext } from "../../../../context/AuthContextProvider";
 
 const Rooms = () => {
   const { currentUser } = useContext(AuthContext);
-  const { filteredRooms } = useSelector((state) => state.roomsReducer);
+  const filteredRooms = useSelector(
+    (state) => state.roomsReducer.filteredRooms
+  );
   const users = useSelector((state) => state.usersReducer.users);
 
   return (
@@ -16,9 +18,9 @@ const Rooms = () => {
           let chatUser;
           if (room.type === "private") {
             const chatUserId = room.members.find(
-              (user) => user.uid !== currentUser.uid
-            ).uid;
-            chatUser = users.find((user) => user.id === chatUserId);
+              (uid) => uid !== currentUser.uid
+            );
+            chatUser = users?.find((user) => user.id === chatUserId);
           }
           if (room.lastMessage !== null) {
             return (

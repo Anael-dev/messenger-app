@@ -8,11 +8,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     //listen for auth status change
-    auth.onAuthStateChanged(async (userAuth) => {
+    const unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
       const loggedUser = await generateUserDocument(userAuth);
       setCurrentUser(loggedUser);
       console.log(loggedUser);
     });
+
+    return () => unsubscribe();
   }, []);
 
   return (

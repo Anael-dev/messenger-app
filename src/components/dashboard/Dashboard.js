@@ -34,35 +34,41 @@ const Dashboard = () => {
         unsubscribeUsers();
       };
     }
-  }, [currentUser, dispatch]);
+  }, [currentUser]);
 
   useEffect(() => {
     if (currentUser && loadedUsers) {
       if (users.length > 0) {
         const unsubscribeRooms = db
           .collection("rooms")
-          .where("members", "array-contains", {
-            name: currentUser.name,
-            uid: currentUser.uid,
-          })
+          // .where(`members.${currentUser.uid}.uid`, "==", currentUser.uid)
+          .where("members", "array-contains", currentUser.uid)
           // .where("lastMessage", "!=", null)
           .orderBy("lastMessage", "desc")
           .onSnapshot(async (snap) => {
-            let chatUser;
+            let chatUserId;
             const userRooms = snap.docs.map((doc) => {
-              if (doc.data().type === "private") {
-                chatUser = doc
-                  .data()
-                  .members.find((user) => user.uid !== currentUser.uid);
+              const data = doc.data({ serverTimestamps: "estimate" });
+              if (data.type === "private") {
+                // const userKey = Object.keys(data.members).find(
+                //   (id) => id !== currentUser.uid
+                // );
+                // chatUserId = data.members[userKey];
+                chatUserId = data.members.find(
+                  (uid) => uid !== currentUser.uid
+                );
               }
 
               return {
-                ...doc.data(),
+                ...data,
                 id: doc.id,
-                name: doc.data().name || chatUser?.name,
+                name:
+                  data.name ||
+                  users.find((user) => user.id === chatUserId).name,
                 photo:
-                  doc.data().photo ||
-                  users.find((user) => user.id === chatUser.uid).photo,
+                  data.photo ||
+                  users.find((user) => user.id === chatUserId).photo,
+                lastMessage: data.lastMessage?.toDate(),
               };
             });
             dispatch(setRooms(userRooms));

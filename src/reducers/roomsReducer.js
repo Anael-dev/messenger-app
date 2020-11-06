@@ -1,4 +1,8 @@
-import { FILTER_ROOMS, SET_REALTIME_ROOMS } from "../actions/types";
+import {
+  FILTER_ROOMS,
+  SET_REALTIME_ROOMS,
+  SET_UNREAD_ROOM_MESSAGES,
+} from "../actions/types";
 
 const initialState = {
   loadedRooms: false,
@@ -40,6 +44,23 @@ const roomsReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredRooms: filteredResult,
+      };
+    case SET_UNREAD_ROOM_MESSAGES:
+      const { roomId, counterVal } = payload;
+      console.log(roomId);
+      console.log(counterVal);
+
+      const mappedRooms = state.rooms.map((room) => {
+        if (room.id === roomId) {
+          return { ...room, unreadMessages: counterVal };
+        }
+        return room;
+      });
+      
+      return {
+        ...state,
+        rooms: mappedRooms,
+        filteredRooms: mappedRooms,
       };
     default:
       return state;
