@@ -28,7 +28,6 @@ export const setUnreadMessages = (roomId, counterVal) => {
 };
 
 export const toggleSidebarView = (bool) => {
-  console.log("hooooo");
   return {
     type: TOGGLE_SIDEBAR_VIEW,
     payload: bool,

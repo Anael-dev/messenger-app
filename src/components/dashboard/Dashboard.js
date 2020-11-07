@@ -57,21 +57,16 @@ const Dashboard = () => {
           // .where(`members.${currentUser.uid}.uid`, "==", currentUser.uid)
           .where("members", "array-contains", currentUser.uid)
           // .where("lastMessage", "!=", null)
-          .orderBy("lastMessage", "desc")
+          .orderBy("lastMessageTime", "desc")
           .onSnapshot(async (snap) => {
             let chatUserId;
             const userRooms = snap.docs.map((doc) => {
               const data = doc.data({ serverTimestamps: "estimate" });
               if (data.type === "private") {
-                // const userKey = Object.keys(data.members).find(
-                //   (id) => id !== currentUser.uid
-                // );
-                // chatUserId = data.members[userKey];
                 chatUserId = data.members.find(
                   (uid) => uid !== currentUser.uid
                 );
               }
-
               return {
                 ...data,
                 id: doc.id,
@@ -81,7 +76,10 @@ const Dashboard = () => {
                 photo:
                   data.photo ||
                   users.find((user) => user.id === chatUserId).photo,
-                lastMessage: data.lastMessage?.toDate(),
+                lastMessageTime:
+                  data.lastMessageTime === null
+                    ? null
+                    : data.lastMessageTime.toDate(),
               };
             });
             dispatch(setRooms(userRooms));

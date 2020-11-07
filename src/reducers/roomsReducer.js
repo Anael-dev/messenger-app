@@ -42,7 +42,7 @@ const roomsReducer = (state = initialState, action) => {
         const lowerInput = inputVal.trim().toLowerCase();
         filteredArr = state.rooms.filter(
           (room) =>
-            room.lastMessage !== null &&
+            (room.lastMessageTime && room.lastMessageContent) !== null &&
             room.name.toLowerCase().trim().includes(lowerInput)
         );
         if (filteredArr !== state.rooms) {

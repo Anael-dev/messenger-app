@@ -9,13 +9,16 @@ import { toggleSidebarView } from "../../../../actions/roomsActions";
 
 const User = ({ userData }) => {
   const [chatRoom, setChatRoom] = useState("");
-  const { rooms, windowWidth } = useSelector((state) => state.roomsReducer);
+  const { rooms, windowWidth, displaySidebar } = useSelector(
+    (state) => state.roomsReducer
+  );
   const history = useHistory();
   const { currentUser } = useContext(AuthContext);
   const dispatch = useDispatch();
 
   const redirectToRoom = async () => {
-    if (windowWidth <= 480) dispatch(toggleSidebarView(true));
+    if (windowWidth <= 480 && !displaySidebar)
+      dispatch(toggleSidebarView(true));
 
     if (chatRoom.id) {
       history.push(
@@ -26,7 +29,8 @@ const User = ({ userData }) => {
     } else {
       const newRoom = await db.collection("rooms").add({
         type: "private",
-        lastMessage: null,
+        lastMessageTime: null,
+        lastMessageContent: null,
         members: [currentUser.uid, userData.uid],
         typingUsers: [],
         // createdAt: new Date(),

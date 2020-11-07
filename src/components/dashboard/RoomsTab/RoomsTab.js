@@ -18,11 +18,12 @@ const RoomsTab = () => {
   useEffect(() => {
     if (
       windowWidth > 480 ||
-      location.pathname === ("/dashboard/chats" || "/dashboard/users")
+      location.pathname === "/dashboard/chats" ||
+      location.pathname === "/dashboard/users"
     ) {
-      dispatch(toggleSidebarView(true));
+      if (!displaySidebar) dispatch(toggleSidebarView(true));
     } else {
-      dispatch(toggleSidebarView(false));
+      if (displaySidebar) dispatch(toggleSidebarView(false));
     }
   }, [windowWidth, location.pathname]);
 

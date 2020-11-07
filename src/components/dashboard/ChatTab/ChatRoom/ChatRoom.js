@@ -25,7 +25,9 @@ const ChatRoom = () => {
   const room = useSelector((state) =>
     state.roomsReducer.rooms.find((room) => room.id === roomId)
   );
-  const windowWidth = useSelector((state) => state.roomsReducer.windowWidth);
+  const { windowWidth, displaySidebar } = useSelector(
+    (state) => state.roomsReducer
+  );
   const chatUser = useSelector((state) =>
     state.usersReducer.users.find((user) => user.id === chatUserId)
   );
@@ -59,7 +61,8 @@ const ChatRoom = () => {
           className={`back-btn ${backBtnActive ? "back-btn__active" : null}`}
           onClick={() => {
             setBackBtnActive(!backBtnActive);
-            if (windowWidth <= 480) dispatch(toggleSidebarView(true));
+            if (windowWidth <= 480 && !displaySidebar)
+              dispatch(toggleSidebarView(true));
           }}>
           <ArrowBackIcon />
         </button>

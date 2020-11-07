@@ -14,7 +14,7 @@ const Messages = ({ messagesRef, id }) => {
   });
 
   useEffect(() => {
-    const unsubscribe = messagesQuery.onSnapshot((snapshot) => {
+    const unsubscribe1 = messagesQuery.onSnapshot((snapshot) => {
       const snapMessages = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
@@ -24,7 +24,7 @@ const Messages = ({ messagesRef, id }) => {
       setMessages(snapMessages);
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe1();
 
     // eslint-disable-next-line
   }, [id]);

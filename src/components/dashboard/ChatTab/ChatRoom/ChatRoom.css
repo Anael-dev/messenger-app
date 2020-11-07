@@ -21,6 +21,7 @@
 .chat-header__info > h3 {
   margin-bottom: 0.3rem;
   font-weight: 500;
+  font-size: 2rem;
 }
 
 .chat-header__info > p {

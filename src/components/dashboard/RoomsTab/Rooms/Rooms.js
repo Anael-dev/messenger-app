@@ -22,7 +22,7 @@ const Rooms = () => {
             );
             chatUser = users?.find((user) => user.id === chatUserId);
           }
-          if (room.lastMessage !== null) {
+          if ((room.lastMessageTime && room.lastMessageContent) !== null) {
             return (
               <Room
                 key={room.id}

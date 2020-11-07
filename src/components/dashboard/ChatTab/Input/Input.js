@@ -35,19 +35,20 @@ const Input = ({ messagesRef, roomRef }) => {
     if (inputValue !== "") {
       try {
         setInputValue("");
-        const messageRef = await messagesRef.add({
+       await messagesRef.add({
           content: inputValue,
           uid: currentUser.uid,
           name: currentUser.name,
-          // createdAt: new Date(),
-        });
-
-        await messageRef.update({
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
+        // await messageRef.update({
+        //   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        // });
+
         await roomRef.update({
-          lastMessage: firebase.firestore.FieldValue.serverTimestamp(),
+          lastMessageTime: firebase.firestore.FieldValue.serverTimestamp(),
+          lastMessageContent: inputValue,
         });
       } catch (err) {
         console.log(err);

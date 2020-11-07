@@ -9,7 +9,7 @@ import { toggleSidebarView } from "../../../../../actions/roomsActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Room = ({ roomData }) => {
-  const [lastMessage, setLastMessage] = useState("");
+  // const [lastMessage, setLastMessage] = useState("");
   const [roomActive, setRoomActive] = useState(false);
   const [changesCounter, setChangesCounter] = useState(0);
   const location = useLocation();
@@ -37,10 +37,8 @@ const Room = ({ roomData }) => {
         .collection("rooms")
         .doc(roomData.id)
         .collection("messages")
-        .orderBy("createdAt", "desc")
-        .limit(1)
         .onSnapshot((snapshot) => {
-          setLastMessage(snapshot.docs.map((doc) => doc.data())[0]);
+          // setLastMessage(snapshot.docs.map((doc) => doc.data())[0]);
           if (initState) {
             initState = false;
           } else {
@@ -63,7 +61,7 @@ const Room = ({ roomData }) => {
 
   return (
     <>
-      {lastMessage && (
+      {/* {lastMessage && ( */}
         <NavLink
           key={roomData.id}
           className='room'
@@ -79,7 +77,7 @@ const Room = ({ roomData }) => {
               <h2>{roomData.name}</h2>
 
               <p className='timestamp'>
-                {new Date(roomData.lastMessage).toLocaleString("en-GB", {
+                {new Date(roomData?.lastMessageTime).toLocaleString("en-GB", {
                   hour: "2-digit",
                   minute: "2-digit",
                 })}
@@ -90,7 +88,7 @@ const Room = ({ roomData }) => {
                 className={`room__info__message ${
                   changesCounter > 0 ? "bold" : null
                 }`}>
-                {ReactEmoji.emojify(lastMessage?.content)}
+                {ReactEmoji.emojify(roomData.lastMessageContent)}
               </p>
               <div
                 className={`room__notification ${
@@ -104,7 +102,7 @@ const Room = ({ roomData }) => {
           </div>
           {/* )} */}
         </NavLink>
-      )}
+      {/* )} */}
     </>
   );
 };
