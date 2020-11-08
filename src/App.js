@@ -26,15 +26,24 @@
 
 // export default App;
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./components/dashboard/Dashboard";
 import { AuthContext } from "./context/AuthContextProvider";
+import { firebase } from "./firebase/base";
 import Auth from "./components/auth/Auth";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
+
+  // window.addEventListener("unload", function (event) {
+  //   //call function to save you state in API or save in localStore
+  //   db.collection("users").doc(currentUser.uid).update({
+  //     active: false,
+  //     lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
+  //   });
+  // });
 
   return currentUser ? (
     <Switch>

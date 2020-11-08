@@ -7,6 +7,9 @@
 }
 
 .chat-header {
+  /* position: sticky;
+  top: 0;
+  left: 0; */
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -53,6 +56,9 @@
   border-top: 1px solid lightgray;
   height: 9vh;
   padding: 0 0.7rem;
+  /* position: fixed;
+  bottom: 0;
+  left: 0; */
 }
 
 .chat-footer > .MuiSvgIcon-root {

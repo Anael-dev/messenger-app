@@ -2,6 +2,7 @@
   height: 100vh;
   display: grid;
   place-items: center;
+  overflow: hidden;
   background-color: #dadbd3;
 }
 
@@ -12,4 +13,11 @@
   height: 90vh;
   width: 90vw;
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
+}
+
+@media (max-width: 480px) {
+  .dashboard__body {
+    height: 100%;
+    width: 100%;
+  }
 }

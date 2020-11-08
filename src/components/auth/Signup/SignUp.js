@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth, generateUserDocument } from "../../../firebase/base";
+import { auth, generateUserDocument, firebase } from "../../../firebase/base";
 import { Link } from "react-router-dom";
 import "../Login/Login.css";
 

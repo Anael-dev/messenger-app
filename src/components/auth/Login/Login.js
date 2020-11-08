@@ -36,7 +36,7 @@ const Login = ({ history }) => {
         password: "",
       });
 
-      // history.push("/");
+      history.push("/");
     } catch (err) {
       console.log(err);
     }

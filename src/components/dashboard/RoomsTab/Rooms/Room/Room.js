@@ -62,46 +62,45 @@ const Room = ({ roomData }) => {
   return (
     <>
       {/* {lastMessage && ( */}
-        <NavLink
-          key={roomData.id}
-          className='room'
-          activeClassName='selected-room'
-          to={`/dashboard/chats/room/${roomData.id}`}
-          onClick={() => {
-            // console.log(WindowWidthContext.width);
-            if (windowWidth <= 480) dispatch(toggleSidebarView(false));
-          }}>
-          <Avatar src={roomData.photo} /> {/* {roomData.lastMessage && ( */}
-          <div className='room__info'>
-            <div className='room__info__container'>
-              <h2>{roomData.name}</h2>
+      <NavLink
+        key={roomData.id}
+        className='room'
+        activeClassName='selected-room'
+        to={`/dashboard/chats/room/${roomData.id}`}
+        onClick={() => {
+          // console.log(WindowWidthContext.width);
+          if (windowWidth <= 480) dispatch(toggleSidebarView(false));
+        }}>
+        <Avatar src={roomData.photo} />
+        {/* {roomData.lastMessage && ( */}
+        <div className='room__info'>
+          <div className='room__info__container'>
+            <h2>{roomData.name}</h2>
 
-              <p className='timestamp'>
-                {new Date(roomData?.lastMessageTime).toLocaleString("en-GB", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </p>
-            </div>
-            <div className='room__info__container'>
-              <p
-                className={`room__info__message ${
-                  changesCounter > 0 ? "bold" : null
-                }`}>
-                {ReactEmoji.emojify(roomData.lastMessageContent)}
-              </p>
-              <div
-                className={`room__notification ${
-                  changesCounter > 0 ? "open" : null
-                }`}>
-                <span className='room__notification__num'>
-                  {changesCounter}
-                </span>
-              </div>
+            <p className='timestamp'>
+              {new Date(roomData?.lastMessageTime).toLocaleString("en-GB", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
+          </div>
+          <div className='room__info__container'>
+            <p
+              className={`room__info__message ${
+                changesCounter > 0 ? "bold" : null
+              }`}>
+              {ReactEmoji.emojify(roomData.lastMessageContent)}
+            </p>
+            <div
+              className={`room__notification ${
+                changesCounter > 0 ? "open" : null
+              }`}>
+              <span className='room__notification__num'>{changesCounter}</span>
             </div>
           </div>
-          {/* )} */}
-        </NavLink>
+        </div>
+        {/* )} */}
+      </NavLink>
       {/* )} */}
     </>
   );

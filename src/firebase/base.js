@@ -1,5 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/database";
+
 import "firebase/auth";
 
 const firebaseConfig = {
@@ -19,9 +21,35 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
+const realTimeDb = firebase.database();
 
+const trackConnectionStatus = (userId) => {
+  const usersRef = db.collection("users"); // Get a reference to the Users collection;
+  const onlineRef = realTimeDb.ref(".info/connected"); // Get a reference to the list of connections
+
+  onlineRef.on("value", (snapshot) => {
+    realTimeDb
+      .ref(`/status/${userId}`)
+      .onDisconnect() // Set up the disconnect hook
+      .set("offline") // The value to be set for this key when the client disconnects
+      .then(() => {
+        // Set the Firestore User's online status to true
+        usersRef.doc(userId).set(
+          {
+            active: true,
+          },
+          { merge: true }
+        );
+
+        // Let's also create a key in our real-time database
+        // The value is set to 'online'
+        realTimeDb.ref(`/status/${userId}`).set("online");
+      });
+  });
+};
 const generateUserDocument = async (user, additionalData) => {
   if (!user) return;
+
   const userRef = db.collection("users").doc(user.uid);
   const userSnapshot = await userRef.get();
   if (userSnapshot.exists) {
@@ -59,4 +87,11 @@ const getUserDocument = async (uid) => {
   }
 };
 
-export { firebase, auth, db, provider, generateUserDocument };
+export {
+  firebase,
+  auth,
+  db,
+  provider,
+  generateUserDocument,
+  trackConnectionStatus,
+};
