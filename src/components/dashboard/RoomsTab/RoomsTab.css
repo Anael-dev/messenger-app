@@ -25,6 +25,7 @@
 .sidebar-header__user-data > p {
   color: grey;
   font-weight: 600;
+  font-family: "Poppins", sans-serif;
   margin-left: 1em;
 }
 
@@ -45,15 +46,12 @@
   border-radius: 20px;
 }
 
-.sidebar-search__body > .MuiSvgIcon-root {
-  color: gray;
-}
-
 .sidebar-search__body > input {
   outline-width: 0;
   border: none;
   margin-left: 1rem;
   width: 100%;
+  padding: 0.2rem;
 }
 
 .backdrop {
@@ -119,7 +117,7 @@
 }
 
 .MuiSvgIcon-root {
-  color: gray;
+  color: grey;
 }
 
 .open {
@@ -138,7 +136,7 @@
 }
 
 .chats-nav {
-  font-size: 1rem;
+  font-size: 1.1rem;
   padding-bottom: 1.5rem;
   display: flex;
   justify-content: space-evenly;
@@ -159,9 +157,24 @@
 }
 
 @media (max-width: 480px) {
+  .MuiSvgIcon-root {
+    color: rgba(241, 241, 242, 0.94);
+  }
+
+  .sidebar-search__body > .MuiSvgIcon-root {
+    color: grey;
+  }
+
+  .input-form > .MuiIconButton-root {
+    background-color: #08594a !important;
+  }
   .sidebar {
     width: 100%;
     position: relative;
+  }
+
+  .sidebar-header {
+    background-color: #08594a;
   }
 
   .model {
@@ -172,6 +185,10 @@
     top: 0;
     right: 0;
     left: auto;
+  }
+
+  .sidebar-header__user-data > p {
+    color: rgba(241, 241, 242, 0.94);
   }
 }
 

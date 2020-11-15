@@ -56,18 +56,6 @@
   position: relative;
 }
 
-/* .user-avatar {
-  position: relative;
-}
-
-.online-circle {
-  display: block;
-  position: absolute;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  background-color: #03a688;
-} */
 
 .bold {
   font-weight: 800;
@@ -79,8 +67,8 @@
 
 .room__notification__num {
   position: absolute;
-  top: 15%;
-  left: 35%;
+  top: 10%;
+  left: 30%;
   color: #ffff;
   font-weight: 800;
   font-size: 0.9rem;

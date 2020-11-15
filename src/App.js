@@ -4,7 +4,7 @@
 // import Dashboard from "./components/dashboard/Dashboard";
 // import Login from "./components/auth/Login/Login";
 // import SignUp from "./components/auth/SignUp";
-// import { AuthProvider } from "./context/auth";
+// import { AuthProvider } from "./contexts/auth";
 // import LoggedRoute from "./components/LoggedRoute";
 
 // function App() {
@@ -30,7 +30,7 @@ import React, { useContext, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./components/dashboard/Dashboard";
-import { AuthContext } from "./context/AuthContextProvider";
+import { AuthContext } from "./contexts/AuthContextProvider";
 import { firebase } from "./firebase/base";
 import Auth from "./components/auth/Auth";
 

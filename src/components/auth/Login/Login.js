@@ -1,17 +1,21 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
-import { auth, db, provider } from "../../../firebase/base";
-import { AuthContext } from "../../../context/AuthContextProvider";
+import { auth, db, provider, firebase, login } from "../../../firebase/base";
+import { AuthContext } from "../../../contexts/AuthContextProvider";
 import "./Login.css";
-import Logo from "../../../images/WhatsApp_Logos/logo.png";
 
 const Login = ({ history }) => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const [isError, setIsError] = useState(false);
+  // const [formData, setFormData] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const { currentUser } = useContext(AuthContext);
+  const [emailFocus, setEmailFocus] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false);
 
   if (currentUser) {
     db.collection("users")
@@ -22,21 +26,23 @@ const Login = ({ history }) => {
       .then(() => history.push("/dashboard/chats"));
   }
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
 
   const handleGoogleLogin = async (e) => {
     e.preventDefault();
     //sign in the user
     try {
+      await firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION);
       await auth.signInWithPopup(provider);
-      setFormData({
-        email: "",
-        password: "",
-      });
-
-      history.push("/");
+      // setFormData({
+      //   email: "",
+      //   password: "",
+      // });
+      // history.push("/");
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +52,12 @@ const Login = ({ history }) => {
     e.preventDefault();
     //sign in the user
     try {
-      await auth.signInWithEmailAndPassword(formData.email, formData.password);
+      setError("");
+      setLoading(true);
+      await firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION);
+      await login(emailRef.current.value, passwordRef.current.value);
       // console.log(authResult);
 
       //update active user status
@@ -54,72 +65,106 @@ const Login = ({ history }) => {
       //   active: true,
       // });
 
-      setFormData({
-        email: "",
-        password: "",
-      });
+      // setFormData({
+      //   email: "",
+      //   password: "",
+      // });
 
       // history.push("/");
     } catch (err) {
       console.log(err);
-      setIsError(true);
+      setError("Failed to log in");
+      setLoading(false);
     }
   };
 
   return (
-    <div className='auth-container'>
-      <div className='auth__inner-container'>
-        <h1 className='auth__heading'>Sign in to WhatsApp</h1>
-        <img className='app-logo' src={Logo} alt='whatsapp logo' />
+    <div className='login-content'>
+      <form onSubmit={(e) => handleEmailLogin(e)} className='form'>
+        <h3 className='auth__heading'>Sign in</h3>
+        {/* <span className='google_span'>Continue with</span> */}
         <button
           className='google-auth__button'
           onClick={(e) => handleGoogleLogin(e)}>
           <i className='fab fa-google'></i>
-          <span>
-            Sign in with <b>Google</b>
-          </span>
         </button>
-        <div className='separate-section'>
+        {/* <div className='separate-section'>
           <div className='border-b'></div>
-          <span>or</span>
+          <span>or login with email</span>
           <div className='border-b'></div>
+        </div> */}
+        {error && <p className='form__error'>{error} </p>}
+        <div className={`input-container ${emailFocus ? "focus" : ""}`}>
+          <div className='icon'>
+            <i className='far fa-envelope'></i>
+          </div>
+          <div className='input-div'>
+            <h5>Email</h5>
+            {/* <input type='text' className='input' /> */}
+            <input
+              type='email'
+              className='input'
+              required
+              ref={emailRef}
+              onFocus={() => setEmailFocus(true)}
+              onBlur={() => setEmailFocus(false)}
+              // placeholder='&#xf1fa; Email'
+              // value={formData.email}
+              // onChange={(e) => handleChange(e)}
+            />
+          </div>
         </div>
-        <form onSubmit={(e) => handleEmailLogin(e)} className='form'>
-          {isError && (
-            <p className='form__error'>
-              There is no match, please try again or sign up
-            </p>
-          )}
-          <input
-            type='email'
-            name='email'
-            className='form__input-field'
-            autoComplete='email'
-            required
-            placeholder='&#xf1fa; Email'
-            // value={formData.email}
-            onChange={(e) => handleChange(e)}
-          />
-          <input
-            type='password'
-            name='password'
-            className='form__input-field'
-            autoComplete='current-password'
-            required
-            placeholder='&#xf023; Password'
-            // value={formData.password}
-            onChange={(e) => handleChange(e)}
-          />
-          <button className='button form__button'>Login</button>
-        </form>
 
+        <div className={`input-container ${passwordFocus ? "focus" : ""}`}>
+          <div className='icon'>
+            <i className='fas fa-lock'></i>
+          </div>
+          <div className='input-div'>
+            <h5>Password</h5>
+            <input
+              type='password'
+              className='input'
+              // autoComplete='current-password'
+              required
+              ref={passwordRef}
+              onFocus={() => setPasswordFocus(true)}
+              onBlur={() => setPasswordFocus(false)}
+              // value={formData.password}
+              // onChange={(e) => handleChange(e)}
+            />
+          </div>
+        </div>
+        {/* <input
+          type='email'
+          name='email'
+          className='form__input-field'
+          autoComplete='email'
+          required
+          ref={emailRef}
+          placeholder='&#xf1fa; Email'
+          // value={formData.email}
+          // onChange={(e) => handleChange(e)}
+        /> */}
+        {/* <input
+          type='password'
+          className='form__input-field'
+          // autoComplete='current-password'
+          required
+          ref={passwordRef}
+          placeholder='&#xf023; Password'
+          // value={formData.password}
+          // onChange={(e) => handleChange(e)}
+        /> */}
+        <button disabled={loading} className='button form__button'>
+          Login
+        </button>
         <p className='signUp-section signUp-p'>
-          Don't have an account yet?
+          Need an account?
           <Link to='/auth/signup'>
             <span className='signUp-section signUp-span'>Sign Up </span>
           </Link>
         </p>
-      </div>
+      </form>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
-import { AuthProvider } from "./context/AuthContextProvider";
+import { AuthProvider } from "./contexts/AuthContextProvider";
 import store from "./store/store";
 import { BrowserRouter } from "react-router-dom";
 

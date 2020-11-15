@@ -23,7 +23,18 @@ const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 const realTimeDb = firebase.database();
 
-const trackConnectionStatus = (userId) => {
+const signup = (email, password) =>
+  auth.createUserWithEmailAndPassword(email, password);
+
+const login = (email, password) =>
+  auth.signInWithEmailAndPassword(email, password);
+
+const logout = () => {
+  auth.signOut();
+  realTimeDb.goOffline();
+};
+
+const trackConnectionStatus = async (userId) => {
   const usersRef = db.collection("users"); // Get a reference to the Users collection;
   const onlineRef = realTimeDb.ref(".info/connected"); // Get a reference to the list of connections
 
@@ -47,23 +58,23 @@ const trackConnectionStatus = (userId) => {
       });
   });
 };
-const generateUserDocument = async (user, additionalData) => {
-  if (!user) return;
 
+const generateUserDocument = async (user, additionalData = null) => {
+  if (!user) return;
   const userRef = db.collection("users").doc(user.uid);
   const userSnapshot = await userRef.get();
-  if (userSnapshot.exists) {
-    await userRef.update({
-      active: true,
-    });
-  } else {
+  if (!userSnapshot.exists) {
+    //   await userRef.update({
+    //     active: true,
+    //   });
+    // } else {
     console.log(additionalData);
     const { uid, displayName, photoURL } = user;
     try {
       await userRef.set({
-        name: displayName || additionalData.name,
+        name: displayName || additionalData,
         uid,
-        photo: photoURL || `https://avatars.dicebear.com/api/human/${uid}.svg`,
+        photo: `https://avatars.dicebear.com/api/human/${uid}.svg`,
         active: true,
         // ...additionalData,
       });
@@ -73,13 +84,14 @@ const generateUserDocument = async (user, additionalData) => {
   }
   // const loggedUserData = await userRef.get();
   // return loggedUserData.data();
-
+  // await trackConnectionStatus(user.uid);
   return getUserDocument(user.uid);
 };
 
 const getUserDocument = async (uid) => {
   if (!uid) return null;
   try {
+    await trackConnectionStatus(uid);
     const userDocument = await db.collection("users").doc(uid).get();
     return userDocument.data();
   } catch (error) {
@@ -94,4 +106,7 @@ export {
   provider,
   generateUserDocument,
   trackConnectionStatus,
+  signup,
+  login,
+  logout,
 };

@@ -3,7 +3,7 @@
 //   match /databases/{database}/documents {
 //     match /{document=**} {
 //       allow read, write;
-//        allow read,write: if isSignedIn() && request.auth.uid == resource.data.uid
+//        allow read,write: if request.auth.uid != null && request.auth.uid == resource.data.uid
 
 //   }
 //   }
@@ -23,14 +23,14 @@ service cloud.firestore {
 			//Allow read if signed in 
       allow read:  if request.auth.uid != null;
 
-  		// //Allow write if isSignedIn() cannot check for uid matching here because other users can also edit to add new contact. Will add validation to it later
-  		// allow write: if isSignedIn();
+  		// //Allow write if request.auth.uid != null cannot check for uid matching here because other users can also edit to add new contact. Will add validation to it later
+  		// allow write: if request.auth.uid != null;
 
         // Allow update only if the uid matches  (same user)
       allow update: if request.auth.uid != null && request.auth.uid == request.resource.data.uid;
 
         // // Allow delete only if the uid matches  (same user)
-        // allow delete: if isSignedIn() && request.auth.uid == resource.data.uid;
+        // allow delete: if request.auth.uid != null && request.auth.uid == resource.data.uid;
 
   }
   

@@ -10,7 +10,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 // import AttachFileIcon from "@material-ui/icons/AttachFile";
 // import SearchIcon from "@material-ui/icons/Search";
 // import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import { AuthContext } from "../../../../context/AuthContextProvider";
+import { AuthContext } from "../../../../contexts/AuthContextProvider";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebarView } from "../../../../actions/roomsActions";

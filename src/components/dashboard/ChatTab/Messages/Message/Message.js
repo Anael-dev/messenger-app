@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ReactEmoji from "react-emoji";
 import "./Message.css";
-import { AuthContext } from "../../../../../context/AuthContextProvider";
+import { AuthContext } from "../../../../../contexts/AuthContextProvider";
 
 const Message = ({ messageData }) => {
   const { content, createdAt, name, uid } = messageData;
@@ -35,9 +35,9 @@ const Message = ({ messageData }) => {
     <>
       {createdAt && (
         <div className={`message ${messageClass}`}>
-          <span className='message-author'>
+          {/* <span className='message-author'>
             {messageClass === "sent" ? "you" : name}
-          </span>
+          </span> */}
           <div className='message-details'>
             <p className='message-text'>{ReactEmoji.emojify(content)}</p>
             <span className='message-timestamp'>

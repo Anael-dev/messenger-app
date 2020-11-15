@@ -3,7 +3,7 @@ import "../Rooms/Room/Room.css";
 import { Avatar } from "@material-ui/core";
 import { db } from "../../../../firebase/base";
 import { useHistory } from "react-router-dom";
-import { AuthContext } from "../../../../context/AuthContextProvider";
+import { AuthContext } from "../../../../contexts/AuthContextProvider";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebarView } from "../../../../actions/roomsActions";
 

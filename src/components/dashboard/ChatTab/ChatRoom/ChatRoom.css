@@ -14,8 +14,9 @@
   flex-wrap: nowrap;
   align-items: center;
   padding: 2rem;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid #dadbd3;
 }
+
 .chat-header__info {
   flex: 1;
   padding-left: 1.5rem;
@@ -34,7 +35,7 @@
 
 .back-btn {
   display: none;
-  margin-right: 0.3rem;
+  margin-right: 1rem;
 }
 
 .back-btn__active {
@@ -53,16 +54,12 @@
 .chat-footer {
   display: flex;
   align-items: center;
-  border-top: 1px solid lightgray;
+  border-top: 1px solid #dadbd3;
   height: 9vh;
-  padding: 0 0.7rem;
+  padding: 0 0.4rem;
   /* position: fixed;
   bottom: 0;
   left: 0; */
-}
-
-.chat-footer > .MuiSvgIcon-root {
-  color: gray;
 }
 
 .last-seen {
@@ -75,6 +72,16 @@
     /* position: absolute; */
     /* display: none; */
   }
+
+  .chat-header {
+    background-color: #08594a;
+  }
+
+  .chat-header__info,
+  .chat-header__info > p {
+    color: rgba(241, 241, 242, 0.94);
+  }
+
   .back-btn {
     display: block;
   }

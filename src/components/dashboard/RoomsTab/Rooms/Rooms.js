@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "../RoomsTab.css";
 import Room from "./Room/Room";
 import { useSelector } from "react-redux";
-import { AuthContext } from "../../../../context/AuthContextProvider";
+import { AuthContext } from "../../../../contexts/AuthContextProvider";
 
 const Rooms = () => {
   const { currentUser } = useContext(AuthContext);

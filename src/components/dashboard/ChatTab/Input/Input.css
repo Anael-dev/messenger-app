@@ -2,7 +2,7 @@
   flex: 1;
   display: flex;
   justify-content: space-between;
-  max-height: 65px;
+  /* max-height: 65px; */
   padding: 0 0.5rem;
   width: 100%;
 }
@@ -11,7 +11,7 @@
   flex: 1;
   border-radius: 20px;
   padding: 1rem;
-  margin-right: 0.3rem;
+  margin-right: 0.8rem;
   border: none;
   outline-width: 0;
 }
