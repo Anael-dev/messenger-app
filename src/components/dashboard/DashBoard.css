@@ -3,7 +3,7 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background-color: #dadbd3;
+  background: #f5f2f5;
 }
 
 .overlay {
@@ -86,9 +86,11 @@
   display: flex;
   overflow: hidden;
   background-color: #ededed;
+  /* background-color: #ffff; */
   height: 90vh;
   width: 90vw;
-  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 4px 10px -6px rgba(0, 0, 0, 0.75);
+  /* border-radius: 10px; */
 }
 
 @media (max-width: 480px) {

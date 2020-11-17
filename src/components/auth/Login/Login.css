@@ -19,7 +19,8 @@
 
 .auth-container {
   display: grid;
-  height: 85vh;
+  height: 90vh;
+  overflow: hidden;
   grid-template-columns: 40rem auto;
   /* padding: 2rem 5rem; */
   place-items: center;
@@ -38,7 +39,6 @@
   background: #03a688;
   height: 100%;
   width: 100%;
-  border-radius: 10px 0 0 10px;
   padding: 1rem 7rem 1rem 1rem;
   position: relative;
 }
@@ -99,11 +99,22 @@
   align-items: center;
   text-align: center;
   z-index: 10;
-  padding: 5rem;
+  height: 100%;
+  padding: 0 5rem;
 }
 
 form {
   width: 300px;
+  height: 100%;
+  padding-top: 3rem;
+}
+
+.signup-google-span {
+  margin-bottom: 0.8rem;
+}
+
+.login-redirect-span {
+  margin-top: 0;
 }
 
 .auth__heading {
@@ -115,26 +126,22 @@ form {
 }
 
 .separate-section {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-top: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 2.5rem 0;
+  text-align: center;
 }
 
 .separate-section span {
-  text-transform: uppercase;
-  color: #d9d9d9;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
 }
 
-.border-b {
+/* .border-b {
   width: 40%;
   height: 0.2rem;
   background-color: #dadbd3;
-}
+} */
 
-.login-content .input-container {
+.input-container {
   position: relative;
   display: grid;
   grid-template-columns: 7% 93%;
@@ -144,7 +151,7 @@ form {
 }
 
 .input-container:first-of-type {
-  margin-top: 1rem;
+  margin-top: 0;
 }
 
 .input-container:last-of-type {
@@ -178,6 +185,17 @@ form {
   transition: 0.3s;
 }
 
+.input-div > .placeholder {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #03a688;
+  font-size: 1rem;
+  transition: 0.3s;
+  display: none;
+}
+
 .input-div > input {
   position: absolute;
   left: 0;
@@ -201,7 +219,7 @@ form {
   width: 0%;
   height: 2px;
   background-color: #03a688;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
 .input-container:before {
@@ -219,16 +237,20 @@ form {
 
 .input-container.focus .input-div > h5 {
   /* transform: translateY(-150%); */
-  top: -3px;
+  top: -0.5px;
   font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.input-container.focus .input-div > .placeholder {
+  /* transform: translateY(-150%); */
+  top: -0.5px;
+  opacity: 0.7;
+  display: block;
 }
 
 .input-container.focus .icon > i {
   color: #03a688;
-}
-
-form {
-  width: 300px;
 }
 
 .form__error {
@@ -304,7 +326,7 @@ form {
   padding: 0.8rem;
   width: 100%;
   cursor: pointer;
-  border: 1px solid #dddddd;
+  border: 1px solid #d9d9d9;
   color: #03a688;
   border-radius: 50%;
   margin: 0 auto;
@@ -320,20 +342,20 @@ form {
   border: 1px solid #03a688;
 }
 
-.google_span {
+/* .google_span {
   margin-right: 1rem;
   font-size: 1.2rem;
-}
+} */
 
 .signUp-section {
   margin-bottom: 0;
   text-align: left;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.5px;
 }
 
 .signUp-p {
   font-size: 1.2rem;
-  margin-top: 1.5rem;
+  margin-top: 0rem;
 }
 
 .signUp-span {
@@ -360,46 +382,140 @@ form {
     grid-template-columns: 30rem auto;
   }
 
-  .bg-image img {
+  .illustration-image img {
     max-width: 350px;
   }
 }
 
 @media (max-width: 780px) {
   .auth-container {
-    grid-column-gap: 0;
-    grid-template-columns: 1fr;
-    /* height: 70vh; */
-  }
-
-  .bg-section {
-    display: none;
-  }
-
-  .wave {
-    display: none;
-    /* bottom: -20px; */
+    grid-template-columns: 25rem auto;
   }
 
   .login-content {
-    justify-content: center;
-    /* grid-column: 1/3; */
+    padding: 2rem 4rem;
+  }
+
+  form {
+    width: 250px;
+  }
+
+  .illustration-image {
+    right: -10px;
+  }
+
+  .illustration-image img {
+    max-width: 250px;
   }
 
   .auth__heading {
     padding-top: 0;
   }
+
+  /* .form__button {
+    margin-bottom: 1rem;
+  }
+
+  .signUp-section {
+    margin-bottom: 2rem;
+  } */
 }
 
-@media (max-width: 560px) {
+@media (max-width: 620px) {
   .auth-container {
-    height: 100vh;
-    width: 100vw;
+    grid-template-columns: 1fr;
+    grid-template-rows: 23% 77%;
+    grid-row-gap: 0;
+    grid-column-gap: 0;
+    height: 90vh;
+    /* height: 70vh; */
+  }
+
+  form {
+    padding-top: 0;
+  }
+
+  .illustration-image {
+    right: -10px;
+  }
+
+  .illustration-image img {
+    max-width: 120px;
   }
 
   .login-content {
-    width: 80vw;
+    justify-content: center;
   }
+
+  .app-image {
+    position: absolute;
+    left: 0;
+    top: -30px;
+  }
+
+  .app-logo {
+    width: 120px;
+    /* position: absolute;
+    top: -90%;
+    left: 40%; */
+    /* animation: logoMove 0.3s 0.9s ease-in-out; */
+  }
+
+  .app-quote {
+    width: 70%;
+    position: absolute;
+    top: 60%;
+    left: 5%;
+  }
+
+  .app-quote p {
+    display: none;
+  }
+
+  .app-quote h2 {
+    font-size: 1.8rem;
+  }
+
+  .auth__heading {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+  }
+
+  .google-auth__button {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+  }
+  /* .signup-google-span {
+    margin: 1rem 0 1.8rem 0;
+  } */
+
+  .signup-input {
+    margin: 0.7rem 0;
+  }
+
+  .separate-section {
+    margin: 1.3rem 0;
+  }
+
+  .form__button {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    width: 50%;
+  }
+
+  .input-div > h5 {
+    font-size: 1.2rem;
+  }
+
+  .input-container.focus .input-div > h5,
+  .input-container.focus .input-div > .placeholder {
+    font-size: 1rem;
+  }
+
+  /* .sign-up-heading {
+    padding: 0;
+  } */
 }
 
 @keyframes titleMove {

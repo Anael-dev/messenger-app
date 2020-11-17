@@ -58,7 +58,10 @@ const User = ({ userData }) => {
         key={userData.id}
         className='user'
         onClick={() => redirectToRoom()}>
-        <Avatar src={userData?.photo} />
+        <div className='user-avatar'>
+          <Avatar src={userData?.photo} />
+          {userData?.active && <div className='user-active'></div>}
+        </div>
         <div className='room__info'>
           <div className='room__info__container'>
             <h2>{userData.name}</h2>

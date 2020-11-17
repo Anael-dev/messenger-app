@@ -13,7 +13,7 @@ const SignUp = ({ history }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const nicknameRef = useRef();
-  const confirmPassword = useRef();
+  const [inputFocus, setInputFocus] = useState([]);
 
   // const [formData, setFormData] = useState({
   //   email: "",
@@ -38,33 +38,41 @@ const SignUp = ({ history }) => {
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
   // };
 
-  // const handleGoogleLogin = async (e) => {
-  //   e.preventDefault();
-  //   //sign in the user
-  //   try {
-  //     await firebase
-  //       .auth()
-  //       .setPersistence(firebase.auth.Auth.Persistence.SESSION);
+  const addInputFocus = (type) => {
+    if (!inputFocus.includes(type)) {
+      setInputFocus((focusArr) => [...focusArr, type]);
+    }
+  };
 
-  //     await auth.signInWithPopup(provider);
-  //     setFormData({
-  //       email: "",
-  //       password: "",
-  //     });
+  const removeInputFocus = (type, value) => {
+    if (value === "") {
+      const filteredArr = inputFocus.filter((x) => x !== type);
+      setInputFocus(filteredArr);
+    }
+  };
 
-  //     history.push("/");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const handleGoogleLogin = async (e) => {
+    e.preventDefault();
+    //sign in the user
+    try {
+      await firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION);
+      await auth.signInWithPopup(provider);
+      // setFormData({
+      //   email: "",
+      //   password: "",
+      // });
+      // history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     // const { email, password, displayName } = formData;
 
-    if (passwordRef.current.value !== confirmPassword.current.value) {
-      return setError("Passwords do not match");
-    }
     //sign up the user
     try {
       setError("");
@@ -115,71 +123,97 @@ const SignUp = ({ history }) => {
   };
 
   return (
-    <div className='auth-container'>
-      <div className='auth__inner-container'>
-        <h1 className='auth__heading'>Sign up</h1>
-        {/* <button
+    <div className='login-content'>
+      <form onSubmit={(e) => handleSignUp(e)} className='form'>
+        <h3 className='auth__heading'>Sign up</h3>
+        <button
           className='google-auth__button'
           onClick={(e) => handleGoogleLogin(e)}>
           <i className='fab fa-google'></i>
-          <span>
-            Sign up with <b>Google</b>
-          </span>
-        </button> */}
-        <form onSubmit={(e) => handleSignUp(e)} className='form'>
-          {error && <p className='form__error'>{error}</p>}
-          <input
-            type='text'
-            name='displayName'
-            className='form__input-field'
-            required
-            ref={nicknameRef}
-            placeholder='&#xf406; Nickname'
-            // value={formData.password}
-            // onChange={(e) => handleChange(e)}
-          />
-          <input
-            type='email'
-            name='email'
-            className='form__input-field'
-            autoComplete='email'
-            required
-            ref={emailRef}
-            placeholder='&#xf1fa; name@domain.com'
-            // value={formData.email}
-            // onChange={(e) => handleChange(e)}
-          />
-          <input
-            type='password'
-            name='password'
-            className='form__input-field'
-            autoComplete='current-password'
-            required
-            ref={passwordRef}
-            placeholder='&#xf023; at least 6 characters'
-            // value={formData.password}
-            // onChange={(e) => handleChange(e)}
-          />
-          <input
-            type='password'
-            name='confirmPassword'
-            className='form__input-field'
-            required
-            ref={confirmPassword}
-            placeholder='&#xf023; confirm password'
-            // value={formData.password}
-          />
-          <button disabled={loading} className='form__button mt-20'>
-            Sign up
-          </button>
-        </form>
+        </button>
+        <div className='separate-section'>
+          <span>or sign up with email:</span>
+        </div>
+        {error && <p className='form__error'>{error} </p>}
+        <div className='inputs'>
+          <div
+            className={`input-container signup-input ${
+              inputFocus.includes("text") ? "focus" : ""
+            }`}>
+            <div className='icon'>
+              <i className='far fa-user-circle'></i>
+            </div>
+            <div className='input-div'>
+              <h5>Nickname</h5>
+              <span className='placeholder'>John</span>
+              <input
+                type='text'
+                className='input'
+                required
+                ref={nicknameRef}
+                onFocus={(e) => addInputFocus(e.target.type)}
+                onBlur={(e) => removeInputFocus(e.target.type, e.target.value)}
+              />
+            </div>
+          </div>
+          <div
+            className={`input-container signup-input ${
+              inputFocus.includes("email") ? "focus" : ""
+            }`}>
+            <div className='icon'>
+              <i className='far fa-envelope'></i>
+            </div>
+            <div className='input-div'>
+              <h5>Email</h5>
+              <span className='placeholder'>john@mail.com</span>
+              {/* <input type='text' className='input' /> */}
+              <input
+                type='email'
+                className='input signup-input'
+                required
+                ref={emailRef}
+                onFocus={(e) => addInputFocus(e.target.type)}
+                onBlur={(e) => removeInputFocus(e.target.type, e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div
+            className={`input-container signup-input ${
+              inputFocus.includes("password") ? "focus" : ""
+            }`}>
+            <div className='icon'>
+              <i className='fas fa-lock'></i>
+            </div>
+            <div className='input-div'>
+              <h5>Password</h5>
+              <span className='placeholder'>6 characters at least</span>
+              <input
+                type='password'
+                className='input signup-input'
+                name='password'
+                // autoComplete='current-password'
+                required
+                ref={passwordRef}
+                onFocus={(e) => addInputFocus(e.target.type)}
+                onBlur={(e) => removeInputFocus(e.target.type, e.target.value)}
+                // value={formData.password}
+                // onChange={(e) => handleChange(e)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <button disabled={loading} className='button form__button'>
+          Sign up
+        </button>
         <p className='signUp-section signUp-p'>
           Already have an account?
           <Link to='/auth/login'>
-            <span className='signUp-section signUp-span'>Login </span>
+            <span className='signUp-section signUp-span'>Login</span>
           </Link>
         </p>
-      </div>
+      </form>
     </div>
   );
 };

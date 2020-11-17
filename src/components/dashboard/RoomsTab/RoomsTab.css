@@ -23,7 +23,8 @@
 }
 
 .sidebar-header__user-data > p {
-  color: grey;
+  color: #999;
+  font-size: 1.4rem;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
   margin-left: 1em;
@@ -136,7 +137,7 @@
 }
 
 .chats-nav {
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding-bottom: 1.5rem;
   display: flex;
   justify-content: space-evenly;

@@ -67,10 +67,6 @@ button {
 }
 
 @media (max-width: 480px) {
-  body {
-    font-size: 2rem;
-  }
-
   p {
     font-size: 1.3rem;
   }

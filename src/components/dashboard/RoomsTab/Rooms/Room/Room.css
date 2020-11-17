@@ -30,7 +30,7 @@
 }
 
 .room__info__container > h2 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin-bottom: 0.8rem;
 }
 
@@ -44,6 +44,7 @@
 
 .timestamp {
   color: #03a688;
+  font-size: 1.1rem;
 }
 
 .room__notification {
@@ -56,6 +57,23 @@
   position: relative;
 }
 
+.user-avatar {
+  position: relative;
+  border-radius: 50%;
+  /* border: 2px solid #fff; */
+  background-color: #f6f6f6;
+}
+
+.user-active {
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  background-color: #03a688;
+}
 
 .bold {
   font-weight: 800;

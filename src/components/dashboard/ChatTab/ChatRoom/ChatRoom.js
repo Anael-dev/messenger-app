@@ -81,7 +81,16 @@ const ChatRoom = () => {
                 <p>
                   <span className='last-seen'>last seen at</span>
                   {chatUser.lastSeen &&
-                    new Date(chatUser.lastSeen.toDate()).toLocaleString()}
+                    new Date(chatUser.lastSeen.toDate()).toLocaleString(
+                      "he-il",
+                      {
+                        year: "numeric",
+                        day: "numeric",
+                        month: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      }
+                    )}
                 </p>
               ))}
             {room.type === "group" && (

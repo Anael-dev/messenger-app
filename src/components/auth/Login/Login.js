@@ -14,8 +14,8 @@ const Login = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { currentUser } = useContext(AuthContext);
-  const [emailFocus, setEmailFocus] = useState(false);
-  const [passwordFocus, setPasswordFocus] = useState(false);
+  const [inputFocus, setInputFocus] = useState([]);
+  // const [passwordFocus, setPasswordFocus] = useState(false);
 
   if (currentUser) {
     db.collection("users")
@@ -29,6 +29,19 @@ const Login = ({ history }) => {
   // const handleChange = (e) => {
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
   // };
+
+  const addInputFocus = (type) => {
+    if (!inputFocus.includes(type)) {
+      setInputFocus((focusArr) => [...focusArr, type]);
+    }
+  };
+
+  const removeInputFocus = (type, value) => {
+    if (value === "") {
+      const filteredArr = inputFocus.filter((x) => x !== type);
+      setInputFocus(filteredArr);
+    }
+  };
 
   const handleGoogleLogin = async (e) => {
     e.preventDefault();
@@ -82,56 +95,61 @@ const Login = ({ history }) => {
     <div className='login-content'>
       <form onSubmit={(e) => handleEmailLogin(e)} className='form'>
         <h3 className='auth__heading'>Sign in</h3>
-        {/* <span className='google_span'>Continue with</span> */}
         <button
           className='google-auth__button'
           onClick={(e) => handleGoogleLogin(e)}>
           <i className='fab fa-google'></i>
         </button>
-        {/* <div className='separate-section'>
-          <div className='border-b'></div>
-          <span>or login with email</span>
-          <div className='border-b'></div>
-        </div> */}
-        {error && <p className='form__error'>{error} </p>}
-        <div className={`input-container ${emailFocus ? "focus" : ""}`}>
-          <div className='icon'>
-            <i className='far fa-envelope'></i>
-          </div>
-          <div className='input-div'>
-            <h5>Email</h5>
-            {/* <input type='text' className='input' /> */}
-            <input
-              type='email'
-              className='input'
-              required
-              ref={emailRef}
-              onFocus={() => setEmailFocus(true)}
-              onBlur={() => setEmailFocus(false)}
-              // placeholder='&#xf1fa; Email'
-              // value={formData.email}
-              // onChange={(e) => handleChange(e)}
-            />
-          </div>
+        <div className='separate-section'>
+          <span>or login with email:</span>
         </div>
-
-        <div className={`input-container ${passwordFocus ? "focus" : ""}`}>
-          <div className='icon'>
-            <i className='fas fa-lock'></i>
+        {error && <p className='form__error'>{error} </p>}
+        <div className='inputs'>
+          <div
+            className={`input-container ${
+              inputFocus.includes("email") ? "focus" : ""
+            }`}>
+            <div className='icon'>
+              <i className='far fa-envelope'></i>
+            </div>
+            <div className='input-div'>
+              <h5>Email</h5>
+              {/* <input type='text' className='input' /> */}
+              <input
+                type='email'
+                className='input'
+                required
+                ref={emailRef}
+                onFocus={(e) => addInputFocus(e.target.type)}
+                onBlur={(e) => removeInputFocus(e.target.type, e.target.value)}
+                // placeholder='&#xf1fa; Email'
+                // value={formData.email}
+                // onChange={(e) => handleChange(e)}
+              />
+            </div>
           </div>
-          <div className='input-div'>
-            <h5>Password</h5>
-            <input
-              type='password'
-              className='input'
-              // autoComplete='current-password'
-              required
-              ref={passwordRef}
-              onFocus={() => setPasswordFocus(true)}
-              onBlur={() => setPasswordFocus(false)}
-              // value={formData.password}
-              // onChange={(e) => handleChange(e)}
-            />
+
+          <div
+            className={`input-container ${
+              inputFocus.includes("password") ? "focus" : ""
+            }`}>
+            <div className='icon'>
+              <i className='fas fa-lock'></i>
+            </div>
+            <div className='input-div'>
+              <h5>Password</h5>
+              <input
+                type='password'
+                className='input'
+                // autoComplete='current-password'
+                required
+                ref={passwordRef}
+                onFocus={(e) => addInputFocus(e.target.type)}
+                onBlur={(e) => removeInputFocus(e.target.type, e.target.value)}
+                // value={formData.password}
+                // onChange={(e) => handleChange(e)}
+              />
+            </div>
           </div>
         </div>
         {/* <input

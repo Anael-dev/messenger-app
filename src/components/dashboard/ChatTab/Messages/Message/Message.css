@@ -5,6 +5,7 @@
   border-radius: 1rem;
   background-color: #ffffff;
   margin-bottom: 3rem;
+  border-radius: 10px 10px 10px 0;
 }
 
 .message:last-child {
@@ -19,8 +20,8 @@
 .message-timestamp {
   margin-left: 1rem;
   align-self: flex-end;
-  font-size: xx-small;
-  opacity: 0.7;
+  font-size: 0.8rem;
+  opacity: 0.6;
 }
 
 .message-author {
@@ -29,12 +30,14 @@
   right: 0.8rem;
   font-weight: 800;
   font-size: xx-small;
-  color: grey;
+  color: #999;
 }
 
 .sent {
   margin-left: auto;
+  /* background-color: #03a688; */
   background-color: #dcf8c6;
+  border-radius: 10px 10px 0 10px;
 }
 
 @media (max-width: 480px) {
