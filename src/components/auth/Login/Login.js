@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { auth, db, provider, firebase, login } from "../../../firebase/base";
-import { AuthContext } from "../../../contexts/AuthContextProvider";
+import { AuthContext } from "../../../context/AuthContextProvider";
 import "./Login.css";
 
 const Login = ({ history }) => {

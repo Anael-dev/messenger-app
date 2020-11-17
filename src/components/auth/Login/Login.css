@@ -207,7 +207,7 @@ form {
   background: none;
   padding: 0.5rem 0.7rem;
   font-size: 1.2rem;
-  color: #555;
+  color: #333;
   font-family: "poppins", sans-serif;
 }
 
@@ -304,10 +304,10 @@ form {
   text-transform: uppercase;
   background-size: 200%;
   transition: 0.5s;
-  padding: 0.8rem;
-  border-radius: 25px;
+  padding: 0.9rem;
+  border-radius: 20px;
   border: none;
-  width: 60%;
+  width: 55%;
   cursor: pointer;
   letter-spacing: 1px;
   margin: 1.5rem 0;
@@ -500,7 +500,6 @@ form {
 
   .form__button {
     font-size: 1.2rem;
-    padding: 0.5rem;
     width: 50%;
   }
 

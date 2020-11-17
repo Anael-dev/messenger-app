@@ -1,0 +1,31 @@
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    color: #162226;
+    height: 100%;
+    background: #f5f2f5;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    @media (max-width: 480px) {
+        p {
+            font-size: 1.3rem;
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #162226;
+}
