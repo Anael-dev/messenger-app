@@ -4,17 +4,17 @@ import { AuthContext } from "../../context/AuthContextProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { setRooms, setWindowWidth } from "../../actions/roomsActions";
 import { setUsers } from "../../actions/usersActions";
-import ChatTab from "../ChatTab/ChatTab";
 import RoomsTab from "../RoomsTab/RoomsTab";
-import "./DashBoard.css";
+import "./DashBoard.scss";
+import ChatTab from "../ChatTab/ChatTab";
 
 const Dashboard = () => {
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const dispatch = useDispatch();
   const users = useSelector((state) => state.usersReducer.users);
   const loadedRooms = useSelector((state) => state.roomsReducer.loadedRooms);
   const [loadedUsers, setLoadedUsers] = useState(false);
-  const [windowWidth, setWidth] = useState(window.innerWidth);
+  const [windowWidth] = useState(window.innerWidth);
   // const [nickName, setNickName] = useState(currentUser.name);
 
   // const submitNickname = async (e) => {

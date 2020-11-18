@@ -18,7 +18,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import "./styles/style.scss";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import { AuthContext } from "./context/AuthContextProvider";
-import Auth from "./components/auth/Auth";
+import Auth from "./containers/Auth/Auth";
 
 function App() {
   const { currentUser } = useContext(AuthContext);

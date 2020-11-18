@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import "./Room.css";
+import React, { useEffect, useState } from "react";
+import "./Room.scss";
 import ReactEmoji from "react-emoji";
 import { Avatar } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
@@ -86,16 +86,16 @@ const Room = ({ roomData }) => {
           </div>
           <div className='room__info__container'>
             <p
-              className={`room__info__message ${
+              className={`room__info__container__message ${
                 changesCounter > 0 ? "bold" : null
               }`}>
               {ReactEmoji.emojify(roomData.lastMessageContent)}
             </p>
             <div
-              className={`room__notification ${
+              className={`room__info__container__notification ${
                 changesCounter > 0 ? "open" : null
               }`}>
-              <span className='room__notification__num'>{changesCounter}</span>
+              <span className='room__notifications__num'>{changesCounter}</span>
             </div>
           </div>
         </div>

@@ -1,0 +1,120 @@
+@import '../../styles/style.scss';
+
+.auth {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: $bg-default;
+
+  &__container {
+    display: grid;
+    height: 90vh;
+    overflow: hidden;
+    grid-template-columns: 40rem auto;
+    place-items: center;
+    @include position-absolute-to-middle;
+    background-color: $white;
+    object-fit: contain;
+    box-shadow: $box-shadow-soft;
+    border-radius: 10px;
+    column-gap: 2rem;
+
+    @media (max-width: $breakpoint-huge) {
+      grid-template-columns: 30rem auto;
+    }
+    @media (max-width: $breakpoint-large) {
+      grid-template-columns: 25rem auto;
+    }
+    @media (max-width: $breakpoint-medium) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 23% 77%;
+      column-gap: 0;
+      height: 90vh;
+      /* height: 70vh; */
+    }
+
+    .bg {
+      background: $primary-main;
+      height: 100%;
+      width: 100%;
+      padding: 1rem 7rem 1rem 1rem;
+      position: relative;
+
+      &__app-logo {
+        position: absolute;
+        left: 0;
+        top: -20px;
+
+        img {
+          width: 150px;
+          @media (max-width: $breakpoint-medium) {
+            width: 120px;
+          }
+        }
+      }
+
+      &__quote {
+        width: 70%;
+        position: absolute;
+        top: 40%;
+        left: 5%;
+        transform: translateY(-50%);
+        color: $white;
+        @include flexContainer(column, center, center);
+        animation: titleMove 1s ease-in-out;
+        @media (max-width: $breakpoint-medium) {
+          width: 70%;
+          position: absolute;
+          top: 60%;
+          left: 5%;
+        }
+
+        h2 {
+          @media (max-width: $breakpoint-medium) {
+            font-size: 1.8rem;
+          }
+        }
+        p {
+          margin-top: 1rem;
+          @media (max-width: $breakpoint-medium) {
+            display: none;
+          }
+        }
+      }
+
+      &__illustration {
+        position: absolute;
+        right: 2px;
+        bottom: 2px;
+        @media (max-width: $breakpoint-large) {
+          right: -10px;
+        }
+        @media (max-width: $breakpoint-medium) {
+          right: -10px;
+        }
+
+        img {
+          width: 280px;
+          @media (max-width: $breakpoint-huge) {
+            max-width: 350px;
+          }
+          @media (max-width: $breakpoint-large) {
+            max-width: 250px;
+          }
+          @media (max-width: $breakpoint-medium) {
+            max-width: 120px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes titleMove {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

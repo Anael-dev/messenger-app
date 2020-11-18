@@ -7,7 +7,7 @@ import {
   firebase,
 } from "../../../firebase/base";
 import { Link } from "react-router-dom";
-import "../Login/Login.css";
+import "../auth.scss";
 
 const SignUp = ({ history }) => {
   const emailRef = useRef();
@@ -15,28 +15,8 @@ const SignUp = ({ history }) => {
   const nicknameRef = useRef();
   const [inputFocus, setInputFocus] = useState([]);
 
-  // const [formData, setFormData] = useState({
-  //   email: "",
-  //   password: "",
-  //   displayName: "",
-  // });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  // const { currentUser } = useContext(AuthContext);
-
-  // if (currentUser) {
-  //   db.collection("users")
-  //     .doc(currentUser.uid)
-  //     .update({
-  //       active: true,
-  //     })
-  //     .then(() => history.push("/dashboard/chats"));
-  // }
-
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
 
   const addInputFocus = (type) => {
     if (!inputFocus.includes(type)) {
@@ -59,10 +39,6 @@ const SignUp = ({ history }) => {
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.SESSION);
       await auth.signInWithPopup(provider);
-      // setFormData({
-      //   email: "",
-      //   password: "",
-      // });
       // history.push("/");
     } catch (err) {
       console.log(err);
@@ -85,49 +61,19 @@ const SignUp = ({ history }) => {
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.SESSION);
       await generateUserDocument(user, nicknameRef.current?.value);
-      // setFormData({
-      //   email: "",
-      //   password: "",
-      //   displayName: "",
-      // });
       history.push("/");
     } catch (error) {
       setError("Failed to create an account");
       setLoading(false);
     }
-    // history.push("/");
-    // try {
-    //   const authResult = await auth.createUserWithEmailAndPassword(
-    //     formData.email,
-    //     formData.password
-    //   );
-    // await authResult.user.updateProfile({
-    //   displayName: formData.displayName,
-    //   // photoURL: , // some photo url
-    // });
-    //create a user document in users collection
-    // await db
-    //   .collection("users")
-    //   .doc(authResult.user.uid)
-    //   .set({
-    //     name: formData.displayName,
-    //     uid: authResult.user.uid,
-    //     active: true,
-    //     photo: `https://avatars.dicebear.com/api/human/${authResult.user.uid}.svg`,
-    //   });
-
-    // } catch (err) {
-    //   console.log(err.message);
-    //   setError(err.message);
-    // }
   };
 
   return (
-    <div className='login-content'>
+    <div className='auth-content'>
       <form onSubmit={(e) => handleSignUp(e)} className='form'>
-        <h3 className='auth__heading'>Sign up</h3>
+        <h3 className='form__heading'>Sign up</h3>
         <button
-          className='google-auth__button'
+          className='google-auth-btn'
           onClick={(e) => handleGoogleLogin(e)}>
           <i className='fab fa-google'></i>
         </button>
@@ -135,7 +81,7 @@ const SignUp = ({ history }) => {
           <span>or sign up with email:</span>
         </div>
         {error && <p className='form__error'>{error} </p>}
-        <div className='inputs'>
+        <div>
           <div
             className={`input-container signup-input ${
               inputFocus.includes("text") ? "focus" : ""
@@ -204,13 +150,13 @@ const SignUp = ({ history }) => {
           </div>
         </div>
 
-        <button disabled={loading} className='button form__button'>
+        <button disabled={loading} className='button form__btn'>
           Sign up
         </button>
-        <p className='signUp-section signUp-p'>
+        <p className='navigate-section'>
           Already have an account?
           <Link to='/auth/login'>
-            <span className='signUp-section signUp-span'>Login</span>
+            <span className='navigate-section navigate-span'>Login</span>
           </Link>
         </p>
       </form>

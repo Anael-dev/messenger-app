@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import "./ChatRoom.css";
+import "./ChatRoom.scss";
 import { Avatar } from "@material-ui/core";
 import Messages from "../Messages/Messages";
 import { db } from "../../firebase/base";
@@ -56,7 +56,7 @@ const ChatRoom = () => {
 
   return (
     <div className='chat'>
-      <div className='chat-header'>
+      <div className='chat__header'>
         <button
           className={`back-btn ${backBtnActive ? "back-btn__active" : null}`}
           onClick={() => {
@@ -68,7 +68,7 @@ const ChatRoom = () => {
         </button>
         <Avatar src={room?.photo} />
         {room && (
-          <div className='chat-header__info'>
+          <div className='chat__header__info'>
             <h3>{room.name}</h3>
             {room.type === "private" &&
               chatUser &&
@@ -112,7 +112,7 @@ const ChatRoom = () => {
             )}
           </div>
         )}
-        <div className='chat-header__right'>
+        <div className='chat__header__right'>
           {/* <IconButton>
             <SearchIcon />
           </IconButton>
@@ -124,10 +124,10 @@ const ChatRoom = () => {
           </IconButton> */}
         </div>
       </div>
-      <div className='chat-body'>
+      <div className='chat__body'>
         <Messages messagesRef={messagesRef} id={roomId} />
       </div>
-      <div className='chat-footer'>
+      <div className='chat__footer'>
         <Input messagesRef={messagesRef} roomRef={roomRef} />
       </div>
     </div>

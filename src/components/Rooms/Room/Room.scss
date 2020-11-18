@@ -1,0 +1,68 @@
+@import '../../../styles/style.scss';
+
+.room {
+  @include chatRoom;
+
+  &__info {
+    width: 100%;
+    margin-left: 1.5rem;
+    /* position: relative; */
+
+    &__container {
+      @include flexContainer($justify: space-between, $align: center);
+
+      &:first-child {
+        margin-bottom: 0.2rem;
+      }
+
+      .timestamp {
+        color: $primary-main;
+        font-size: 1.1rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+      }
+
+      &__message {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 15em;
+      }
+
+      &__notification {
+        display: none;
+        /* position: absolute; */
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background-color: $primary-main;
+        position: relative;
+
+        .room__notifications__num {
+          position: absolute;
+          top: 10%;
+          left: 30%;
+          color: $white;
+          font-weight: 800;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+.selected-room {
+  background-color: #ededed;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.open {
+  display: block;
+}

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { filterRooms } from "../../actions/roomsActions";
-import { filterUsers } from "../../actions/usersActions";
+import { filterRooms } from "../../../actions/roomsActions";
+import { filterUsers } from "../../../actions/usersActions";
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 // import { IconButton } from "@material-ui/core";
-import "../../containers/RoomsTab/RoomsTab.css";
+import "./SideBarSearch.scss";
 
 const SideBarSearch = () => {
   const dispatch = useDispatch();

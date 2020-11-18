@@ -69,7 +69,9 @@ const generateUserDocument = async (user, additionalData = null) => {
     //   });
     // } else {
     console.log(additionalData);
-    const { uid, displayName, photoURL } = user;
+    // const { uid, displayName, photoURL } = user;
+
+    const { uid, displayName } = user;
     try {
       await userRef.set({
         name: displayName || additionalData,

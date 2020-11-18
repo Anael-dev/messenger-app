@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../Rooms/Room/Room.css";
+import "./User.scss";
 import { Avatar } from "@material-ui/core";
-import { db } from "../../firebase/base";
+import { db } from "../../../firebase/base";
 import { useHistory } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContextProvider";
+import { AuthContext } from "../../../context/AuthContextProvider";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSidebarView } from "../../actions/roomsActions";
+import { toggleSidebarView } from "../../../actions/roomsActions";
 
 const User = ({ userData }) => {
   const [chatRoom, setChatRoom] = useState("");
@@ -60,10 +60,10 @@ const User = ({ userData }) => {
         onClick={() => redirectToRoom()}>
         <div className='user-avatar'>
           <Avatar src={userData?.photo} />
-          {userData?.active && <div className='user-active'></div>}
+          {userData?.active && <div className='user-avatar--active'></div>}
         </div>
-        <div className='room__info'>
-          <div className='room__info__container'>
+        <div className='user__info'>
+          <div className='user__info__container'>
             <h2>{userData.name}</h2>
           </div>
         </div>

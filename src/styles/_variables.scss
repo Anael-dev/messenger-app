@@ -14,12 +14,14 @@ $white: #fff;
 $light-grey: #d9d9d9;
 $dark-grey: rgb(128, 128, 128);
 $text-dark-grey: #555;
-
+$text-light-grey: rgba(241, 241, 242, 0.94);
+$placeholder-grey: #999;
 $border-grey: #dadbd3;
 
 //Background
 $bg-default: #f5f2f5;
 $bg-light-grey: #f6f6f6;
+$bg-dark-grey: rgba(243, 241, 241, 0.1);
 
 //Error
 // $error: #e26453;
@@ -27,4 +29,29 @@ $error: rgb(250, 92, 92);
 $success: #2bc769;
 
 //Box Shadows
-$bx-shadow-soft: -1px 4px 10px -6px rgba(0, 0, 0, 0.75);
+$box-shadow-soft: -1px 4px 10px -6px rgba(0, 0, 0, 0.75);
+
+//Fonts
+$font-content: ('Open Sans', sans-serif);
+$font-header: ('Poppins', sans-serif);
+
+//Media-queries
+$breakpoint-huge: 900px;
+$breakpoint-large: 780px;
+$breakpoint-medium: 620px;
+$breakpoint-small: 480px;
+
+// $breakpoints: (
+//     'huge': (
+//         max-width: 900px,
+//     ),
+//     'large': (
+//         max-width: 780px,
+//     ),
+//     'medium': (
+//         max-width: 620px,
+//     ),
+//     'small': (
+//         max-width: 480px,
+//     ),
+// );

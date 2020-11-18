@@ -1,0 +1,24 @@
+@import '../../styles/style.scss';
+
+.input-form {
+  flex: 1;
+  @include flexContainer($justify: space-between, $align: center);
+  max-height: 4rem;
+  padding: 0 0.5rem;
+  width: 100%;
+
+  input {
+    flex: 1;
+    border-radius: 20px;
+    padding: 1rem;
+    margin-right: 0.8rem;
+    border: none;
+    outline-width: 0;
+  }
+
+  .MuiIconButton-root {
+    @media (max-width: $breakpoint-small) {
+      background-color: #08594a !important;
+    }
+  }
+}

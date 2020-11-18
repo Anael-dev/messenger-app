@@ -1,0 +1,43 @@
+@import '../../styles/style.scss';
+
+.sidebar {
+  @include flexContainer($direction: column);
+  width: 35%;
+  /* flex: 0.35; */
+  @media (max-width: $breakpoint-small) {
+    width: 100%;
+    position: relative;
+  }
+
+  &__chats-nav {
+    font-size: 1rem;
+    padding-bottom: 1.5rem;
+    @include flexContainer($justify: space-evenly);
+    background-color: $bg-light-grey;
+
+    .nav-link {
+      color: $primary-main;
+      padding: 0.3rem;
+    }
+
+    .active-route {
+      border-bottom: 2px solid $primary-main;
+    }
+  }
+
+  &__rooms-container {
+    background-color: $white;
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+.hide-sidebar {
+  display: none;
+}
+
+.no-results {
+  color: $dark-grey;
+  padding: 3rem;
+  text-align: center;
+}

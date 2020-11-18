@@ -1,0 +1,48 @@
+@import '../../../styles/style.scss';
+
+.message {
+  position: relative;
+  padding: 1rem;
+  width: fit-content;
+  border-radius: 1rem;
+  background-color: $white;
+  margin-bottom: 2rem;
+  border-radius: 10px 10px 10px 0;
+
+  // :last-child {
+  //   margin-bottom: 1rem;
+  // }
+
+  &__details {
+    @include flexContainer($justify: space-between);
+    .timestamp {
+      margin-left: 1rem;
+      align-self: flex-end;
+      font-size: 0.8rem;
+      opacity: 0.6;
+      color: $dark-grey;
+      @media (max-width: $breakpoint-small) {
+        font-size: x-small;
+      }
+    }
+  }
+
+  // &__author {
+  //   position: absolute;
+  //   top: -1.3rem;
+  //   right: 0.8rem;
+  //   font-weight: 800;
+  //   font-size: xx-small;
+  //   color: #999;
+  //   @media (max-width: $breakpoint-small) {
+  //     font-size: x-small;
+  //   }
+  // }
+}
+
+.sent {
+  margin-left: auto;
+  /* background-color: #03a688; */
+  background-color: #dcf8c6;
+  border-radius: 10px 10px 0 10px;
+}

@@ -1,7 +1,6 @@
 import React from "react";
-import "../../containers/RoomsTab/RoomsTab.css";
 import { useSelector } from "react-redux";
-import User from "./User";
+import User from "./User/User";
 
 const Users = () => {
   const filteredUsers = useSelector(

@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import ChatIcon from "@material-ui/icons/Chat";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+// import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import PersonIcon from "@material-ui/icons/Person";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
+// import PersonIcon from "@material-ui/icons/Person";
+// import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Avatar, IconButton } from "@material-ui/core";
-import { AuthContext } from "../../context/AuthContextProvider";
-import { db, firebase, auth, logout } from "../../firebase/base";
-import "../../containers/RoomsTab/RoomsTab.css";
+import { AuthContext } from "../../../context/AuthContextProvider";
+import { db, firebase, logout } from "../../../firebase/base";
+import "./SideBarNav.scss";
 import { useHistory } from "react-router-dom";
 
 const SideBarNav = () => {

@@ -1,0 +1,7 @@
+@import '../../styles/style.scss';
+
+.default-page__container {
+  @media (max-width: $breakpoint-small) {
+    display: none;
+  }
+}

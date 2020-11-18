@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Message from "../Messages/Message/Message";
+import Message from "./Message/Message";
 
 const Messages = ({ messagesRef, id }) => {
   //querying 20 messages by time order

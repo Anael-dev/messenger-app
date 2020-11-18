@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "../../containers/RoomsTab/RoomsTab.css";
+import "../../containers/RoomsTab/RoomsTab.scss";
 import Room from "./Room/Room";
 import { useSelector } from "react-redux";
 import { AuthContext } from "../../context/AuthContextProvider";

@@ -1,0 +1,42 @@
+@import '../../../styles/style.scss';
+
+.user {
+    @include chatRoom;
+    
+    &-avatar {
+        position: relative;
+        border-radius: 50%;
+        /* border: 2px solid #fff; */
+        background-color: $bg-light-grey;
+
+        &--active {
+            position: absolute;
+            bottom: 0;
+            right: 2px;
+            width: 0.9rem;
+            height: 0.9rem;
+            border-radius: 50%;
+            border: 1.5px solid $white;
+            background-color: $primary-main;
+        }
+    }
+
+    &__info {
+        width: 100%;
+        margin-left: 1.5rem;
+        /* position: relative; */
+
+        &__container {
+            @include flexContainer($justify: space-between, $align: center);
+
+            &:first-child {
+                margin-bottom: 0.2rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                margin-bottom: 0.8rem;
+            }
+        }
+    }
+}

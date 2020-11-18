@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import "./RoomsTab.css";
+import "./RoomsTab.scss";
 import Rooms from "../../components/Rooms/Rooms";
-import SideBarNav from "../../components/SideBar/SideBarNav";
-import SideBarSearch from "../../components/SideBar/SideBarSearch";
+import SideBarNav from "../../components/SideBar/SideBarNav/SideBarNav";
+import SideBarSearch from "../../components/SideBar/SideBarSearch/SideBarSearch";
 import { NavLink, Switch, Route, useLocation } from "react-router-dom";
 import Users from "../../components/Users/Users";
 import { useSelector, useDispatch } from "react-redux";
@@ -31,7 +31,7 @@ const RoomsTab = () => {
     <div className={`sidebar ${!displaySidebar ? "hide-sidebar" : null}`}>
       <SideBarNav />
       <SideBarSearch />
-      <nav className='chats-nav'>
+      <nav className='sidebar__chats-nav'>
         <NavLink
           className='nav-link'
           to='/dashboard/chats'
@@ -45,7 +45,7 @@ const RoomsTab = () => {
           <h3 className='link-title'>People</h3>
         </NavLink>
       </nav>
-      <div className='rooms-container'>
+      <div className='sidebar__rooms-container'>
         <Switch>
           <Route path='/dashboard/chats' component={Rooms} />
           <Route path='/dashboard/users' component={Users} />

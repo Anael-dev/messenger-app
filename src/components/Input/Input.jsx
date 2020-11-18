@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import SendIcon from "@material-ui/icons/Send";
 import { IconButton } from "@material-ui/core";
-import "./Input.css";
+import "./Input.scss";
 import { AuthContext } from "../../context/AuthContextProvider";
 import { firebase } from "../../firebase/base";
 
