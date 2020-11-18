@@ -4,19 +4,17 @@ import "firebase/database";
 
 import "firebase/auth";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCf3oYMryeQS13Q_YsR9fAl3taaPd8EA9Q",
-  authDomain: "messenger-app-cce9f.firebaseapp.com",
-  databaseURL: "https://messenger-app-cce9f.firebaseio.com",
-  projectId: "messenger-app-cce9f",
-  storageBucket: "messenger-app-cce9f.appspot.com",
-  messagingSenderId: "986604618991",
-  appId: "1:986604618991:web:47380cf34640ef70e1071a",
-  measurementId: "G-9D9L33PFCE",
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
+// // Initialize Firebase
+firebase.initializeApp({
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_MESSAGING_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+});
 //exports
 const db = firebase.firestore();
 const auth = firebase.auth();
