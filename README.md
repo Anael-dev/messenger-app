@@ -2,9 +2,9 @@
 
 > This app ("WhatsApp alike") developed using React and Firebase with React Hooks, SCSS, Redux, React Router, Firestore and Firebase functions
 
- <img src="public/screenshots/Screenshot 2020-11-28 235913.png" height="200" alt="Screenshot"/>
+ <img src="public/screenshots/Screenshot 2020-11-28 235913.png" height="250" alt="Screenshot"/>
 
- <img src="public/screenshots/Screenshot 2020-11-28 235526.png" height="200" alt="Screenshot"/>
+ <img src="public/screenshots/Screenshot 2020-11-28 235526.png" height="250" alt="Screenshot"/>
 
 Main app features:
 
@@ -17,6 +17,7 @@ Main app features:
 :heavy_check_mark: Show when a user is typing
 
 :heavy_check_mark: Get notifications on unread messages
+
 
 <a href="https://messenger-app-cce9f.web.app/" target="_blank">**Try the app here** :smiley:</a>
 
