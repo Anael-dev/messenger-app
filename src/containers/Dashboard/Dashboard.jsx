@@ -15,15 +15,6 @@ const Dashboard = () => {
   const loadedRooms = useSelector((state) => state.roomsReducer.loadedRooms);
   const [loadedUsers, setLoadedUsers] = useState(false);
   const [windowWidth] = useState(window.innerWidth);
-  // const [nickName, setNickName] = useState(currentUser.name);
-
-  // const submitNickname = async (e) => {
-  //   e.preventDefault();
-  //   if (nickName === "") return;
-  //   const userRef = db.collection("users").doc(currentUser.uid);
-  //   await userRef.update({ nickName });
-  //   setCurrentUser((currUser) => ({ ...currUser, nickName }));
-  // };
 
   useEffect(() => {
     dispatch(setWindowWidth(windowWidth));
@@ -39,7 +30,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (currentUser) {
-      // if (currentUser.nickName) {
       const unsubscribeUsers = db
         .collection("users")
         .where("uid", "!=", currentUser.uid)
@@ -61,7 +51,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (currentUser && loadedUsers) {
-      // if (currentUser.nickName && loadedUsers) {
       if (users.length > 0) {
         const unsubscribeRooms = db
           .collection("rooms")
@@ -113,33 +102,8 @@ const Dashboard = () => {
           <ChatTab />
         </div>
       ) : (
-        <h3>Loading...</h3>
+          <div className='loader'></div>
       )}
-      {/* {currentUser.nickName ? (
-        loadedUsers && loadedRooms ? (
-          <div className='dashboard__body'>
-            <RoomsTab />
-            <ChatTab />
-          </div>
-        ) : (
-          <h3>Loading...</h3>
-        )
-      ) : (
-        <div className='popup active'>
-          <div className='overlay'></div>
-          <div className='model'>
-            <form onSubmit={(e) => submitNickname(e)}>
-              <h2>Your Nickname: </h2>
-              <input
-                type='text'
-                value={nickName}
-                onChange={(e) => setNickName(e.target.value)}
-              />
-              <button type='submit'>I'm Done!</button>
-            </form>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };

@@ -3,10 +3,11 @@ import "./RoomsTab.scss";
 import Rooms from "../../components/Rooms/Rooms";
 import SideBarNav from "../../components/SideBar/SideBarNav/SideBarNav";
 import SideBarSearch from "../../components/SideBar/SideBarSearch/SideBarSearch";
-import { NavLink, Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import Users from "../../components/Users/Users";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebarView } from "../../actions/roomsActions";
+import LogoNav from "../../components/LogoNav/LogoNav";
 
 const RoomsTab = () => {
   const { windowWidth, displaySidebar } = useSelector(
@@ -17,7 +18,7 @@ const RoomsTab = () => {
 
   useEffect(() => {
     if (
-      windowWidth > 480 ||
+      windowWidth > 545 ||
       location.pathname === "/dashboard/chats" ||
       location.pathname === "/dashboard/users"
     ) {
@@ -29,27 +30,16 @@ const RoomsTab = () => {
 
   return (
     <div className={`sidebar ${!displaySidebar ? "hide-sidebar" : null}`}>
-      <SideBarNav />
-      <SideBarSearch />
-      <nav className='sidebar__chats-nav'>
-        <NavLink
-          className='nav-link'
-          to='/dashboard/chats'
-          activeClassName='active-route'>
-          <h3 className='link-title'>Chats</h3>
-        </NavLink>
-        <NavLink
-          className='nav-link'
-          to='/dashboard/users'
-          activeClassName='active-route'>
-          <h3 className='link-title'>People</h3>
-        </NavLink>
-      </nav>
-      <div className='sidebar__rooms-container'>
-        <Switch>
-          <Route path='/dashboard/chats' component={Rooms} />
-          <Route path='/dashboard/users' component={Users} />
-        </Switch>
+      <LogoNav />
+      <div className='sidebar__column'>
+        <SideBarNav />
+        <SideBarSearch />
+        <div className='sidebar__rooms-container'>
+          <Switch>
+            <Route path='/dashboard/chats' component={Rooms} />
+            <Route path='/dashboard/users' component={Users} />
+          </Switch>
+        </div>
       </div>
     </div>
   );

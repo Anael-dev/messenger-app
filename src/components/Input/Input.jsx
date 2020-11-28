@@ -1,6 +1,4 @@
 import React, { useState, useContext } from "react";
-import SendIcon from "@material-ui/icons/Send";
-import { IconButton } from "@material-ui/core";
 import "./Input.scss";
 import { AuthContext } from "../../context/AuthContextProvider";
 import { firebase } from "../../firebase/base";
@@ -35,16 +33,12 @@ const Input = ({ messagesRef, roomRef }) => {
     if (inputValue !== "") {
       try {
         setInputValue("");
-       await messagesRef.add({
+        await messagesRef.add({
           content: inputValue,
           uid: currentUser.uid,
           name: currentUser.name,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         });
-
-        // await messageRef.update({
-        //   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        // });
 
         await roomRef.update({
           lastMessageTime: firebase.firestore.FieldValue.serverTimestamp(),
@@ -59,17 +53,17 @@ const Input = ({ messagesRef, roomRef }) => {
 
   return (
     <form className='input-form' onSubmit={(e) => sendMessage(e)}>
-      <input
+      <textarea
         type='text'
+        wrap='soft'
         value={inputValue}
-        placeholder='Type a message'
+        placeholder='Write a message...'
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyPress={(e) => typeMessage(e)}
-      />
+        onKeyPress={(e) => typeMessage(e)}></textarea>
       {inputValue && (
-        <IconButton type='submit'>
-          <SendIcon />
-        </IconButton>
+        <button type='submit' className='send-message-button'>
+          <i className='fas fa-paper-plane'></i>{" "}
+        </button>
       )}
     </form>
   );

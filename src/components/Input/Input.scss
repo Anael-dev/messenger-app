@@ -2,23 +2,39 @@
 
 .input-form {
   flex: 1;
-  @include flexContainer($justify: space-between, $align: center);
+  @include flexContainer($justify: space-between);
   max-height: 4rem;
   padding: 0 0.5rem;
   width: 100%;
 
-  input {
+  textarea {
     flex: 1;
     border-radius: 20px;
     padding: 1rem;
     margin-right: 0.8rem;
     border: none;
     outline-width: 0;
+    overflow-y: auto;
+    resize: none;
+    max-width: 90%;
   }
 
-  .MuiIconButton-root {
-    @media (max-width: $breakpoint-small) {
-      background-color: #08594a !important;
+  .send-message-button {
+    padding: 0.8rem;
+    width: 100%;
+    cursor: pointer;
+    color: $white;
+    background-color: $primary-green;
+    border-radius: 50%;
+    margin: 0 auto;
+    height: 34px;
+    width: 34px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+
+    &:hover {
+      transform: scale(1.1);
     }
   }
 }

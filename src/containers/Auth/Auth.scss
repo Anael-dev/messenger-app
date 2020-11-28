@@ -1,14 +1,14 @@
 @import '../../styles/style.scss';
 
 .auth {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  background: $bg-default;
+  background: $primary-bg;
 
   &__container {
     display: grid;
-    height: 90vh;
+    height: 90%;
     overflow: hidden;
     grid-template-columns: 40rem auto;
     place-items: center;
@@ -29,20 +29,23 @@
       grid-template-columns: 1fr;
       grid-template-rows: 23% 77%;
       column-gap: 0;
-      height: 90vh;
+      height: 100%;
+      width: 100%;
+      border-radius: 0;
       /* height: 70vh; */
     }
 
     .bg {
-      background: $primary-main;
-      height: 100%;
+      background: $primary-green;
+      background: $primary-light-purple;
+      min-height: 100%;
       width: 100%;
       padding: 1rem 7rem 1rem 1rem;
       position: relative;
 
       &__app-logo {
         position: absolute;
-        left: 0;
+        left: -5px;
         top: -20px;
 
         img {
@@ -54,19 +57,19 @@
       }
 
       &__quote {
-        width: 70%;
+        margin-top: 2rem;
+        width: 75%;
         position: absolute;
         top: 40%;
-        left: 5%;
+        left: 20px;
         transform: translateY(-50%);
         color: $white;
         @include flexContainer(column, center, center);
         animation: titleMove 1s ease-in-out;
         @media (max-width: $breakpoint-medium) {
-          width: 70%;
-          position: absolute;
-          top: 60%;
-          left: 5%;
+          width: 65%;
+          top: 55%;
+          left: 3%;
         }
 
         h2 {
@@ -76,6 +79,9 @@
         }
         p {
           margin-top: 1rem;
+          letter-spacing: 0.3px;
+          line-height: 130%;
+          font-size: 1.4rem;
           @media (max-width: $breakpoint-medium) {
             display: none;
           }

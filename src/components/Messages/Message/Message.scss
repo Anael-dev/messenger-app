@@ -2,23 +2,41 @@
 
 .message {
   position: relative;
-  padding: 1rem;
+  padding: 1.2rem 1.5rem;
   width: fit-content;
   border-radius: 1rem;
   background-color: $white;
   margin-bottom: 2rem;
   border-radius: 10px 10px 10px 0;
+  transition: all 0.3s ease;
+  transform: scale(0);
+  transform-origin: right;
+  animation-name: showIn;
+  animation-duration: 0.2s; /* or: Xms */
+  animation-iteration-count: 1;
+  animation-direction: normal; /* or: normal */
+  animation-timing-function: cubic-bezier(0.88, 0.19, 0.37, 1.11);
+  animation-fill-mode: both;
+  animation-delay: 0.2s;
 
   // :last-child {
   //   margin-bottom: 1rem;
   // }
 
   &__details {
-    @include flexContainer($justify: space-between);
+    @include flexContainer(column, space-between);
+
+    .message__text {
+      max-width: 200px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      margin-bottom: 1rem;
+    }
+
     .timestamp {
-      margin-left: 1rem;
+      // margin-left: 1rem;
       align-self: flex-end;
-      font-size: 0.8rem;
+      font-size: 1rem;
       opacity: 0.6;
       color: $dark-grey;
       @media (max-width: $breakpoint-small) {
@@ -26,23 +44,36 @@
       }
     }
   }
-
-  // &__author {
-  //   position: absolute;
-  //   top: -1.3rem;
-  //   right: 0.8rem;
-  //   font-weight: 800;
-  //   font-size: xx-small;
-  //   color: #999;
-  //   @media (max-width: $breakpoint-small) {
-  //     font-size: x-small;
-  //   }
-  // }
 }
 
 .sent {
   margin-left: auto;
-  /* background-color: #03a688; */
-  background-color: #dcf8c6;
+  background: $primary-light-purple;
+  color: $dark-white;
   border-radius: 10px 10px 0 10px;
+  .timestamp {
+    color: $dark-white;
+  }
+}
+
+.received {
+  margin-right: auto;
+
+  background-color: $text-light-grey;
+  .message__details {
+    .timestamp {
+      margin-right: 1rem;
+      margin-left: 0;
+      align-self: start;
+    }
+  }
+}
+
+@keyframes showIn {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

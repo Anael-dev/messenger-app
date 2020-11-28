@@ -1,34 +1,63 @@
 @import '../../styles/style.scss';
 
 .sidebar {
-  @include flexContainer($direction: column);
-  width: 35%;
-  /* flex: 0.35; */
+  @include flexContainer(row, space-around);
+  background: $primary-dark-purple; // width: 30%;
+  min-width: 300px;
+  flex: 0.25;
+  @media (max-width: $breakpoint-large) {
+    min-width: 250px;
+    flex: 0.2;
+  }
   @media (max-width: $breakpoint-small) {
-    width: 100%;
+    flex: 1;
     position: relative;
+    justify-content: space-between;
+  }
+
+  &__column {
+    @include flexContainer($direction: column);
+    min-width: 230px;
+    flex: 0.8;
+    margin: 1rem;
+    margin-left: 0;
+    border-radius: 10px;
+    background: $primary-light-purple;
+    @media (max-width: $breakpoint-large) {
+      min-width: 200px;
+    }
+    @media (max-width: $breakpoint-small) {
+      margin: 0;
+      padding: 1rem;
+      flex: 0.9;
+      border-radius: 0;
+    }
   }
 
   &__chats-nav {
-    font-size: 1rem;
-    padding-bottom: 1.5rem;
+    font-size: 1.2rem;
     @include flexContainer($justify: space-evenly);
-    background-color: $bg-light-grey;
 
     .nav-link {
-      color: $primary-main;
-      padding: 0.3rem;
+      color: $white;
+      opacity: 0.5;
+      padding: 1rem;
+      font-size: 1.6rem;
+      border-radius: 10px;
+      transition: 0.2s all ease-in;
     }
 
     .active-route {
-      border-bottom: 2px solid $primary-main;
+      opacity: 1;
+      background-color: rgb(95, 93, 129);
     }
   }
 
   &__rooms-container {
-    background-color: $white;
+    // background-color: $white;
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 
@@ -37,7 +66,8 @@
 }
 
 .no-results {
-  color: $dark-grey;
-  padding: 3rem;
+  color: $light-grey;
+  padding: 2rem;
   text-align: center;
+  font-size: 1.4rem;
 }

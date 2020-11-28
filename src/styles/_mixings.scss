@@ -28,13 +28,15 @@
 @mixin chatRoom {
     width: 100%;
     display: flex;
-    padding: 1.5rem;
+    align-items: center;
+    padding: 1.5rem 1.2rem;
     cursor: pointer;
-    border-bottom: 1px solid $bg-light-grey;
+    border-bottom: 0.1px solid #b8b8b87c;
+    transition: 0.4s all ease-out;
     outline: none;
 
     &:hover {
-        background-color: #ededed;
+        background-color: #414059;
     }
 }
 // @mixin animation-title-move {

@@ -17,7 +17,7 @@ const User = ({ userData }) => {
   const dispatch = useDispatch();
 
   const redirectToRoom = async () => {
-    if (windowWidth <= 480 && !displaySidebar)
+    if (windowWidth <= 545 && !displaySidebar)
       dispatch(toggleSidebarView(true));
 
     if (chatRoom.id) {

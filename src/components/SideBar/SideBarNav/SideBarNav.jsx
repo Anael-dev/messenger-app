@@ -1,26 +1,24 @@
-import React, { useState, useContext } from "react";
-import ChatIcon from "@material-ui/icons/Chat";
-// import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-// import PersonIcon from "@material-ui/icons/Person";
-// import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import { Avatar, IconButton } from "@material-ui/core";
+import React, { useState, useContext, useRef } from "react";
+import { Avatar } from "@material-ui/core";
 import { AuthContext } from "../../../context/AuthContextProvider";
-import { db, firebase, logout } from "../../../firebase/base";
+import { db } from "../../../firebase/base";
 import "./SideBarNav.scss";
-import { useHistory } from "react-router-dom";
 
 const SideBarNav = () => {
   const [openMore, setOpenMore] = useState(false);
-  const { currentUser } = useContext(AuthContext);
-  const history = useHistory();
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const [editMode, setEditMode] = useState(false);
+  const nameRef = useRef();
 
-  const signOut = async () => {
-    await db.collection("users").doc(currentUser.uid).update({
-      active: false,
-      lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
-    });
-    logout();
+  const editUserName = async (e) => {
+    e.preventDefault();
+    if (nameRef.current?.value !== "") {
+      await db.collection("users").doc(currentUser.uid).update({
+        name: nameRef.current?.value,
+      });
+      setCurrentUser((user) => ({ ...user, name: nameRef.current?.value }));
+    }
+    setEditMode(!editMode);
   };
 
   return (
@@ -30,48 +28,31 @@ const SideBarNav = () => {
         onClick={() => setOpenMore(!openMore)}></div>
       <div className='sidebar-header'>
         <div className='sidebar-header__user-data'>
-          <Avatar src={currentUser?.photo} />
-          <p>{currentUser?.name}</p>
-          {/* <p>{currentUser?.nickName}</p> */}
-        </div>
-        <div className='sidebar-header__nav-section'>
-          {/* <Link to='/dashboard/users'> */}
-          <IconButton
-            title='new chat'
-            onClick={() => history.push("/dashboard/users")}>
-            <ChatIcon />
-          </IconButton>
-          <IconButton title='log out' onClick={signOut}>
-            <ExitToAppIcon />
-          </IconButton>
-          {/* </Link> */}
-          {/* <div className='model'>
-            <IconButton title='menu' onClick={() => setOpenMore(!openMore)}>
-              <MoreVertIcon />
-            </IconButton>
-            <nav className={`dropdown-model ${openMore ? "open" : null}`}>
-              <ul className='dropdown-model__items'>
-                <li className='dropdown-model__item'>
-                  <button className='dropdown__btn' onClick={() => null}>
-                    <span>New group</span>
-                    <GroupAddIcon />
-                  </button>
-                </li>
-                <li className='dropdown-model__item'>
-                  <button className='dropdown__btn' onClick={() => null}>
-                    <span>Profile</span>
-                    <PersonIcon />
-                  </button>
-                </li>
-                <li className='dropdown-model__item'>
-                  <button className='dropdown__btn' onClick={signOut}>
-                    <span>Log out</span>
-                    <ExitToAppIcon />
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </div> */}
+          <div className='user-avatar'>
+            <Avatar src={currentUser?.photo} />
+          </div>
+          {editMode ? (
+            <form onSubmit={(e) => editUserName(e)}>
+              <input
+                type='text'
+                defaultValue={currentUser?.name}
+                ref={nameRef}
+              />
+              <button type='submit' className='name-edit-btn' title='save'>
+                <i className='fas fa-check'></i>
+              </button>
+            </form>
+          ) : (
+            <>
+              <h4>{currentUser?.name}</h4>
+              <button
+                className='name-edit-btn'
+                title='edit'
+                onClick={() => setEditMode(!editMode)}>
+                <i className='fas fa-edit'></i>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </>

@@ -1,30 +1,28 @@
 //Primay Color
-$primary-main: #03a688;
-// $primary-dark: #f05a28;
-// $primary-light: #f5f2f5;
-
-//Secondary color
-// $secondary-main: #f7931e;
-// $secondary-dark: #f05a28;
-// $secondary-light: #c0d1e0;
+$primary-green: #03a688;
+$primary-dark-purple: #414059;
+$primary-light-purple: #5f5d81;
+$primary-bg: #e4f2ee;
 
 // Other colors:
 $black: #333;
+
 $white: #fff;
+$light-white: #fafafa;
+$dark-white: #f5f5f5;
+
 $light-grey: #d9d9d9;
 $dark-grey: rgb(128, 128, 128);
 $text-dark-grey: #555;
-$text-light-grey: rgba(241, 241, 242, 0.94);
+$text-light-grey: rgb(235, 235, 236);
 $placeholder-grey: #999;
-$border-grey: #dadbd3;
 
 //Background
-$bg-default: #f5f2f5;
+$bg-default: #f0f0f0;
 $bg-light-grey: #f6f6f6;
 $bg-dark-grey: rgba(243, 241, 241, 0.1);
 
 //Error
-// $error: #e26453;
 $error: rgb(250, 92, 92);
 $success: #2bc769;
 
@@ -39,19 +37,4 @@ $font-header: ('Poppins', sans-serif);
 $breakpoint-huge: 900px;
 $breakpoint-large: 780px;
 $breakpoint-medium: 620px;
-$breakpoint-small: 480px;
-
-// $breakpoints: (
-//     'huge': (
-//         max-width: 900px,
-//     ),
-//     'large': (
-//         max-width: 780px,
-//     ),
-//     'medium': (
-//         max-width: 620px,
-//     ),
-//     'small': (
-//         max-width: 480px,
-//     ),
-// );
+$breakpoint-small: 545px;

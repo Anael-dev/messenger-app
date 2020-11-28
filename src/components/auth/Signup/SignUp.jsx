@@ -39,7 +39,6 @@ const SignUp = ({ history }) => {
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.SESSION);
       await auth.signInWithPopup(provider);
-      // history.push("/");
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +46,6 @@ const SignUp = ({ history }) => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    // const { email, password, displayName } = formData;
 
     //sign up the user
     try {
@@ -75,12 +73,11 @@ const SignUp = ({ history }) => {
         <button
           className='google-auth-btn'
           onClick={(e) => handleGoogleLogin(e)}>
-          <i className='fab fa-google'></i>
+          continue with <i className='fab fa-google'></i>
         </button>
         <div className='separate-section'>
           <span>or sign up with email:</span>
         </div>
-        {error && <p className='form__error'>{error} </p>}
         <div>
           <div
             className={`input-container signup-input ${
@@ -96,6 +93,7 @@ const SignUp = ({ history }) => {
                 type='text'
                 className='input'
                 required
+                autoComplete='name'
                 ref={nicknameRef}
                 onFocus={(e) => addInputFocus(e.target.type)}
                 onBlur={(e) => removeInputFocus(e.target.type, e.target.value)}
@@ -117,6 +115,7 @@ const SignUp = ({ history }) => {
                 type='email'
                 className='input signup-input'
                 required
+                autoComplete='email'
                 ref={emailRef}
                 onFocus={(e) => addInputFocus(e.target.type)}
                 onBlur={(e) => removeInputFocus(e.target.type, e.target.value)}
@@ -138,18 +137,16 @@ const SignUp = ({ history }) => {
                 type='password'
                 className='input signup-input'
                 name='password'
-                // autoComplete='current-password'
+                autoComplete='none'
                 required
                 ref={passwordRef}
                 onFocus={(e) => addInputFocus(e.target.type)}
                 onBlur={(e) => removeInputFocus(e.target.type, e.target.value)}
-                // value={formData.password}
-                // onChange={(e) => handleChange(e)}
               />
             </div>
           </div>
         </div>
-
+        {error && <p className='form__error'>{error} </p>}
         <button disabled={loading} className='button form__btn'>
           Sign up
         </button>

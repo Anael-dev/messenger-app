@@ -1,0 +1,47 @@
+@import '../../styles/style.scss';
+
+.nav {
+    max-width: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin: 1.5rem 1rem;
+    flex: 0.2;
+    position: relative;
+    @media (max-width: $breakpoint-large) {
+        min-width: 30px;
+    }
+    @media (max-width: $breakpoint-large) {
+        flex: 0.1;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    .sidebar__chats-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 25%;
+
+        .nav-link {
+            margin-bottom: 2rem;
+        }
+    }
+
+    .logout-button {
+        color: $white;
+        opacity: 0.5;
+        padding: 0.3rem;
+        font-size: 1.6rem;
+        transition: 0.2s all ease-in;
+    }
+
+    .logout-button:hover {
+        opacity: 1;
+    }
+}

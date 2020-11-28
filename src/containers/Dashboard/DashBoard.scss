@@ -1,99 +1,52 @@
 @import '../../styles/style.scss';
 
 .dashboard {
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: $bg-default;
+  background: $primary-bg;
 
   &__body {
     @include flexContainer();
     overflow: hidden;
-    background-color: #ededed;
-    // background-color: $white;
-    height: 90vh;
-    width: 90vw;
+    // background-color: $bg-light-grey;
+    background-color: $white;
+    // height: 90vh;
+    margin: auto;
+    height: 90%;
+    max-width: 80%;
+    width: 100%;
+    // height: 90vh;
+    // width: 90vw;
+    border-radius: 10px;
     box-shadow: $box-shadow-soft; /* border-radius: 10px; */
+    @media (max-width: $breakpoint-huge) {
+      max-width: 95%;
+    }
     @media (max-width: $breakpoint-small) {
       height: 100%;
-      width: 100%;
+      min-width: 100%;
+      border-radius: 0;
     }
+  }
+
+  .loader {
+    border: 5px solid $primary-light-purple;
+    border-radius: 50%;
+    border-top: 5px solid $dark-white;
+    width: 5rem;
+    height: 5rem;
+    animation: spin 2s linear infinite;
   }
 }
 
-// .overlay {
-//   position: fixed;
-//   top: 0px;
-//   left: 0px;
-//   width: 100vw;
-//   height: 100vh;
-//   background-color: rgba(0, 0, 0, 0.8);
-//   background-image: url('../.../../../images/WhatsApp_Logos/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
-//   background-position: center;
-//   background-repeat: repeat;
-//   background-size: contain;
-//   z-index: 1;
-//   display: none;
-// }
-
-// .show {
-//   display: block;
-// }
-
-// .model {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%) scale(0);
-//   background: rgba(255, 255, 255, 0.541);
-//   z-index: 2;
-//   text-align: center;
-//   padding: 7rem;
-//   font-family: 'Open Sans', sans-serif;
-//   border-radius: 10px;
-// }
-
-// .popup.active .overlay {
-//   display: block;
-// }
-
-// .popup.active .model {
-//   transition: all 300ms ease-in-out;
-//   transform: translate(-50%, -50%) scale(1);
-// }
-// .popup input {
-//   border-radius: 5px;
-//   outline: transparent;
-//   background-color: #ffff;
-//   border: 1.5px solid transparent;
-//   box-shadow: -1px 4px 10px -5px #dadbd3;
-//   color: #2979ff;
-//   padding: 0.8rem 1rem;
-//   width: 100%;
-//   font-family: inherit;
-//   font-family: FontAwesome, 'Open Sans', sans-serif;
-//   word-spacing: 0.3rem;
-//   font-style: normal;
-//   font-weight: normal;
-//   text-decoration: inherit;
-//   font-size: 1.2rem;
-//   margin-top: 1.7rem;
-//   opacity: 0.9;
-// }
-// .popup button {
-//   font-family: inherit;
-//   font-size: 1.3rem;
-//   text-transform: capitalize;
-//   color: #fff !important;
-//   text-decoration: none;
-//   background: #2979ff;
-//   padding: 0.8rem;
-//   border-radius: 30px;
-//   border: none;
-//   width: 60%;
-//   cursor: pointer;
-//   letter-spacing: 1px;
-//   margin: 1.5rem 0;
-//   outline: none;
-// }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

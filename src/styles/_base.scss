@@ -1,31 +1,47 @@
-html {
-    height: 100%;
-    scroll-behavior: smooth;
-}
-
+html,
 body {
-    color: #162226;
+    position: fixed;
     height: 100%;
-    background: #f5f2f5;
+    width: 100%;
 }
 
-h1,
-h2,
-h3 {
-    margin: 0;
-    padding: 0;
-}
+html {
+    scroll-behavior: smooth;
 
-p {
-    margin: 0;
-    @media (max-width: $breakpoint-small) {
+    body {
+        color: $black;
+        min-height: -moz-available; /* WebKit-based browsers will ignore this. */
+        min-height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+        min-height: stretch;
+        background-color: $primary-bg;
+        overscroll-behavior: contain;
+        overflow: hidden;
+        font-family: $font-content;
+
+        #root {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        //
+        // @include flexContainer(row, center, center);
+
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            padding: 0;
+        }
+
         p {
-            font-size: 1.3rem;
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: $black;
         }
     }
-}
-
-a {
-    text-decoration: none;
-    color: #162226;
 }

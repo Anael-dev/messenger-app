@@ -3,8 +3,8 @@
 @import 'reset';
 @import 'variables';
 @import 'typography';
-@import 'base';
 @import 'mixings';
+@import 'base';
 
 button {
     font-family: inherit;
@@ -17,4 +17,26 @@ button {
     /* display: flex; */
     margin: 0;
     padding: 0;
+    outline: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: $bg-light-grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $primary-green;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $primary-green;
 }

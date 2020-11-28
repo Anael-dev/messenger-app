@@ -2,11 +2,10 @@
 
 .user {
     @include chatRoom;
-    
+
     &-avatar {
         position: relative;
         border-radius: 50%;
-        /* border: 2px solid #fff; */
         background-color: $bg-light-grey;
 
         &--active {
@@ -17,13 +16,14 @@
             height: 0.9rem;
             border-radius: 50%;
             border: 1.5px solid $white;
-            background-color: $primary-main;
+            background-color: $primary-green;
         }
     }
 
     &__info {
         width: 100%;
         margin-left: 1.5rem;
+        color: $dark-white;
         /* position: relative; */
 
         &__container {
@@ -36,6 +36,9 @@
             h2 {
                 font-size: 1.4rem;
                 margin-bottom: 0.8rem;
+                @media (max-width: $breakpoint-small) {
+                    font-size: 1.6rem;
+                }
             }
         }
     }

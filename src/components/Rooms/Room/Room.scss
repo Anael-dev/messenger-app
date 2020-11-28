@@ -3,34 +3,63 @@
 .room {
   @include chatRoom;
 
+  .user-avatar {
+    position: relative;
+    border-radius: 50%;
+    background-color: $bg-light-grey;
+  }
+
   &__info {
     width: 100%;
     margin-left: 1.5rem;
+    color: $dark-white;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     /* position: relative; */
 
     &__container {
-      @include flexContainer($justify: space-between, $align: center);
+      @include flexContainer($justify: space-between, $align: flex-start);
 
       &:first-child {
         margin-bottom: 0.2rem;
       }
 
       .timestamp {
-        color: $primary-main;
+        color: $primary-green;
+        color: $light-grey;
         font-size: 1.1rem;
+        margin-left: 0.5rem;
+        @media (max-width: $breakpoint-small) {
+          font-size: 1.2rem;
+        }
       }
 
       h2 {
         font-size: 1.4rem;
         margin-bottom: 0.8rem;
+        max-width: 80%;
+        overflow: hidden;
+        overflow-wrap: break-word;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        @media (max-width: $breakpoint-small) {
+          font-size: 1.6rem;
+        }
       }
 
       &__message {
         display: inline-block;
+        max-width: 90%;
+        color: $light-grey;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 15em;
+        padding-bottom: 0.2rem;
+        font-size: 1.2rem;
+        @media (max-width: $breakpoint-small) {
+          font-size: 1.4rem;
+        }
       }
 
       &__notification {
@@ -39,16 +68,16 @@
         width: 1.5rem;
         height: 1.5rem;
         border-radius: 50%;
-        background-color: $primary-main;
+        background-color: $primary-green;
         position: relative;
 
         .room__notifications__num {
-          position: absolute;
-          top: 10%;
-          left: 30%;
           color: $white;
+          display: grid;
+          place-items: center;
           font-weight: 800;
-          font-size: 0.9rem;
+          font-size: 1rem;
+          padding: 0.2rem;
         }
       }
     }
@@ -56,7 +85,7 @@
 }
 
 .selected-room {
-  background-color: #ededed;
+  background-color: $primary-dark-purple;
 }
 
 .bold {

@@ -1,38 +1,45 @@
 @import '../../../styles/style.scss';
 
 .sidebar-search {
-    @include flexContainer($align: center);
-    background-color: $bg-light-grey;
-    padding: 1rem;
+    @include flexContainer($direction: column, $align: flex-start);
+    padding: 3rem 1rem;
+
+    .chat-section {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        h3 {
+            color: $white;
+            text-transform: capitalize;
+        }
+
+        .new-chat-button {
+            color: $primary-green;
+            font-size: 2rem;
+        }
+    }
 
     &__body {
         @include flexContainer($align: center);
-        background-color: $white;
         width: 100%;
         padding: 0.5rem;
         padding-left: 1rem;
         border-radius: 20px;
-
-        .MuiSvgIcon-root {
-            color: $dark-grey;
-            @media (max-width: $breakpoint-small) {
-                color: $dark-grey;
-            }
-        }
+        color: $light-grey;
+        background-color: $white;
 
         input {
             outline-width: 0;
             border: none;
             margin-left: 1rem;
             width: 100%;
-            padding: 0.2rem;
+            padding: 0.4rem;
+        }
+
+        .fas {
+            color: $light-grey;
         }
     }
 }
-
-/* @media (max-width: $breakpoint-small) {
-    .sidebar-header__right {
-      flex-direction: column;
-      margin: 0 1rem;
-    }
-  } */

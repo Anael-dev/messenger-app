@@ -42,7 +42,6 @@ const Login = ({ history }) => {
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.SESSION);
       await auth.signInWithPopup(provider);
-      // history.push("/");
     } catch (err) {
       console.log(err);
     }
@@ -74,12 +73,12 @@ const Login = ({ history }) => {
         <button
           className='google-auth-btn'
           onClick={(e) => handleGoogleLogin(e)}>
-          <i className='fab fa-google'></i>
+          continue with <i className='fab fa-google'></i>
         </button>
         <div className='separate-section'>
           <span>or login with email:</span>
         </div>
-        {error && <p className='form__error'>{error} </p>}
+
         <div>
           <div
             className={`input-container ${
@@ -94,6 +93,7 @@ const Login = ({ history }) => {
                 type='email'
                 className='input'
                 required
+                autoComplete='email'
                 ref={emailRef}
                 onFocus={(e) => addInputFocus(e.target.type)}
                 onBlur={(e) => removeInputFocus(e.target.type, e.target.value)}
@@ -113,7 +113,7 @@ const Login = ({ history }) => {
               <input
                 type='password'
                 className='input'
-                // autoComplete='current-password'
+                autoComplete='current-password'
                 required
                 ref={passwordRef}
                 onFocus={(e) => addInputFocus(e.target.type)}
@@ -122,6 +122,7 @@ const Login = ({ history }) => {
             </div>
           </div>
         </div>
+        {error && <p className='form__error'>{error} </p>}
         <button disabled={loading} className='button form__btn'>
           Login
         </button>

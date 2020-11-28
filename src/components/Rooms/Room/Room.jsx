@@ -71,7 +71,9 @@ const Room = ({ roomData }) => {
           // console.log(WindowWidthContext.width);
           if (windowWidth <= 480) dispatch(toggleSidebarView(false));
         }}>
-        <Avatar src={roomData.photo} />
+        <div className='user-avatar'>
+          <Avatar src={roomData.photo} />
+        </div>
         {/* {roomData.lastMessage && ( */}
         <div className='room__info'>
           <div className='room__info__container'>

@@ -1,4 +1,3 @@
-
 //     <AuthProvider>
 //       {/* <BrowserRouter> */}
 //         <Switch>
@@ -12,8 +11,7 @@
 //       {/* </BrowserRouter> */}
 //     </AuthProvider>
 
-
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./styles/style.scss";
 import Dashboard from "./containers/Dashboard/Dashboard";
@@ -25,7 +23,7 @@ function App() {
 
   return currentUser ? (
     <Switch>
-      <Route path='/dashboard' component={Dashboard} />
+      <Route path='/dashboard/:category' component={Dashboard} />
       <Redirect to='/dashboard/chats' component={Dashboard} />
     </Switch>
   ) : (

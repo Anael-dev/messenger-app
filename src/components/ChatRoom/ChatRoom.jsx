@@ -5,11 +5,6 @@ import { Avatar } from "@material-ui/core";
 import Messages from "../Messages/Messages";
 import { db } from "../../firebase/base";
 import Input from "../Input/Input";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-// import MoreVertIcon from "@material-ui/icons/MoreVert";
-// import AttachFileIcon from "@material-ui/icons/AttachFile";
-// import SearchIcon from "@material-ui/icons/Search";
-// import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { AuthContext } from "../../context/AuthContextProvider";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -45,9 +40,6 @@ const ChatRoom = () => {
 
   useEffect(() => {
     if (room && room.type === "private") {
-      // const userId = Object.keys(room.members).find(
-      //   (id) => id !== currentUser.uid
-      // );
       const userId = room.members.filter((uid) => uid !== currentUser.uid)[0];
       setChatUserId(userId);
     }
@@ -61,12 +53,14 @@ const ChatRoom = () => {
           className={`back-btn ${backBtnActive ? "back-btn__active" : null}`}
           onClick={() => {
             setBackBtnActive(!backBtnActive);
-            if (windowWidth <= 480 && !displaySidebar)
+            if (windowWidth <= 545 && !displaySidebar)
               dispatch(toggleSidebarView(true));
           }}>
-          <ArrowBackIcon />
+          <i className='fas fa-arrow-left'></i>
         </button>
-        <Avatar src={room?.photo} />
+        <div className='user-avatar'>
+          <Avatar src={room?.photo} />
+        </div>
         {room && (
           <div className='chat__header__info'>
             <h3>{room.name}</h3>
@@ -79,7 +73,7 @@ const ChatRoom = () => {
                 <p>online</p>
               ) : (
                 <p>
-                  <span className='last-seen'>last seen at</span>
+                  <span className='last-seen'>Last seen at</span>
                   {chatUser.lastSeen &&
                     new Date(chatUser.lastSeen.toDate()).toLocaleString(
                       "he-il",
@@ -112,17 +106,6 @@ const ChatRoom = () => {
             )}
           </div>
         )}
-        <div className='chat__header__right'>
-          {/* <IconButton>
-            <SearchIcon />
-          </IconButton>
-          <IconButton>
-            <AttachFileIcon />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton> */}
-        </div>
       </div>
       <div className='chat__body'>
         <Messages messagesRef={messagesRef} id={roomId} />
