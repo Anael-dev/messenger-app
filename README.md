@@ -2,9 +2,9 @@
 
 > This app ("WhatsApp alike") developed using React and Firebase with React Hooks, SCSS, Redux, React Router, Firestore and Firebase functions
 
- <img src="public/screenshots/Screenshot 2020-11-28 235913.png" height="250" alt="Screenshot"/>
+ <img src="public/screenshots/Screenshot 2020-11-28 235913.png" height="200" alt="Screenshot"/>
 
- <img src="public/screenshots/Screenshot 2020-11-28 235526.png" height="250" alt="Screenshot"/>
+ <img src="public/screenshots/Screenshot 2020-11-28 235526.png" height="200" alt="Screenshot"/>
 
 Main app features:
 
@@ -21,8 +21,8 @@ Main app features:
 <a href="https://messenger-app-cce9f.web.app/" target="_blank">**Try the app here** :smiley:</a>
 
 <img src="public/screenshots/Screenshot 2020-11-28 235410.png" height="300" alt="Screenshot"/>
- 
- 
+
+
 ## Installation
 
 This SPA project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -34,8 +34,6 @@ This SPA project was bootstrapped with [Create React App](https://github.com/fac
 - Clone this repo to your local machine using `git clone https://github.com/Anael-dev/messenger-app.git`
 
 ### Setup
-
-> First, run the <a href="https://github.com/Anael-dev/Nodejs-Subscriptions-WS" target="_blank">**Subscriptions WS**</a> REST API
 
 > Install the project dependencies and packages
 
