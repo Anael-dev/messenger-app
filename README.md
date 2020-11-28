@@ -1,68 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Mama'Tzav- a Real-Time Chat Application
 
-## Available Scripts
+> This app ("WhatsApp alike") developed using React and Firebase with React Hooks, SCSS, Redux, React Router, Firestore and Firebase functions
 
-In the project directory, you can run:
+ <img src="public/screenshots/Screenshot 2020-11-28 235410.png" height="200" alt="Screenshot"/>
 
-### `yarn start`
+ <img src="public/screenshots/Screenshot 2020-11-28 235526.png" height="200" alt="Screenshot"/>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+ <img src="public/screenshots/Screenshot 2020-11-28 235913.png" height="300" alt="Screenshot"/>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Main app features:
+:heavy_check_mark: Firebase users Authentication
 
-### `yarn test`
+:heavy_check_mark: Sending and receiving real-time messages
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+:heavy_check_mark: Display online and last seen status
 
-### `yarn build`
+:heavy_check_mark: Show when a user is typing
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+:heavy_check_mark: Get notifications on unread messages
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+<a href="https://messenger-app-cce9f.web.app/" target="_blank">**Try the app here** :smiley:</a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This SPA project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Installation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- You will need a <a href="https://nodejs.org/en/download/" target="_blank">**Node.js**</a> installed in your environement.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Clone
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Clone this repo to your local machine using `git clone https://github.com/Anael-dev/messenger-app.git`
 
-## Learn More
+### Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> First, run the <a href="https://github.com/Anael-dev/Nodejs-Subscriptions-WS" target="_blank">**Subscriptions WS**</a> REST API
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> Install the project dependencies and packages
 
-### Code Splitting
+```shell
+$ npm install
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+> Run the app in a development mode
 
-### Analyzing the Bundle Size
+```shell
+$ npm start
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+> Navigate to
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```shell
+$ http://localhost:3000/
+```

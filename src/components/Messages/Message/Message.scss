@@ -27,10 +27,14 @@
     @include flexContainer(column, space-between);
 
     .message__text {
+      font-size: 1.2rem;
       max-width: 200px;
       overflow-wrap: break-word;
       word-wrap: break-word;
       margin-bottom: 1rem;
+      @media (max-width: $breakpoint-small) {
+        font-size: 1.4rem;
+      }
     }
 
     .timestamp {
