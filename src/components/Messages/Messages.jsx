@@ -29,6 +29,17 @@ const Messages = ({ messagesRef, id }) => {
     // eslint-disable-next-line
   }, [id]);
 
+  // useEffect(() => {
+  //   if (messages) {
+  //     const lastMessage = messages.length - 1;
+  //     if (lastMessage.uid !== currentUser.uid && !lastMessage.receiverHasRead) {
+  //       messageRef.update({
+  //         receiverHasRead: true,
+  //       });
+  //     }
+  //   }
+  // }, [messages]);
+
   return (
     <main>
       {messages.length > 0 && (

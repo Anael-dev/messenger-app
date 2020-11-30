@@ -2,9 +2,13 @@
 
 .default-page {
   &__container {
-    // flex: 0.75;
+    flex: 0.75;
     width: 100%;
     height: 100%;
+    min-width: 260px;
+    @media (max-width: $breakpoint-large) {
+      flex: 0.8;
+    }
     @media (max-width: $breakpoint-small) {
       display: none;
     }
@@ -27,9 +31,19 @@
       color: $dark-grey;
       margin-top: 0.5rem;
       letter-spacing: 0.3px;
+      animation: titleMove 1s 0.2s ease-in-out;
       @media (max-width: $breakpoint-medium) {
         max-width: 90%;
       }
+    }
+  }
+
+  @keyframes titleMove {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 }

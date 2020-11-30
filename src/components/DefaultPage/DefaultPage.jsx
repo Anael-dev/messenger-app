@@ -7,7 +7,7 @@ const DefaultPage = () => {
       <div className='default-page__content'>
         <img src={bgDefault} alt='default logo' />
         <h3>It's nice to chat with someone</h3>
-        <p>Pick a person from left menu and start a conversation</p>
+        <p>Pick a person from the users tab and start a conversation</p>
       </div>
     </div>
   );
