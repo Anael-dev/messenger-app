@@ -8,7 +8,10 @@
 
  <img src="public/screenshots/Screenshot 2020-11-28 235410.png" height="250" alt="Screenshot"/>
 
-Main app features:
+<a href="https://messenger-app-cce9f.web.app/" target="_blank">**Try the app here** :smiley:</a>
+
+Main features:
+
 
 :heavy_check_mark: Firebase users Authentication
 
@@ -19,8 +22,6 @@ Main app features:
 :heavy_check_mark: Show when a user is typing
 
 :heavy_check_mark: Get notifications on unread messages
-
-<a href="https://messenger-app-cce9f.web.app/" target="_blank">**Try the app here** :smiley:</a>
 
 ## Installation
 
