@@ -43,7 +43,6 @@ const Dashboard = () => {
         });
 
       return () => {
-        console.log("unsubscribed");
         unsubscribeUsers();
       };
     }
@@ -86,7 +85,6 @@ const Dashboard = () => {
           });
 
         return () => {
-          console.log("unsubscribed");
           unsubscribeRooms();
         };
       }

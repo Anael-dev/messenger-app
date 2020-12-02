@@ -62,13 +62,6 @@ const generateUserDocument = async (user, additionalData = null) => {
   const userRef = db.collection("users").doc(user.uid);
   const userSnapshot = await userRef.get();
   if (!userSnapshot.exists) {
-    //   await userRef.update({
-    //     active: true,
-    //   });
-    // } else {
-    console.log(additionalData);
-    // const { uid, displayName, photoURL } = user;
-
     const { uid, displayName } = user;
     try {
       await userRef.set({
@@ -82,9 +75,6 @@ const generateUserDocument = async (user, additionalData = null) => {
       console.log("Error creating user document", error);
     }
   }
-  // const loggedUserData = await userRef.get();
-  // return loggedUserData.data();
-  // await trackConnectionStatus(user.uid);
   return getUserDocument(user.uid);
 };
 

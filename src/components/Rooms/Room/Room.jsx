@@ -46,10 +46,7 @@ const Room = ({ roomData }) => {
               let changes = snapshot.docChanges();
               changes.forEach((change) => {
                 if (change.type === "added") {
-                  // console.log(roomData.name);
                   setChangesCounter((counter) => counter + 1);
-                  // console.log(change.doc.data());
-                  // console.log(change.type);
                 }
               });
             }
@@ -68,7 +65,6 @@ const Room = ({ roomData }) => {
         activeClassName='selected-room'
         to={`/dashboard/chats/room/${roomData.id}`}
         onClick={() => {
-          // console.log(WindowWidthContext.width);
           if (windowWidth <= 480) dispatch(toggleSidebarView(false));
         }}>
         <div className='user-avatar'>

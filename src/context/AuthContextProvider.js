@@ -16,10 +16,6 @@ export const AuthProvider = ({ children }) => {
       const loggedUser = await generateUserDocument(userAuth);
       setCurrentUser(loggedUser);
       setLoading(false);
-      // if (loggedUser) {
-      // await trackConnectionStatus(userAuth.uid);
-      // }
-      console.log(loggedUser);
     });
 
     return () => unsubscribe();
