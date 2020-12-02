@@ -12,7 +12,6 @@
 
 Main features:
 
-
 :heavy_check_mark: Firebase users Authentication
 
 :heavy_check_mark: Sending and receiving real-time messages
@@ -20,6 +19,8 @@ Main features:
 :heavy_check_mark: Display online and last seen status
 
 :heavy_check_mark: Show when a user is typing
+
+:heavy_check_mark: Display a history of the last 20 room's messages
 
 :heavy_check_mark: Get notifications on unread messages
 
