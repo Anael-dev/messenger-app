@@ -1,16 +1,3 @@
-//     <AuthProvider>
-//       {/* <BrowserRouter> */}
-//         <Switch>
-//           <  PrivateRoute exact path='/' component={Dashboard} />
-//           <  PrivateRoute path='/room' component={Dashboard} />
-//           <  PrivateRoute path='/dashboard/chats' component={Dashboard} />
-//           <  PrivateRoute path='/dashboard/users' component={Dashboard} />
-//           <Route path='/login' component={Login} />
-//           <Route path='/signup' component={SignUp} />
-//         </Switch>
-//       {/* </BrowserRouter> */}
-//     </AuthProvider>
-
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import "./styles/style.scss";
