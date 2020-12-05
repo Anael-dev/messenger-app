@@ -39,9 +39,9 @@
         padding: 0.3rem;
         font-size: 1.6rem;
         transition: 0.2s all ease-in;
-    }
 
-    .logout-button:hover {
-        opacity: 1;
+        &:hover {
+            opacity: 1;
+        }
     }
 }
