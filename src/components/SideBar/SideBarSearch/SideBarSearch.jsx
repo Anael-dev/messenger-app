@@ -16,10 +16,6 @@ const SideBarSearch = () => {
     dispatch(filterUsers(input));
   }, [input, dispatch]);
 
-  // useEffect(() => {
-  //   callback(filteredResult);
-  // }, [filteredResult]);
-
   const backToAllRooms = () => {
     setInput("");
     dispatch(filterRooms());

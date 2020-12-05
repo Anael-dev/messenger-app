@@ -24,7 +24,6 @@
         @include flexContainer(column, center);
         @media (max-width: $breakpoint-small) {
             min-height: 100%;
-            // padding: 0.5rem;
         }
 
         &__heading {
@@ -35,10 +34,6 @@
             @media (max-width: $breakpoint-large) {
                 padding-top: 0;
             }
-            // @media (max-width: $breakpoint-medium) {
-            //     font-size: 1.8rem;
-            //     // padding: 0.5rem;
-            // }
         }
 
         &__error {

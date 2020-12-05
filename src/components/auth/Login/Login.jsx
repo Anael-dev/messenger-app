@@ -57,8 +57,6 @@ const Login = ({ history }) => {
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.SESSION);
       await login(emailRef.current.value, passwordRef.current.value);
-
-      // history.push("/");
     } catch (err) {
       console.log(err);
       setError("Failed to log in");

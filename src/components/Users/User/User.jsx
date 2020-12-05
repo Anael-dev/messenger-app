@@ -33,7 +33,6 @@ const User = ({ userData }) => {
         lastMessageContent: null,
         members: [currentUser.uid, userData.uid],
         typingUsers: [],
-        // createdAt: new Date(),
       });
       history.push(`/dashboard/users/room/${newRoom.id}`);
     }

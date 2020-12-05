@@ -53,9 +53,7 @@ const Dashboard = () => {
       if (users.length > 0) {
         const unsubscribeRooms = db
           .collection("rooms")
-          // .where(`members.${currentUser.uid}.uid`, "==", currentUser.uid)
           .where("members", "array-contains", currentUser.uid)
-          // .where("lastMessage", "!=", null)
           .orderBy("lastMessageTime", "desc")
           .onSnapshot(async (snap) => {
             let chatUserId;

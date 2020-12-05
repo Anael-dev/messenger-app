@@ -9,7 +9,6 @@ import { toggleSidebarView } from "../../../actions/roomsActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Room = ({ roomData }) => {
-  // const [lastMessage, setLastMessage] = useState("");
   const [roomActive, setRoomActive] = useState(false);
   const [changesCounter, setChangesCounter] = useState(0);
   const location = useLocation();
@@ -21,7 +20,6 @@ const Room = ({ roomData }) => {
   useEffect(() => {
     if (location.pathname.includes(roomData.id)) {
       setChangesCounter(0);
-      // dispatch(setUnreadMessages(roomData.id, 0));
       setRoomActive(true);
       if (windowWidth <= 480 && displaySidebar)
         dispatch(toggleSidebarView(false));
@@ -38,7 +36,6 @@ const Room = ({ roomData }) => {
         .doc(roomData.id)
         .collection("messages")
         .onSnapshot((snapshot) => {
-          // setLastMessage(snapshot.docs.map((doc) => doc.data())[0]);
           if (initState) {
             initState = false;
           } else {

@@ -14,14 +14,10 @@
   animation-name: showIn;
   animation-duration: 0.2s;
   animation-iteration-count: 1;
-  animation-direction: normal; 
+  animation-direction: normal;
   animation-timing-function: cubic-bezier(0.88, 0.19, 0.37, 1.11);
   animation-fill-mode: both;
   animation-delay: 0.2s;
-
-  // :last-child {
-  //   margin-bottom: 1rem;
-  // }
 
   &__details {
     @include flexContainer(column, space-between);
@@ -38,7 +34,6 @@
     }
 
     .timestamp {
-      // margin-left: 1rem;
       align-self: flex-end;
       font-size: 1rem;
       opacity: 0.6;

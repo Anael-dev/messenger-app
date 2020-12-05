@@ -36,13 +36,6 @@ const roomsReducer = (state = initialState, action) => {
         ...state,
         filteredUsers: filteredResult,
       };
-    // case ADD_POST:
-    //   return { ...state, posts: [...state.posts, payload] };
-    // case DELETE_POST:
-    //   return {
-    //     ...state,
-    //     posts: state.posts.filter((x) => x.id !== payload.id),
-    //   };
     default:
       return state;
   }
