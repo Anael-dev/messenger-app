@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import icon from "../../images/WhatsApp_Logos/logo-small.svg";
+import icon from "../../images/logos/logo-small.svg";
 import "./LogoNav.scss";
 import { db, firebase, logout } from "../../firebase/base";
 import { AuthContext } from "../../context/AuthContextProvider";

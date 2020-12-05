@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "../../components/auth/Login/Login";
 import SignUp from "../../components/auth/Signup/SignUp";
 import "./Auth.scss";
-import icon from "../../images/WhatsApp_Logos/logo-large.svg";
+import icon from "../../images/logos/logo-large.svg";
 import illustration from "../../images/illustrations/illustrationChat.svg";
 
 const Auth = () => {
